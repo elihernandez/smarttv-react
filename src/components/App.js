@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-tv'
 import { BaseRouter } from '../router/index'
 // import { CookiesProvider } from 'react-cookie' 
 // import { UserContextProvider } from '../context/UserContext'
@@ -6,6 +7,8 @@ import { BaseRouter } from '../router/index'
 // require('spatial-navigation-js')
 // require('../js/SpatialNavigation')
 import '../styles/app.css'
+
+console.log(Platform('webos'))
 
 export default function App() {
 	return (
