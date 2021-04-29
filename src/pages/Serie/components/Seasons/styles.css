@@ -1,0 +1,43 @@
+@import '../../../../styles/style-base.css';
+
+.seasons-content-wrapper{
+      position: relative;
+      width: 100%;
+      min-height: 600px !important;
+      overflow: hidden;
+      padding: 0;
+
+      .spinner-mui{
+            height: 500px !important;
+      }
+
+      .seasons-menu{
+            padding: 0 $full-padding-content !important;
+      }
+
+      .popper-menu-wrapper{
+
+            div[x-placement]{
+                  z-index: 1;
+                  min-width: 170px;
+            }
+
+            .MuiPaper-root{
+                  background-color: #424242 !important;     
+
+                  .MuiTab-wrapper{
+                        font-size: .8vw !important;
+                  }
+            }
+
+            .MuiMenuItem-root{
+                  padding: 10px 15px;
+                  font-size: 15px;
+                  border-radius: 4px;
+
+                  &:hover{
+                        background-color: #616161;
+                  }
+            }
+      }
+}

@@ -1,0 +1,8 @@
+@import "../../../../styles/style-base.css";
+
+.content-section {
+    position: relative;
+    width: calc(100vw - $width-sidebar-music);
+    height: 100%;
+    overflow-y: scroll;
+}

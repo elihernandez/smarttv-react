@@ -1,0 +1,73 @@
+@import '../../styles/style-base.css';
+
+.navbar{
+
+    .section-wrapper{ 
+    
+        .navbar-list{
+            display: flex;
+            flex-direction: row;
+    
+            .navbar-item{
+                margin: 0 5px;
+                padding: 5px 15px;
+                min-width: 80px;
+                transition: all .3s ease;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                border-radius: 3px;
+                text-align: center;
+                cursor: pointer;
+    
+                .navbar-link{
+                    text-decoration: none;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+
+                    i, p, svg{
+                        font-size: 14px;
+                        margin: 0 10px;
+                        color: $color-grey-3;
+                        transition: all .15s ease;
+                        margin-bottom: 1px;
+                    }
+
+                    p{
+                        font-weight: 600;
+                    }
+
+                    svg{
+                        font-size: 18px;
+                        margin-bottom: 2px;
+                    }
+
+
+                    &:hover i{
+                        color: $color-white;
+                    }
+
+                    &.active i{
+                        color: $color-white;
+                    }
+
+                    &:hover p{
+                        color: $color-white;
+                    }
+
+                    &.active p{
+                        color: $color-white;
+                    }
+
+                    &:hover svg{
+                        color: $color-white;
+                    }
+
+                    &.active svg{
+                        color: $color-white;
+                    }
+                }
+            }
+        }
+    }
+}

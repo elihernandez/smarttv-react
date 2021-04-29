@@ -1,0 +1,46 @@
+@import '../../styles/style-base.css';
+
+.popper-menu-wrapper{
+
+      button{
+            font-family: 'Poppins' !important;
+            text-transform: inherit !important;
+            box-shadow: none !important;
+            color: white !important;
+      
+            span{
+                  display: flex !important;
+                  flex-direction: row !important;
+                  justify-content: center !important;
+                  align-content: center !important;
+                  align-items: center !important;
+                  font-size: .8vw;
+      
+                  i{
+                        font-size: 22px !important;
+                  }
+            } 
+      }
+
+      .MuiList-root.MuiList-padding{
+            a{
+                  color: white !important;
+                  text-decoration: none !important;
+                  
+                  li{
+                        font-size: .8vw;
+                        font-family: "Poppins", sans-serif !important;
+                  }
+            }
+      }
+      
+      .MuiPaper-root{
+            background-color: $color-grey-5 !important;
+
+            .MuiListItem-button{
+                  &:hover{
+                       background-color: $color-grey-4; 
+                  }
+            }
+      }
+}

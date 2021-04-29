@@ -1,0 +1,97 @@
+@import '../../../../styles/style-base.css';
+
+.list-profiles-wrapper{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .list-profiles{
+        position: relative;
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 50px;
+
+        .profile-item{
+            position: relative;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .img-profile{
+                position: relative;
+                border-radius: 50%;
+                width: 150px;
+                height: 150px;
+                transition: all 300ms ease-in-out;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 4px;
+                background: $color-grey-5;
+
+                &:hover{
+                    cursor: pointer;
+                    transform: scale(1.05, 1.05);
+
+                    .thumbnail-gradient{
+                        opacity: 1;
+                    }
+                }
+
+                .thumbnail-gradient{
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    background: linear-gradient(270deg, $color-violet 0%, $color-guide-blue 100%);
+                    padding: 4px;
+                    transition: all 300ms ease-in-out;
+                    opacity: 0;
+                }
+
+                img{
+                    position: absolute;
+                    width: 100%;
+                    border-radius: 50%;
+                    padding: 4px;
+                }
+
+                .edit-icon{
+                    position: absolute;
+                    bottom: 5%;
+                    right: 10%;
+                    background: $color-white;
+                    border-radius: 50%;
+                    width: 35px;
+                    height: 35px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+
+                    i{
+                        color: black;
+                        font-size: 15px;
+                    }
+                }
+
+                &.add-profile{
+                    background: $color-grey-5;
+
+                    i{
+                        font-size: 35px;
+                    }
+                }
+            }
+
+            .profile-name{
+                margin-top: 25px;
+                font-weight: 500;
+            }
+        }
+    }
+}

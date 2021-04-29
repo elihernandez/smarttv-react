@@ -1,0 +1,40 @@
+@import '../../../../styles/style-base.css';
+
+.info-audio-wrapper{
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+
+      p{
+            font-size: 14px;
+            color: $color-grey-2;
+      }
+      
+      .title-audio{
+            font-size: 20px;
+            font-weight: 600;
+      }
+
+      .thumbnail-content{
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            picture{
+                  position: relative;
+                  display: flex;
+            }
+      }
+
+      .thumbnail-radio{
+            position: relative;
+            width: auto;
+            height: 2.5vw;
+            max-height: 2.5vw;
+            object-fit: contain;
+            margin-left: 35px;
+            border-radius: 4px;
+            /* margin-left: 15px; */
+      }
+}

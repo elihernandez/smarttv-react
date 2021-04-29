@@ -1,0 +1,65 @@
+@import '../../../../styles/style-base.css';
+
+.guide{
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      transition: all .3s ease;
+      z-index: 3;
+
+      .tabs-wrapper{
+                
+
+            .list{
+                  margin-top: 0;
+                  margin-bottom: 15px;
+            }
+
+            .title-list{
+                  display: none;
+            }
+            
+            header{
+                  width: 85%;
+                  padding: 0 $full-padding-content;
+
+                  &.MuiPaper-root span{
+                        font-size: .8vw !important;
+                        font-family: "Poppins", sans-serif !important;
+                  }
+
+                  &.MuiPaper-root{
+                        background: transparent !important;
+                  }
+
+                  &.MuiTab-wrapper{
+                       font-size: .8vw !important;
+                       font-family: 'Poppins' sans-serif !important;
+                  }
+            }
+      }
+}
+
+.guide-wrapper{
+      position: relative;
+      height: 100%;
+      width: 100%;
+      /* border: 1px solid red; */
+
+      &.active-enter {
+            opacity: 0;
+      }
+      &.active-enter-active {
+            opacity: 1;
+            transition: opacity 300ms;
+      }
+      &.active-exit {
+            opacity: 1;
+      }
+      &.active-exit-active {
+            opacity: 1;
+            transition: opacity 300ms;
+      }
+}

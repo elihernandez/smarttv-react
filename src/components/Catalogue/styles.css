@@ -1,0 +1,15 @@
+@import '../../styles/style-base.css';
+
+.content-catalogue{
+      padding-top: $height-top-menu;
+
+      &.radio{
+
+            /* position: absolute;
+            top: $height-top-menu;
+            overflow-y: scroll; */
+           
+           /* overflow-y: scroll; */
+         
+      }
+}

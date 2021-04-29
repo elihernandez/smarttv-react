@@ -1,0 +1,86 @@
+@import '../../styles/style-base.css';
+
+.page-404{
+      .page-404-wrapper{
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            padding: 50px 25px;
+            display: flex;
+            flex-direction: column;
+
+            @media (--tablet-medium-viewport) {
+                  .logo {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        padding-left: 50px;
+
+                        img{
+                              width: 200px;
+                              height: auto;
+                        }
+                  }
+            }
+      
+            .message-container{
+                  align-self: center;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  margin-top: 125px;
+
+                  .title-text{
+                        font-size: 50px;
+                        font-weight: 600;
+                        text-align: center;
+                  }
+
+                  @media (--movil-large-viewport) {
+                        .title-text{
+                              font-size: 45px;
+                        }
+                  }
+                  
+                  p{
+                        max-width: 1000px;
+                        font-size: 22px;
+                        font-weight: 300;
+                        text-align: center;
+                        margin-top: 25px !important;
+                  }
+
+                  @media (--movil-large-viewport) {
+                        p{
+                              font-size: 20px;
+                        }
+                  }
+      
+                  .btn-link-to-home{
+                        color: $color-grey-2;
+                        font-size: 25px;
+                        margin-top: 50px;
+                        border-radius: 5px;
+                        padding: 12px 30px;
+                        border: 2px solid $color-grey-2;
+                        background: transparent;
+                        transition: all .15s ease;
+      
+                        &:hover{
+                              cursor: pointer;
+                              color: black;
+                              border: 2px solid $color-white;
+                              background: $color-white;
+                        }
+                  }
+
+                  @media (--movil-large-viewport) {
+                        .btn-link-to-home{
+                              font-size: 20px;
+                        }
+                  }
+            }
+      }
+}
+

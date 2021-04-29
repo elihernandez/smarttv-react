@@ -1,0 +1,43 @@
+@import '../../../../styles/style-base.css';
+
+.player-wrapper{
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: $height-player-music;
+      background-color: $color-background-app;
+
+      .player-content-wrapper{
+            position: relative;
+            width: 100vw;
+            height: calc($height-player-music - 5px);
+
+            .player-content{
+                  position: relative;
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  align-content: center;
+                  align-items: center;
+
+                  .group-controls{
+                        position: relative;
+                        display: flex;
+                        align-content: center;
+                        align-items: center;
+                        flex: 0 0 calc(100% / 3);
+
+                        &.info{
+                              justify-content: flex-start;
+                        }
+                        &.controls{
+                              justify-content: center;
+                        }
+                        &.buttons{
+                              justify-content: space-between;
+                        }
+                  }
+            }
+      }
+}

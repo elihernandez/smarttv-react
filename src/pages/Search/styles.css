@@ -1,0 +1,7 @@
+@import '../../styles/style-base.css';
+
+.search-page{
+    position: relative;
+    top: $height-top-menu;
+    padding: 0;
+}

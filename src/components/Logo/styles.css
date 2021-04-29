@@ -1,0 +1,55 @@
+.logo-guiahtv{
+      display: flex;
+      justify-content: center;
+
+      .img-logo{
+            position: relative;
+            width: auto;
+            min-width: 1px;
+
+            &.sm{
+                  height: 40px;  
+            }
+
+            &.md{
+                  height: 60px;  
+            }
+
+            &.lg{
+                  height: 80px;  
+            }
+      }
+
+      @media (--movil-large-viewport){
+            .img-logo{
+
+                  &.sm{
+                        height: 35px;  
+                  }
+      
+                  &.md{
+                        height: 55px;  
+                  }
+      
+                  &.lg{
+                        height: 75px;  
+                  } 
+            }
+      }
+
+      @media (--movil-small-viewport){
+            .img-logo{
+                  &.sm{
+                        height: 30px;  
+                  }
+      
+                  &.md{
+                        height: 50px;  
+                  }
+      
+                  &.lg{
+                        height: 70px;  
+                  } 
+            }
+      }
+}

@@ -1,0 +1,60 @@
+@import '../../../../../../styles/style-base.css';
+
+.progress-time-wrapper{
+    position: relative;
+    width: 100%;
+    height: auto;
+
+    .progress-content{
+        width: 100%;
+        height: 5px;
+        /* background: #424242; */
+        /* background: rgba(255, 255, 255, 0.4); */
+
+        .current-progress{
+            position: absolute;
+            width: 35%;
+            height: 5px;
+            background: $color-guide-blue;
+        }
+
+        .MuiSlider-root{
+            color: $color-guide-blue !important;
+            padding: 0 !important;
+            position: absolute !important;
+            z-index: 2;
+        
+            /* &.Mui-disabled{
+                color: rgba($rgba-color-guide-blue, 0.5) !important;
+            } */
+            
+            .MuiSlider-rail{
+                height: 5px;
+                background-color: $color-grey-5;
+            }
+        
+            .MuiSlider-track{
+                height: 5px;
+            }
+        
+            .MuiSlider-thumb{
+                margin-top: -5px;
+                width: 15px;
+                height: 15px;
+                background-color: $color-white;
+                opacity: 0;
+        
+                &.Mui-disabled{
+                    width: 0;
+                    height: 0;
+                }
+            }
+        }
+
+        &:hover{
+            .MuiSlider-thumb{
+                opacity: 1;
+            }
+        }
+    }
+}

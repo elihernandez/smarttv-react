@@ -1,0 +1,51 @@
+@import '../../styles/style-base.css';
+
+.tabs-wrapper{
+      header{
+            background: transparent !important;
+            padding: 0 $full-padding-content;
+      }
+}
+
+.MuiPaper-root{
+      /* background-color: transparent !important; */
+      box-shadow: none !important;
+
+      span{
+            font-size: .8vw;
+            font-weight: 600;
+      }
+    
+      button{
+            flex-basis: none !important;
+            box-shadow: none !important;
+      }
+
+      .MuiTabs-indicator{
+            background-color: $color-white !important;
+      }
+
+      .MuiTab-fullWidth{
+            flex-basis: none !important;
+            flex-grow: 0 !important;
+            color: $color-grey-5 !important;
+      }
+
+      .MuiTab-wrapper{
+            color: $color-grey-3;
+      }
+
+      .Mui-selected{
+            .MuiTab-wrapper{
+                  color: $color-white !important;
+            }
+      }
+
+      .MuiTab-root{
+            min-width: 11vw !important;
+      }
+}
+
+.MuiBox-root{
+      padding: 0 !important;
+}

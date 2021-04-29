@@ -1,0 +1,33 @@
+@import '../../../../styles/style-base.css';
+
+.header-home{
+      position: fixed;
+      width: 100%;
+      height: $height-header;
+      z-index: 999;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 50px;
+      height: 80px;
+
+      &.bgcolor{
+            background-color: black;
+      }
+    
+      button{
+
+            &.btn-register{
+                  padding: .5vw 1vw;
+                  margin-left: 15px;
+                  /* border: 2px solid $color-white; */
+            }
+
+            &.btn-login{
+                  padding: .5vw 1vw;
+                  margin-left: 15px;
+                  border: 2px solid $color-white;
+            }
+      }
+}

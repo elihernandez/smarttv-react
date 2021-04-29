@@ -1,0 +1,44 @@
+@import '../../../../styles/style-base.css';
+
+.wrapper-radio{
+
+      .guide-radio{
+            min-height: 300px;
+            width: 100%;
+            position: absolute;
+            bottom: 90px;
+            padding: 0;
+
+            .tabs-wrapper{
+                
+
+                  .list{
+                        margin-top: 0;
+                        margin-bottom: 40px;
+                  }
+
+                  .title-list{
+                        display: none;
+                  }
+                  
+                  header{
+                        width: 85%;
+                        padding: 0 $full-padding-content;
+
+                        &.MuiPaper-root span{
+                              font-size: .8vw !important;
+                              font-family: "Poppins", sans-serif !important;
+                        }
+
+                        &.MuiPaper-root{
+                              background: transparent !important;
+                        }
+
+                        &.MuiTab-wrapper{
+                             font-size: .8vw !important;
+                             font-family: 'Poppins' sans-serif !important;
+                        }
+                  }
+            }
+      }
+}
