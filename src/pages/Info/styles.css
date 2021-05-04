@@ -15,7 +15,6 @@
 
       .wrapper-background{
             position: absolute;
-            z-index: 1;
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -31,7 +30,6 @@
 
       .gradient-overlay{
             position: absolute;
-            z-index: 2;
             width: 100%;
             height: 25%;
             bottom: 0;
@@ -80,15 +78,14 @@
 }
 
 .main-info{
-      position: relative;
-      height: 100vh;
-      width: 45%;
-      z-index: 3;
+      position: absolute;
+      height: 60%;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      /* padding-top: 175px; */
+      justify-content: space-between;
       padding-left: 75px;
+      padding-top: 75px;
 
       .logo-guiahtv{
             justify-content: flex-start;
@@ -96,11 +93,13 @@
       }
 
       .title-text{
+            width: 45%;
             font-weight: 600;
             /* line-height: 55px; */
       }
 
       .subtitle-text{
+            width: 45%;
             font-weight: 300;
             margin: 10px 0;
             /* color: $color-grey-2; */

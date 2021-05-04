@@ -5,7 +5,7 @@ import imgLogoPurple from '../../assets/images/logos/guiahtv/guiahtv-logo-purple
 import logoForeground from '../../assets/images/logos/guiahtv/logo_foreground.png'
 import './styles.css'
 
-export default function Logo({ color = 'purple', size = 'md' }) {
+export default function Logo({ color = 'purple', size = 'md', to = '/' }) {
 	let src
 	switch(color){
 	case 'blue':
@@ -21,7 +21,7 @@ export default function Logo({ color = 'purple', size = 'md' }) {
 	const className = `img-logo ${size}`
 
 	return (
-		<NavLink to="/">
+		<NavLink to={to}>
 			<div className="logo-guiahtv">
 				<img className={className} src={src} alt="logo-guiahtv" />
 			</div>

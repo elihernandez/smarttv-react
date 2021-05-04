@@ -13,22 +13,16 @@ export function BaseRouter() {
 				<Route exact path="/">
 					<h1>Home</h1>
 					<NavLink to='/login'>
-						<button style={{ color: 'white' }}>Ir a Login</button>
+						<button className="focusable" style={{ color: 'white' }}>Ir a Login</button>
 					</NavLink>
 					<NavLink to='/info'>
-						<button style={{ color: 'white' }}>Ir a Info</button>
+						<button className="focusable" style={{ color: 'white' }}>Ir a Info</button>
 					</NavLink>
 				</Route>
-				<Route path="/login">
-					<h1>Login</h1>
-					<NavLink to='/'>
-						<button style={{ color: 'white' }}>Ir a Home</button>
-					</NavLink>
-					<NavLink to='/info'>
-						<button style={{ color: 'white' }}>Ir a Info</button>
-					</NavLink>
+				<Route exact path="/info">
+					<Info/>
 				</Route>
-				<Route path="/info">
+				<Route exact path="/login">
 					<Info/>
 				</Route>
 			</Switch>

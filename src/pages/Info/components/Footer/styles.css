@@ -1,0 +1,21 @@
+@import '../../../../styles/style-base.css';
+
+.footer-register-info{
+    position: absolute;
+    bottom: 0;
+    padding-left: 75px;
+    padding-bottom: 75px;
+
+    h3{
+        font-size:  16px;
+        font-weight: 400;
+        color: $color-white;
+    }
+
+    p{
+        font-size: 14px;
+        margin-top: 10px;
+        font-weight: 300;
+        color: $color-grey-2;
+    }
+}

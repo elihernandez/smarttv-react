@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-export default function encryptString(str, numSalts){
+export function encryptString(str, numSalts){
 	return new Promise(function(resolve, reject) {
 		bcrypt.genSalt(numSalts, function(err, salt) {
 			if(!err){

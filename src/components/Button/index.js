@@ -2,27 +2,30 @@ import React from 'react'
 import './styles.css'
 
 export function Button({
+	id = '',
 	children, 
-	uppercase=false,
+	uppercase = false,
 	color='primary',
 	size='width-auto',
 	classes,
 	type,
-	onClick
+	onClick,
+	onKeyDown,
+	focused = ''
 }){
 	const className = `button-ui 
-            ${uppercase ? 'uppercase' : ''}
-            ${color}
-            ${size}
-            ${classes}
+		${uppercase ? 'uppercase' : ''}
+		${color}
+		${size}
+		${classes}
       `
 	return(
-		<button type={type} className={className} onClick={onClick}>{children}</button>
+		<button id={id} type={type} className={className} onClick={onClick} onKeyDown={onKeyDown} tabIndex="-1">{children}</button>
 	)
 }
 
 export function ButtonUI({type, className, text}){
 	return(
-		<button type={type} className={className}>{text}</button>
+		<button type={type} className={className} tabIndex="-1">{text}</button>
 	)
 }
