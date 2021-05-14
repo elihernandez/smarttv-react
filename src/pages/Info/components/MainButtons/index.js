@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { Button } from '../../../../components/Button/index'
 import { FormLogin } from '../FormLogin'
-
 import './styles.css'
 
-export function PlansPrices(){
+export function MainButtons(){
 	const history = useHistory()
 	const { url } = useRouteMatch()
 
 	useEffect(() => {
+		/* eslint-disable no-undef */
 		SpatialNavigation.focus()
 	}, [url])
 
@@ -18,9 +18,9 @@ export function PlansPrices(){
 	}
 
 	return (
-		<div className="plans-prices-wrapper">
-			<div className="plans">
-				<div className="card-plan price-month">
+		<div className="main-buttons-wrapper">
+			<div className="main-buttons">
+				<div className="container">
 					{url == '/info' && (
 						<Button type="button" onClick={handleShowLoginForm} uppercase={true} color="transparent outline" classes="btn-register body-3">Iniciar sesión</Button>	
 					)}

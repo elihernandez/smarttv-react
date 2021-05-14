@@ -5,6 +5,7 @@ const Context = createContext({})
 
 const initialState = {
 	credentials: [],
+	deviceInformaion: [],
 	suscriptionStatus: null,
 	errorAuth: false
 }

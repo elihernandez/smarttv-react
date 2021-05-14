@@ -1,0 +1,25 @@
+@import '../../../../styles/style-base.css';
+
+.main-buttons-wrapper{
+      position: relative;
+      min-height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .main-buttons{
+            position: relative;
+            display: flex;
+
+            .container{
+                  margin-right: 3vw;
+                  display: flex;
+                  align-items: center;
+
+                  button {
+                        margin-right: 1vw;
+                        min-width: 200px;
+                  }
+            }
+      }
+}

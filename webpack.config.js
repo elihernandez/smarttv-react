@@ -41,7 +41,7 @@ const stylesRules = {
 }
 
 const filesRules = {
-	test: /\.(webp|png|svg|jpg|gif)$/,
+	test: /\.(webp|png|svg|jpg|gif|mp4)$/,
 	use: [
 		{
 			loader: 'file-loader',
@@ -66,6 +66,17 @@ const fontsRules = {
 	],
 }
 
+const htmlLoader = {
+
+	test: /\.html$/,
+	use: {
+		loader: 'html-loader',
+		options: {
+			attrs: [':src']
+		}
+	}
+}
+
 const developmentPlugins = [
 ]
 
@@ -87,7 +98,7 @@ module.exports = (env, { mode }) => ({
 			javascriptRules,
 			stylesRules,
 			filesRules,
-			fontsRules,
+			fontsRules
 		]
 	},
 	devServer: {

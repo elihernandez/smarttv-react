@@ -1,14 +1,10 @@
-import SpatialNavigation from 'spatial-navigation-js'
+/* eslint-disable no-undef */
+require('spatial-navigation-js')
 
-SpatialNavigation.init()
- 
-// Define navigable elements (anchors and elements with "focusable" class).
-SpatialNavigation.add({
-	selector: '.focusable'
-})
-
-// Make the *currently existing* navigable elements focusable.
-SpatialNavigation.makeFocusable()
-
-// Focus the first navigable element.
-SpatialNavigation.focus()
+export const initSpatialNavigation = () => {
+	SpatialNavigation.init()
+	SpatialNavigation.add({
+		selector: 'button, input'
+	})
+	SpatialNavigation.makeFocusable()
+}

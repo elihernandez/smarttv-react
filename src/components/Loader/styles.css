@@ -22,7 +22,6 @@
             border-right: .5vh solid transparent;
             animation: spinner 1s linear infinite;
         }
-          
     }
 
     &.purple{
@@ -49,7 +48,6 @@
         //     height: 50px;
         //     width: 50px;
         // } */
-          
     }
 
     @keyframes spinner {
@@ -58,19 +56,31 @@
 }
 
 .loader-logo{
-    position: absolute;
+    position: relative;
     z-index: 999;
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    align-content: center;
+    background-color: $color-background-app;
 
     .logo{
         position: relative;
         width: 30%;
         height: auto;
+    }
+
+    .spinner-mui{
+        position: absolute;
+        width: 100% !important;
+        height: auto !important;
+        bottom: 0;
+        margin-bottom: 75px;
+        display: flex;
+        justify-content: center;
     }
 }
 
@@ -121,11 +131,22 @@
     }
 }
 
+.loader-video{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    video{
+        position: relative;
+        width: 100%;
+        height: 100%; 
+    }
+}
+
 .spinner-mui{
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 99;
 
     &.row{
         display: flex;
@@ -150,6 +171,6 @@
         color: white !important;
     }
     .MuiCircularProgress-indeterminate{
-        animation: MuiCircularProgress-keyframes-circular-rotate 0.8s linear infinite !important;
+        animation: MuiCircularProgress-keyframes-circular-rotate 1s linear infinite !important;
     }
 }
