@@ -1,18 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import TvDeviceContext from '../../../../context/TvDeviceContext'
 import { Button } from '../../../../components/Button/index'
 import { encryptString } from '../../../../js/Encrypt'
 import { isKeyEnter } from '../../../../js/Keyboard'
+import { getLogin } from '../../../../services/getLogin'
+import { useUserLogging } from '../../../../hooks/useUserLogging'
 import './styles.css'
 
 export const FormLogin = () => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
+	const { stateTvDevice } = useContext(TvDeviceContext)
+	const [responseService, setResponseService] = useState(null)
+	useUserLogging(username, responseService)
 
 	const onKeyDownButtonLogin = async(e) => {
 		if(isKeyEnter(e)){
 			const hashPassword = await encryptString(password, 10)
-			console.log(password)
-			console.log(hashPassword)
+			const response = await getLogin(username, btoa(hashPassword), stateTvDevice)
+			setResponseService(response)
 		}
 	}
 

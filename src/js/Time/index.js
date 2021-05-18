@@ -1,63 +1,22 @@
-const moment = require('moment')
+const dayjs = require('dayjs')
+const customParseFormat = require('dayjs/plugin/customParseFormat')
+const isSameOrAfter = require('dayjs/plugin/isSameOrAfter')
+const isSameOrBefore = require('dayjs/plugin/isSameOrBefore')
+const utc = require('dayjs/plugin/utc')
 
 export function getEventTime(inicio, fin) {
-	// var resolvedOptions = Intl.DateTimeFormat().resolvedOptions();
-	// var timezone = resolvedOptions.timeZone;
-	var d = moment(inicio)
+	dayjs.extend(customParseFormat)
+	const startTime = dayjs(inicio).format('hh:mm A')
+	const endTime = dayjs(fin).format('hh:mm A')
 
-	var hh = moment(d).hours()
-	var m = moment(d).minutes()
-	var s = moment(d).seconds()
-	var dd = ' AM'
-	var h = hh
-
-	if (h >= 12) {
-		h = hh - 12
-		dd = ' PM'
-	}
-	if (h == 0) {
-		h = 12
-	}
-
-	// h = h < 10 ? "0" + h : h;
-
-	m = m < 10 ? '0' + m : m
-
-	s = s < 10 ? '0' + s : s
-
-	var StartTime = h + ':' + m + dd
-
-	var d = moment(fin)
-	var hh = moment(d).hours()
-	var m = moment(d).minutes()
-	var s = moment(d).seconds()
-	var dd = ' AM'
-	var h = hh
-
-	if (h >= 12) {
-		h = hh - 12
-		dd = ' PM'
-	}
-	if (h == 0) {
-		h = 12
-	}
-
-	// h = h < 10 ? "0" + h : h;
-
-	m = m < 10 ? '0' + m : m
-
-	s = s < 10 ? '0' + s : s
-
-	var EndTime = h + ':' + m + dd
-
-	return `${StartTime} - ${EndTime}`
+	return `${startTime} - ${endTime}`
 }
 
 export function isLive(inicio, fin){
-	let startDate = moment(inicio)
-	let endDate = moment(fin)
+	dayjs.extend(isSameOrAfter)
+	dayjs.extend(isSameOrBefore)
 
-	if(moment().isSameOrAfter(startDate) && moment().isSameOrBefore(endDate)){
+	if(dayjs().isSameOrAfter(inicio) && dayjs().isSameOrBefore(fin)){
 		return true
 	}
 
@@ -73,11 +32,8 @@ export function isEvent(type){
 }
 
 export function timerEvent(Inicio){
-	var startTime = moment(Inicio)
-	var actualTime = moment()
-	var h = startTime.diff(actualTime, 'hours')
-	var minutes = startTime.diff(actualTime, 'minutes')
-	var m = minutes - (h * 60)
+	const h = dayjs(Inicio).diff(dayjs(), 'h')
+	const m = (dayjs(Inicio).diff(dayjs(), 'm')) - (h * 60)
 	let time
 
 	if(h === 0 && m === 0){
@@ -119,18 +75,17 @@ export function timerEvent(Inicio){
 }
 
 export function getProgressTimeEvent(Inicio, Fin){
-	var startTime = moment(Inicio)
-	var endTime = moment(Fin)
-	var duration = endTime.diff(startTime, 'm')
-	var actualTime = moment()
-	var position = actualTime.diff(startTime, 'm')
-	var time = ((position * 100) / duration)+'%'
+	const duration = dayjs(Fin).diff(dayjs(Inicio), 'm')
+	const position = dayjs().diff(dayjs(Inicio), 'm')
+	const time = ((position * 100) / duration)+'%'
+
 	return time
 }
 
 export function getUtcOffsetLocal(){
-	let utcOffsetLocal = 'UTC'+(moment().utcOffset()/60)
-  
+	dayjs.extend(utc)
+	const utcOffsetLocal = 'UTC'+(dayjs().utcOffset()/60)
+
 	return utcOffsetLocal
 }
 
@@ -183,4 +138,45 @@ export function secondsToString(seconds) {
 	}
 
 	return time
+}
+
+export function minutesToHoursString(seconds){
+	let string
+	// let seconds = minutes * 60
+	let minutes = Math.floor((seconds / 60) % 60)
+	let hours = Math.floor(minutes / 60)
+
+	if(hours > 0){
+		if(minutes > 0){
+			string = `${hours} h ${minutes} min`
+		}else{
+			string = `${hours} h`
+		}
+	}else{
+		string = `${minutes} min`
+	}
+
+	return string
+}
+
+export function getYearDate(date){
+	return dayjs(date).year()
+}
+
+export function getNowDateTime(){
+	return dayjs()
+}
+
+export function addToDate(date, amount, unit){
+	return date.add(amount, unit)
+}
+
+export function isSameOrBeforeDate(date){
+	dayjs.extend(isSameOrBefore)
+
+	if(dayjs().isSameOrBefore(date)){
+		return true
+	}
+
+	return false
 }

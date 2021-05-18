@@ -9,6 +9,6 @@ export const getTVDeviceInformation = () => {
 			})
 		}
 			
-		resolve({ modelName: 'Emulator', version: 'Emulator' })
+		resolve({ modelName: 'Emulator' })
 	})
 }

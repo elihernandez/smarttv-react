@@ -5,7 +5,7 @@ const initialState = {
 	devicePlatform: 'SmartTv Emulator',
 	deviceType: 'SmartTv Emulator',
 	deviceUUID: '',
-	deviceVersion: ''
+	deviceVersion: '',
 }
 
 const reducer = (state, action) => {

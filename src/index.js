@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { TvDeviceContextProvider } from './context/TvDeviceContext'
+import { UserContextProvider } from './context/UserContext'
 import { App } from './components/App'
 require('./js/WebOS/webOSTV')
 require('./js/WebOS/webOSTV-dev')
@@ -11,7 +12,9 @@ elem.parentNode.removeChild(elem)
 
 ReactDOM.render(
 	<TvDeviceContextProvider>
-		<App/>
+		<UserContextProvider>
+			<App/>
+		</UserContextProvider>
 	</TvDeviceContextProvider>
 	,document.getElementById('app')
 ) 

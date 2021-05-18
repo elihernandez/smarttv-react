@@ -6,8 +6,11 @@ import './styles.css'
 export function Home() {
 	return (
 		<div className="wrapper-home">
-			<Spotlight />
-			<ButtonsMenu />
+			<h1>Usuario logueado</h1>
 		</div>
 	)
 }
+
+
+{/* <Spotlight />
+<ButtonsMenu /> */}

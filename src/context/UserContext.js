@@ -1,17 +1,28 @@
-import React, { createContext, useEffect, useReducer } from 'react'
-import { useAuth } from '../hooks/useAuth'
-import { isArrayEmpty } from '../js/Array'
+import React, { createContext, useReducer } from 'react'
 const Context = createContext({})
 
 const initialState = {
+	userLogged: null,
+	userToken: null,
 	credentials: [],
-	deviceInformaion: [],
 	suscriptionStatus: null,
 	errorAuth: false
 }
 
 const reducer = (state, action) => {
 	switch (action.type) {
+	case 'setUserLogged': {
+		return {
+			...state,
+			userLogged: action.payload
+		}
+	}
+	case 'setUserToken': {
+		return {
+			...state,
+			userToken: action.payload
+		}
+	}
 	case 'setCredentials': {
 		return {
 			...state,
@@ -35,17 +46,10 @@ const reducer = (state, action) => {
 }
 
 export function UserContextProvider({ children }) {
-	const cookies = useAuth()
 	const [stateUser, dispatchUser] = useReducer(reducer, initialState)
 
-	useEffect(() => {
-		dispatchUser({ type: 'setCredentials', payload: cookies })
-	}, [cookies])
-
 	return <Context.Provider value={{ stateUser, dispatchUser }}>
-		{!isArrayEmpty(stateUser.credentials) &&
-                  children
-		}
+		{ children }
 	</Context.Provider>
 }
 

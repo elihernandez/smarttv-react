@@ -92,6 +92,7 @@
     "can-autoplay": "^3.0.0",
     "caniuse-lite": "^1.0.30001211",
     "css-transition": "0.0.3",
+    "dayjs": "^1.10.4",
     "detect-browser": "^5.2.0",
     "dom-node-polyfills": "^1.0.0",
     "history": "^5.0.0",

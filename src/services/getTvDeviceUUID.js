@@ -12,8 +12,8 @@ export const getTVDeviceUUID = () => {
 					reject(res)
 				}
 			})
-		}else{
-			resolve('Emulator')
 		}
+		
+		resolve('Emulator')
 	})
 }

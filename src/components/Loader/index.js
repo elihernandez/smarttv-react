@@ -3,7 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { CSSTransition } from 'react-transition-group'
 import imgLogoBlue from '../../assets/images/logos/guiahtv/guiahtv-logo-blue.png'
 import imgLogoPurple from '../../assets/images/logos/guiahtv/guiahtv-logo-purple.png'
-import videoLogo from '../../assets/videos/Mi video.mp4'
+import videoLogo from '../../assets/videos/video-logo-gris.mp4'
 import './styles.css'
 
 export function LoaderSpinner({ color }) {
@@ -59,7 +59,7 @@ export function LoaderVideo({ show = true }) {
 		<CSSTransition in={show} timeout={100} classNames="fade" unmountOnExit>
 			<div className="section-video">
 				<div className="loader-video">
-					<video ref={videoRef} src={videoLogo} />
+					<video ref={videoRef} id="loader-video" src={videoLogo} />
 				</div>
 			</div>
 		</CSSTransition>
