@@ -6,8 +6,8 @@ import Logo from '../Logo/index'
 // import { containsString } from '../../js/String'	
 import './styles.css'
 
-function LeftContent({showNavbar	}) {
-	let location = useLocation()
+function LeftContent({showNavbar}) {
+	const location = useLocation()
 	const { pathname } = location
 	const classItems = 'navbar-link-top-menu'
 	const classNavbar = 'navbar-top-menu'
@@ -75,9 +75,9 @@ export const TopMenu = () => {
 
 	useEffect(() => {
 		switch(pathname){
-		case '/':
-			hideTopMenu()
-			break
+		// case '/':
+		// 	hideTopMenu()
+		// 	break
 		case '/perfiles':
 			hideTopMenu()
 			break

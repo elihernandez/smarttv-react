@@ -17,7 +17,7 @@ const javascriptRules = {
 					'@babel/preset-env',
 					{
 						'targets': {
-							'chrome': '28'
+							'chrome': '38'
 						}
 					}
 				]
@@ -66,17 +66,6 @@ const fontsRules = {
 	],
 }
 
-const htmlLoader = {
-
-	test: /\.html$/,
-	use: {
-		loader: 'html-loader',
-		options: {
-			attrs: [':src']
-		}
-	}
-}
-
 const developmentPlugins = [
 ]
 
@@ -86,10 +75,10 @@ const productionPlugins = [
 	new CssMinimizerPlugin(),
 ]
 
-module.exports = (env, { mode }) => ({
+module.exports = (_env, { mode }) => ({
 	output: {
 		path: path.resolve(process.cwd(), __dirname + '/webOS/app/'),
-		filename: 'app.js',
+		filename: 'app.min.js',
 		publicPath: 'app',
 	},
 	watch: (mode === 'production' ? false : true),
@@ -113,8 +102,8 @@ module.exports = (env, { mode }) => ({
 			filename: '../index.html',
 		}),
 		new MiniCSSExtract({
-			filename: (mode === 'production' ? 'app.css' : 'app.css'),
-			chunkFilename: (mode === 'production' ? 'main.css' : 'main.css'),
+			filename: 'app.min.css',
+			chunkFilename: 'main.min.css',
 		}),
 	].filter(Boolean)
 })

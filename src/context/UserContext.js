@@ -6,7 +6,6 @@ const initialState = {
 	userToken: null,
 	credentials: [],
 	suscriptionStatus: null,
-	errorAuth: false
 }
 
 const reducer = (state, action) => {
@@ -35,10 +34,28 @@ const reducer = (state, action) => {
 			errorAuth: action.payload
 		}
 	}
+	case 'setError': {
+		return {
+			...state,
+			error: action.payload
+		}
+	}
+	case 'setErrorMessage': {
+		return {
+			...state,
+			errorMessage: action.payload
+		}
+	}
 	case 'setSuscriptionStatus': {
 		return {
 			...state,
 			suscriptionStatus: action.payload
+		}
+	}
+	case 'setLoading': {
+		return {
+			...state,
+			loading: action.payload
 		}
 	}
 	default: return state

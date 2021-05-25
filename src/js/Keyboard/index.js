@@ -15,7 +15,7 @@ export function isKeyRight(e){
 }
 
 export function isKeyEnter(e){
-	if(e.nativeEvent.which === 13 || e.nativeEvent.keyCode === 13 || e.nativeEvent.code === 'Enter'){
+	if(e.nativeEvent.which === 13 || e.nativeEvent.keyCode === 13 || e.nativeEvent.code === 'Enter' || e.nativeEvent.type === 'click'){
 		return true
 	}
 

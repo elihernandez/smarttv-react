@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAxios } from '../../hooks/useAxios'
 import { LazyImage } from '../Image'
 import { SlickSlider } from '../SlickCarousel'
@@ -11,12 +11,13 @@ export function Spotlight() {
 		dots: true,
 		infinite: true,
 		speed: 500,
-		autoplay: true,
+		autoplay: false,
 		autoplaySpeed: 6000,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		pauseOnHover: true,
 		swipeToSlide: true,
+		focusOnSelect: true,
 	}
 
 	return (
@@ -24,7 +25,7 @@ export function Spotlight() {
 			<SlickSlider settings={settings}>
 				{data.map(({ Registro, ImgLandscape }) => {
 					return (
-						<div key={Registro} style={{ width: '100%' }}>
+						<div className="spotlight-item" key={Registro} style={{ width: '100%' }}>
 							<LazyImage
 								img={ImgLandscape}
 								alt={`spotlight-image-${Registro}`}

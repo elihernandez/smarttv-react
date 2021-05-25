@@ -1,5 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react'
-import UserContext from '../context/UserContext'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useLoaderApp } from '../hooks/useLoaderApp'
 import { useDeviceInfo } from '../hooks/useDeviceInfo'
 import { LoaderLogo, LoaderVideo } from '../components/Loader'
@@ -10,7 +9,6 @@ export function App() {
 	const [ appIsReady, setAppIsReady ] = useState(false)
 	const { loaderVideo, loaderLogo, loadedLoader } = useLoaderApp()
 	useDeviceInfo()
-	const { stateUser } = useContext(UserContext)
 
 	useEffect(() => {
 		if(loadedLoader){

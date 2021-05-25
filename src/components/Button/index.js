@@ -10,8 +10,7 @@ export function Button({
 	classes,
 	type,
 	onClick,
-	onKeyDown,
-	focused = ''
+	onKeyDown
 }){
 	const className = `button-ui 
 		${uppercase ? 'uppercase' : ''}

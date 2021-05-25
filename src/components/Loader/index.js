@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import * as ReactDOM from 'react-dom'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { CSSTransition } from 'react-transition-group'
 import imgLogoBlue from '../../assets/images/logos/guiahtv/guiahtv-logo-blue.png'
 import imgLogoPurple from '../../assets/images/logos/guiahtv/guiahtv-logo-purple.png'
-import videoLogo from '../../assets/videos/video-logo-gris.mp4'
+import videoLogo from '../../assets/videos/video-logo.mp4'
+import UserContext from '../../context/UserContext'
 import './styles.css'
 
 export function LoaderSpinner({ color }) {
@@ -38,7 +40,7 @@ export function LoaderLogo({show = true, color = 'purple' }) {
 				<div className="loader-logo">
 					<img className="logo" src={imgSrc} alt="guiahtv-logo-purple" />
 					<CSSTransition in={showSpinner} timeout={100} classNames="fade" unmountOnExit>
-						<div className="spinner-mui">
+						<div className="spinner-mui loader-logo ">
 							<CircularProgress disableShrink />
 						</div>
 					</CSSTransition>
@@ -83,21 +85,19 @@ export function LoaderLogoSpinner({ color }) {
 }
 
 export function LoaderSpinnerMUI({ text, placementText }) {
-	const [show, setShow] = useState(false)
+	const { stateUser } = useContext(UserContext)
+	const { loading } = stateUser
 	const classContent = placementText == ('top' || 'bottom') ? 'column' : 'row'
 
-	useEffect(() => {
-		setShow(true)
-	}, [])
-
-	return (
-		<CSSTransition in={show} timeout={100} classNames="fade" unmountOnExit>
+	return ReactDOM.createPortal(
+		<CSSTransition in={loading} timeout={100} classNames="fade" unmountOnExit>
 			<div className={`spinner-mui ${classContent}`}>
 				<CircularProgress disableShrink />
 				{text &&
 					<p className="text-loading">{text}</p>
 				}
 			</div>
-		</CSSTransition>
+		</CSSTransition>,
+		document.body
 	)
 }

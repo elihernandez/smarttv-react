@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { Button } from '../../../../components/Button/index'
 import { FormLogin } from '../FormLogin'
+import { Navigation } from '../../../../js/SpatialNavigation'
 import './styles.css'
 
 export function MainButtons(){
@@ -9,8 +10,9 @@ export function MainButtons(){
 	const { url } = useRouteMatch()
 
 	useEffect(() => {
-		/* eslint-disable no-undef */
-		SpatialNavigation.focus()
+		Navigation.add('input')
+		Navigation.add('button')
+		Navigation.focus('input')
 	}, [url])
 
 	const handleShowLoginForm = () => {

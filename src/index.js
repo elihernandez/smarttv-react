@@ -2,7 +2,10 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { TvDeviceContextProvider } from './context/TvDeviceContext'
 import { UserContextProvider } from './context/UserContext'
+import { GlobalContextProvider } from './context/GlobalContext'
 import { App } from './components/App'
+import { Backdrop } from './components/Backdrop'
+require('polyfill-library-node')
 require('./js/WebOS/webOSTV')
 require('./js/WebOS/webOSTV-dev')
 require('./js/SpatialNavigation')
@@ -12,9 +15,12 @@ elem.parentNode.removeChild(elem)
 
 ReactDOM.render(
 	<TvDeviceContextProvider>
-		<UserContextProvider>
-			<App/>
-		</UserContextProvider>
+		<GlobalContextProvider>
+			<UserContextProvider>
+				<App/>
+				<Backdrop />
+			</UserContextProvider>
+		</GlobalContextProvider>
 	</TvDeviceContextProvider>
 	,document.getElementById('app')
 ) 

@@ -16,7 +16,7 @@ export function Navbar({ navLinks, classNavbar, classItems, show }) {
 						{
 							navLinks.map(({ title, href, icon }) => {
 								return  <li key={title} className="navbar-item">
-									<NavLink to={href} className={classItem} activeClassName="active">
+									<NavLink to={href} className={classItem} activeClassName="active" tabIndex="-1">
 										{icon}
 										<p>{title}</p>
 									</NavLink>

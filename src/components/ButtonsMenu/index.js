@@ -48,6 +48,7 @@ export function ButtonsMenu() {
 							<div
 								key={ContentType}
 								className="item-button"
+								tabIndex="-1"
 								onClick={() => handleClick(ContentType)}
 							>
 								<picture>
