@@ -7,21 +7,8 @@ import { SlickSlider } from '../SlickCarousel'
 import { Navigation } from '../../js/SpatialNavigation'
 import './styles.css'
 
-const Button = ({ data }) => {
-	const history = useHistory()
+const Button = ({ data, handleClick }) => {
 	const { titulo, ContentType, PosterCardUrlLandscape } = data
-
-	const handleClick = (contentType) => {
-		const url = {
-			'leon_livetv': '/tv',
-			'leon_movies': '/alacarta',
-			'leon_radio': '/radio',
-			'leon_music': '/musica',
-			'leon_kids': '/zonakids'
-		}
-
-		history.push(url[contentType])
-	}
 
 	const onFocus = () => {
 		console.log('focus')
@@ -56,6 +43,7 @@ const Button = ({ data }) => {
 }
 
 export function ButtonsMenu() {
+	const history = useHistory()
 	const { data } = useAxios('buttons-menu')
 
 	const settings = {
@@ -64,6 +52,18 @@ export function ButtonsMenu() {
 		infinite: false,
 		slidesToShow: 5,
 		slidesToScroll: 5
+	}
+
+	const handleClick = (contentType) => {
+		const url = {
+			'leon_livetv': '/tv',
+			'leon_movies': '/alacarta',
+			'leon_radio': '/radio',
+			'leon_music': '/musica',
+			'leon_kids': '/zonakids'
+		}
+
+		history.push(url[contentType])
 	}
 
 	useEffect(() => {
@@ -75,7 +75,7 @@ export function ButtonsMenu() {
 			<SlickSlider settings={settings}>
 				{data.map((button) => {
 					if(button.ContentType !== 'leon_music'){
-						return <Button key={button.orden} data={button} length={data.length} />
+						return <Button key={button.orden} data={button} length={data.length} handleClick={handleClick} />
 					}
 				})}
 			</SlickSlider>

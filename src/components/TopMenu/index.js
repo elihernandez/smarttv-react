@@ -4,10 +4,9 @@ import { Navbar } from '../Navbar/index'
 import { UserMenu } from '../UserMenu/index'
 import Logo from '../Logo/index'
 import { Navigation } from '../../js/SpatialNavigation'
-// import { containsString } from '../../js/String'	
 import './styles.css'
 
-function LeftContent({showNavbar}) {
+const LeftContent = React.memo(({showNavbar}) => {
 	const location = useLocation()
 	const { pathname } = location
 	const classItems = 'navbar-link-top-menu'
@@ -28,9 +27,9 @@ function LeftContent({showNavbar}) {
 			<Navbar navLinks={navLinks} classNavbar={classNavbar} classItems={classItems} show={showNavbar} />
 		</div>
 	)
-}
+})
 
-function RightContent() {
+const RightContent = React.memo(() => {
 	return (
 		<div className="right-content">
 			<NavLink to='/busqueda' className="search-button" activeClassName="active">
@@ -42,40 +41,29 @@ function RightContent() {
 			<UserMenu />
 		</div>
 	)
-}
+})
 
 export const TopMenu = () => {
 	const location = useLocation()
-	const topMenuRef = useRef(null)
 	const { pathname } = location
 	const [showLeftContent, setShowLeftContent] = useState(false)
 	const [showRightContent, setShowRightContent] = useState(false)
 	const [showNavbar, setShowNavbar] = useState(false)
 	const [scroll, setScroll] = useState(0)
-
-	const hideTopMenu = () => {
-		setShowLeftContent(true)
-		setShowNavbar(false)
-		setShowRightContent(true)
-	}
-
-	const showTopMenu = () => {
-		setShowLeftContent(true)
-		setShowNavbar(true)
-		setShowRightContent(true)
-	}
-
+	
 	useEffect(() => {
-		window.onscroll = function () {
-			if (window.scrollY > 25 && scroll == false) {
-				setScroll(true)
-			} else {
-				setScroll(false)
-			}
+		const hideTopMenu = () => {
+			setShowLeftContent(true)
+			setShowNavbar(false)
+			setShowRightContent(true)
 		}
-	}, [])
+	
+		const showTopMenu = () => {
+			setShowLeftContent(true)
+			setShowNavbar(true)
+			setShowRightContent(true)
+		}
 
-	useEffect(() => {
 		switch(pathname){
 		case '/perfiles':
 			hideTopMenu()
@@ -90,11 +78,21 @@ export const TopMenu = () => {
 	}, [pathname])
 
 	useEffect(() => {
+		window.onscroll = () => {
+			if (window.scrollY > 25 && scroll == false) {
+				setScroll(true)
+			} else {
+				setScroll(false)
+			}
+		}
+	}, [])
+
+	useEffect(() => {
 		Navigation.add('.navbar-link-top-menu')
 	}, [])
 
 	return (
-		<div id="top-menu" className={`top-menu ${scroll ? 'bgcolor' : 'bggradient'}`} ref={topMenuRef}>
+		<div id="top-menu" className={`top-menu ${scroll ? 'bgcolor' : 'bggradient'}`}>
 			<div className="section-wrapper">
 				{	showLeftContent &&
 					<LeftContent showNavbar={showNavbar}/>
