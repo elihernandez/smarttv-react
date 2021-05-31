@@ -5,7 +5,6 @@ import { TopMenu } from '../../../components/TopMenu'
 import { MusicPage } from '../../../pages/Music'
 
 export function RouterLogged() {
-
 	return (
 		<Fragment>
 			<TopMenu />

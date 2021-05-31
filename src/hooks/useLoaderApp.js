@@ -23,12 +23,13 @@ export const useLoaderApp = () => {
 		}
 	}, [])
 
-	const onEndedLoaderVideo = () => {
-		document.getElementById('loader-video').removeEventListener('ended', onEndedLoaderVideo)
-		setLoadedLoader(true)
-	}
-
+	
 	useEffect(() => {
+		const onEndedLoaderVideo = () => {
+			document.getElementById('loader-video').removeEventListener('ended', onEndedLoaderVideo)
+			setLoadedLoader(true)
+		}
+		
 		if(stateTvDevice?.devicePlatform && stateTvDevice?.deviceType && stateTvDevice?.deviceUUID && stateTvDevice?.deviceVersion){
 			if(loaderVideo){
 				document.getElementById('loader-video').addEventListener('ended', onEndedLoaderVideo)

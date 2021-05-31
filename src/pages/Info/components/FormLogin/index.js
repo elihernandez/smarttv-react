@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useCallback } from 'react'
 import GlobalContext from '../../../../context/GlobalContext'
 import TvDeviceContext from '../../../../context/TvDeviceContext'
-import { Button } from '../../../../components/Button/index'
-import { isKeyEnter } from '../../../../js/Keyboard'
-import { getLogin } from '../../../../services/getLogin'
 import { useUserSuscription } from '../../../../hooks/useUserSuscription'
 import { encryptService } from '../../../../services/webosServices/encryptService'
+import { getLogin } from '../../../../services/getLogin'
+import { Button } from '../../../../components/Button/index'
+import { isKeyEnter } from '../../../../js/Keyboard'
 import './styles.css'
 
 export const FormLogin = () => {
@@ -13,24 +13,24 @@ export const FormLogin = () => {
 	const [usernameLabel, setUsernameLabel] = useState('Correo electrónico')
 	const [password, setPassword] = useState('')
 	const [passwordLabel, setPasswordLabel] = useState('Password')
-	const { globalState, globalDispatch } = useContext(GlobalContext)
-	const { stateTvDevice } = useContext(TvDeviceContext)
 	const [responseService, setResponseService] = useState(null)
+	const {globalState, globalDispatch} = useContext(GlobalContext)
+	const {stateTvDevice} = useContext(TvDeviceContext)
 	useUserSuscription(username, responseService)
-
-	const onKeyDownInputUsername = (e) => {
+	
+	const onKeyDownInputUsername = useCallback((e) => {
 		if((isKeyEnter(e)) && e.target.value !== ''){
 			document.getElementById('password').focus()
 		}
-	}
+	}, [])
 
-	const onKeyDownInputPassword = (e) => {
+	const onKeyDownInputPassword = useCallback((e) => {
 		if((isKeyEnter(e)) && e.target.value !== ''){
 			document.getElementById('button-login').focus()
 		}
-	}
+	}, [])
 
-	const dataIsValid = () => {
+	const dataIsValid = useCallback(() => {
 		if(username === ''){
 			setUsernameLabel('Ingresa tu correo electrónico')
 			document.getElementById('username').focus()
@@ -44,9 +44,9 @@ export const FormLogin = () => {
 		}
 		
 		return true
-	}
+	}, [])
 
-	const handleSubmit = async(e) => {
+	const handleSubmit = useCallback(async(e) => {
 		if(dataIsValid()){
 			if(isKeyEnter(e)){
 				try{
@@ -64,7 +64,7 @@ export const FormLogin = () => {
 				}
 			}
 		}
-	}
+	}, [])
 
 	useEffect(() => {
 		if(globalState.typeError === 'username'){

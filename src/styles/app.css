@@ -3,19 +3,6 @@
 @import './fontawesome.css';
 @import './style-base.css';
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif !important;
-  background: $color-black-1; 
-
-}
-
 ::-webkit-scrollbar {
   -webkit-appearance: none;
 }
@@ -24,7 +11,7 @@ body {
   width: 8px;
 }
 
-::-webkit-scrollbar-button:increment,::-webkit-scrollbar-button {
+::-webkit-scrollbar-button:increment, ::-webkit-scrollbar-button {
   display: none;
 }
 
@@ -35,6 +22,29 @@ body {
 
 ::-webkit-scrollbar-track {
   border-radius: 10px;  
+}
+
+*{
+  box-sizing: border-box;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif !important;
+  background: $color-black-1; 
+  font-size: 100%;
 }
 
 h1,
@@ -52,16 +62,6 @@ ol {
   list-style: none;
 }
 
-*{
-  box-sizing: border-box;
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  outline: none;
-}
-
 input{
   font-family: "Poppins", sans-serif !important;
   font-weight: 400;
@@ -72,63 +72,7 @@ button{
   background: transparent;
   cursor: pointer;
   padding: 0;
-}
-
-#app{
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.app-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: $color-black-1; 
-  /* overflow-x: hidden; */
-}
-
-.focusable {
-  outline: none !important;
-
-  &:focus{
-
-    &::after{
-      border-radius: 4px;
-      border: 4px solid rgba(255, 255, 255, 255);
-      inset: 0px;
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      transition: all 300ms ease-out 0s;
-    }
-  }
-}
-
-.disabled{
-  pointer-events: none;
-  opacity: 0.25;
-}
-
-.MuiTooltip-popper{
-  /* width: 200px !important; */
-
-  .MuiTooltip-tooltip{
-    font-size: 14px !important;
-    /* width: 200px !important;
-    height: 50px !important; */
-  }
-}
-
-.section-content{
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.top-header{
-  top: $height-top-menu;
+  font-family: "Poppins", sans-serif !important;
 }
 
 html > div[style] {

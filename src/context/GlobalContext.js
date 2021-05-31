@@ -2,33 +2,39 @@ import React, { createContext, useReducer } from 'react'
 const Context = createContext({})
 
 const initialState = {
-	isBackdrop: false,
-	isLoading: false,
-	isErrorMessage: false,
+	isShowBackdrop: false,
+	isShowLoading: false,
+	isShowErrorMessage: false,
 	typeError: null,
 	errorMessage: '',
 	snackbarOptions : {
 		open: false,
 		type: null,
 		message: ''
+	},
+	isShowKeyboard: false,
+	networkConnection: {
+		type: null,
+		status: null,
+		connection: {}
 	}
 }
 
 const reducer = (state, action) => {
 	switch (action.type) {
-	case 'setIsBackdrop': {
+	case 'setIsShowBackdrop': {
 		return {
 			...state,
-			isLoading: false,
-			isErrorMessage: false,
-			errorMessage: '',
-			isBackdrop: action.payload
+			isShowLoading: false,
+			isShowErrorMessage: false,
+			isShowBackdrop: action.payload,
+			errorMessage: ''
 		}
 	}
 	case 'setIsLoading': {
 		return {
 			...state,
-			isLoading: action.payload
+			isShowLoading: action.payload
 		}
 	}
 	case 'setIsErrorMessage': {
@@ -53,6 +59,18 @@ const reducer = (state, action) => {
 		return {
 			...state,
 			snackbarOptions: action.payload,
+		}
+	}
+	case 'setIsShowKeyboard': {
+		return {
+			...state,
+			isShowKeyboard: action.payload,
+		}
+	}
+	case 'setNetworkConnection': {
+		return {
+			...state,
+			networkConnection: action.payload,
 		}
 	}
 	default: return state
