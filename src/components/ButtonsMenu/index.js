@@ -1,74 +1,81 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { H6 } from '../Typography'
 import { imgSourceSetPng } from '../../js/Image'
 import { useHistory } from 'react-router-dom'
 import { useAxios } from '../../hooks/useAxios'
 import { SlickSlider } from '../SlickCarousel'
+import { Navigation } from '../../js/SpatialNavigation'
 import './styles.css'
 
-export function ButtonsMenu() {
+const Button = ({ data }) => {
 	const history = useHistory()
-	const { data } = useAxios('buttons-menu')
+	const { titulo, ContentType, PosterCardUrlLandscape } = data
 
 	const handleClick = (contentType) => {
-		switch (contentType) {
-		case 'leon_livetv':
-			history.push('/tv')
-			break
-		case 'leon_movies':
-			history.push('/alacarta')
-			break
-		case 'leon_radio':
-			history.push('/radio')
-			break
-		case 'leon_music':
-			history.push('/musica')
-			break
-		case 'leon_kids':
-			history.push('/zonakids')
-			break
-		default:
-			break
+		const url = {
+			'leon_livetv': '/tv',
+			'leon_movies': '/alacarta',
+			'leon_radio': '/radio',
+			'leon_music': '/musica',
+			'leon_kids': '/zonakids'
 		}
+
+		history.push(url[contentType])
 	}
 
+	const onFocus = () => {
+		console.log('focus')
+	}
+
+	return (
+		<div
+			key={ContentType}
+			className="item-button"
+			tabIndex="-1"
+			onClick={() => handleClick(ContentType)}
+			onFocus={onFocus}
+		>
+			<picture>
+				<source
+					srcSet={PosterCardUrlLandscape}
+					type="image/webp"
+				/>
+				<source
+					srcSet={imgSourceSetPng(PosterCardUrlLandscape,'png')}
+					type="image/png"
+				/>
+				<img
+					src="build/assets/images/logos/guiahtv/error-tv-landscape.png"
+					alt={`${ContentType}-image`}
+					className="image-button"
+				/>
+			</picture>
+			<H6 className="title-button title-2">{titulo}</H6>
+		</div>
+	)
+}
+
+export function ButtonsMenu() {
+	const { data } = useAxios('buttons-menu')
+
 	const settings = {
+		accessibility: false,
 		dots: false,
 		infinite: false,
 		slidesToShow: 5,
-		slidesToScroll: 5,
+		slidesToScroll: 5
 	}
+
+	useEffect(() => {
+		// Navigation.add('.slick-slide')
+	}, [])
 
 	return (
 		<div className="buttons-menu-wrapper">
 			<SlickSlider settings={settings}>
-				{data.map(({ titulo, ContentType, PosterCardUrlLandscape }) => {
-					if (ContentType !== 'leon_music') {
-						return (
-							<div
-								key={ContentType}
-								className="item-button"
-								tabIndex="-1"
-								onClick={() => handleClick(ContentType)}
-							>
-								<picture>
-									<source
-										srcSet={PosterCardUrlLandscape}
-										type="image/webp"
-									/>
-									<source
-										srcSet={imgSourceSetPng(PosterCardUrlLandscape,'png')}
-										type="image/png"
-									/>
-									<img
-										src="build/assets/images/logos/guiahtv/error-tv-landscape.png"
-										alt={`${ContentType}-image`}
-										className="image-button"
-									/>
-								</picture>
-								<H6 className="title-button title-2">{titulo}</H6>
-							</div>
-						)
+				{data.map((button) => {
+					if(button.ContentType !== 'leon_music'){
+						return <Button key={button.orden} data={button} length={data.length} />
 					}
 				})}
 			</SlickSlider>

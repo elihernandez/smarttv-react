@@ -154,6 +154,7 @@
       &.list-tracks{
             padding: 0 $full-padding-content 0 calc($full-padding-content / 2);
             margin: 25px 0;
+            width: 1770px;
 
             &.square{
 

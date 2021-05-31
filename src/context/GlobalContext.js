@@ -6,7 +6,12 @@ const initialState = {
 	isLoading: false,
 	isErrorMessage: false,
 	typeError: null,
-	errorMessage: ''
+	errorMessage: '',
+	snackbarOptions : {
+		open: false,
+		type: null,
+		message: ''
+	}
 }
 
 const reducer = (state, action) => {
@@ -42,6 +47,12 @@ const reducer = (state, action) => {
 		return {
 			...state,
 			errorMessage: action.payload
+		}
+	}
+	case 'setSnackbarOptions': {
+		return {
+			...state,
+			snackbarOptions: action.payload,
 		}
 	}
 	default: return state

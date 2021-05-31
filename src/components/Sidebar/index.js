@@ -1,16 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import './styles.css'
 
-function Item({ title, url, icon }) {
+function Button({ title, handleClick, icon }) {
+	return (
+		<li className="list-item" onClick={handleClick} tabIndex="-1">
+			{icon && (
+				<i className={icon} />
+			)}
+			<p>{title}</p>
+		</li>
+	)
+}
+
+function Link({ title, url, icon }) {
 	return (
 		<NavLink
 			to={url}
 			activeClassName="active"
 		>
-			<li className="list-item">
-				<i className={icon} />
-				{title}
+			<li className="list-item" tabIndex="-1">
+				{icon && (
+					<i className={icon} />
+				)}
+				<p>{title}</p>
 			</li>
 		</NavLink>
 	)
@@ -21,9 +34,13 @@ function List({ title, data }) {
 		<div className="list-section">
 			<h3 className="list-title">{title}</h3>
 			<ul className="list-menu">
-				{
-					data.map(({ title, url, icon }) => {
-						return <Item key={title} title={title} url={url} icon={icon} />
+				{data !== null &&
+					data.map(({ title, url, handleClick, icon, type }) => {
+						if(type === 'link'){
+							return <Link key={title} title={title} url={url} icon={icon} />
+						}else{
+							return <Button key={title} title={title} handleClick={handleClick} icon={icon} />
+						}
 					})
 				}
 			</ul>
@@ -32,7 +49,8 @@ function List({ title, data }) {
 }
 
 export function Sidebar({ classes, links }) {
-	const className = `sidebar ${classes}`
+	const [open, setOpen] = useState(false)
+	const className = `sidebar ${classes} ${open ? 'open' : ''}`
 
 	return (
 		<div className={className}>

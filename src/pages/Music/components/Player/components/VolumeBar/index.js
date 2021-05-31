@@ -10,7 +10,7 @@ export function VolumeBar() {
 	const [volume, setVolume] = useState(50)
 	const [mute, setMute] = useState(false)
 
-	const handleChange = (event, newValue) => {
+	const handleChange = (_event, newValue) => {
 		setVolume(newValue)
 		audioRef.current.volume = newValue / 100
 	}
@@ -50,9 +50,9 @@ export function VolumeBar() {
 				<Slider
 					orientation="horizontal"
 					onChange={handleChange}
-					value={track.length === 0 ? 0 : volume}
+					value={track?.length === 0 ? 0 : volume}
 					aria-labelledby="music-player-slider"
-					disabled={mute || track.length === 0 ? true : false}
+					disabled={mute || track?.length === 0 ? true : false}
 				/>
 			</div>
 		</div>

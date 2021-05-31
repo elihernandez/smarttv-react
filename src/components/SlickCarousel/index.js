@@ -29,6 +29,7 @@ export function NextArrowSlider(props) {
 }
 
 export function SlickSlider({ children, 
+	sliderRef = null,
 	settings = {
 		dots: true,
 		infinite: false,
@@ -47,7 +48,7 @@ export function SlickSlider({ children,
 	settings.nextArrow = <NextArrowSlider />
 	
 	return (	
-		<Slider {...settings}>
+		<Slider ref={sliderRef} {...settings}>
 			{ children }
 		</Slider>
 	)

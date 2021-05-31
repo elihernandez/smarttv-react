@@ -43,7 +43,7 @@
             } 
             
             .navbar-top-menu{
-                margin-left: 25px;
+                margin-left: 15px;
             }
         }
 
@@ -71,7 +71,7 @@
                 justify-content: center;
                 align-content: center;
                 align-items: center;
-                font-size: 14px;
+                font-size: 16px;
                
                 i{
                     font-size: 20px;

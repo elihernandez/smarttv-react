@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Spotlight } from '../../components/Spotlight/index'
 import { ButtonsMenu } from '../../components/ButtonsMenu/index'
-import { Navigation } from '../../js/SpatialNavigation'
+import { useDidMount } from 'rooks'
 import './styles.css'
 
 export function Home() {
-
-	useEffect(() => {
-		Navigation.clear()
-		Navigation.add('.navbar-link-top-menu')
-		Navigation.focus('.navbar-link-top-menu')
-		Navigation.add('.slick-slide')
-	}, [])
+	
+	useDidMount(function () {
+		setTimeout(() => {
+			document.getElementById('link-home')?.focus()
+		}, 10)
+	})
 
 	return (
 		<div className="wrapper-home">

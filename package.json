@@ -9,12 +9,10 @@
     "ares-package": "ares-package -o webOS webOS",
     "ares-install": "ares-install --device emulator webOS/com.guiahtv.smarttv_1.1.0_all.ipk",
     "ares-inspect": "ares-inspect --device emulator --app com.guiahtv.smarttv --open",
-    "ares-build": "npm-run-all ares-package ares-install ares-inspect",
+    "ares-build-em": "npm-run-all ares-package ares-install ares-inspect",
     "ares-install-tv": "ares-install --device webOS_TV webOS/com.guiahtv.smarttv_1.1.0_all.ipk",
     "ares-inspect-tv": "ares-inspect --device webOS_TV --app com.guiahtv.smarttv --open",
     "ares-build-tv": "npm-run-all ares-package ares-install-tv ares-inspect-tv",
-    "ares-build-dev": "dev npm-run-all ares-package ares-install ares-inspect",
-    "ares-build-prod": "build npm-run-all ares-package ares-install ares-inspect",
     "ares-server": "ares-server ./webOS --open"
   },
   "keywords": [],

@@ -33,7 +33,9 @@ export const useLoaderApp = () => {
 			if(loaderVideo){
 				document.getElementById('loader-video').addEventListener('ended', onEndedLoaderVideo)
 			}else{
-				setLoadedLoader(true)
+				setTimeout(() => {
+					setLoadedLoader(true)
+				}, 5000)
 			}
 		}
 	}, [stateTvDevice])

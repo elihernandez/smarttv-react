@@ -3,6 +3,7 @@ import { useLocation, NavLink } from 'react-router-dom'
 import { Navbar } from '../Navbar/index'
 import { UserMenu } from '../UserMenu/index'
 import Logo from '../Logo/index'
+import { Navigation } from '../../js/SpatialNavigation'
 // import { containsString } from '../../js/String'	
 import './styles.css'
 
@@ -13,11 +14,12 @@ function LeftContent({showNavbar}) {
 	const classNavbar = 'navbar-top-menu'
 	
 	const navLinks = [
-		{ title: 'En vivo', href: pathname.includes('tv') ? location : '/tv', icon: <i className="fas fa-tv"></i> },
-		{ title: 'A la carta', href: '/alacarta', icon: <i className="fas fa-popcorn"></i> },
-		{ title: 'Radio', href: '/radio', icon: <i className="fas fa-radio"></i> },
-		{ title: 'Musica', href: pathname.includes('musica') ? location : '/musica/inicio', icon: <i className="fas fa-headphones"></i> },
-		{ title: 'Zona kids', href: '/zonakids', icon: <i className="fas fa-child"></i> }
+		{ id: 'link-home', title: 'Inicio', href: '/inicio', icon: <i className="fas fa-home"></i> },
+		{ id: 'link-tv', title: 'En vivo', href: pathname.includes('tv') ? location : '/tv', icon: <i className="fas fa-tv"></i> },
+		{ id: 'link-vod', title: 'A la carta', href: '/alacarta', icon: <i className="fas fa-popcorn"></i> },
+		{ id: 'link-radio', title: 'Radio', href: '/radio', icon: <i className="fas fa-radio"></i> },
+		{ id: 'link-music', title: 'Musica', href: pathname.includes('musica') ? location : '/musica/inicio', icon: <i className="fas fa-headphones"></i> },
+		{ id: 'link-kids', title: 'Zona kids', href: '/zonakids', icon: <i className="fas fa-child"></i> }
 	]
 
 	return (
@@ -51,16 +53,6 @@ export const TopMenu = () => {
 	const [showNavbar, setShowNavbar] = useState(false)
 	const [scroll, setScroll] = useState(0)
 
-	useEffect(() => {
-		window.onscroll = function () {
-			if (window.scrollY > 25 && scroll == false) {
-				setScroll(true)
-			} else {
-				setScroll(false)
-			}
-		}
-	}, [])
-
 	const hideTopMenu = () => {
 		setShowLeftContent(true)
 		setShowNavbar(false)
@@ -74,10 +66,17 @@ export const TopMenu = () => {
 	}
 
 	useEffect(() => {
+		window.onscroll = function () {
+			if (window.scrollY > 25 && scroll == false) {
+				setScroll(true)
+			} else {
+				setScroll(false)
+			}
+		}
+	}, [])
+
+	useEffect(() => {
 		switch(pathname){
-		// case '/':
-		// 	hideTopMenu()
-		// 	break
 		case '/perfiles':
 			hideTopMenu()
 			break
@@ -89,6 +88,10 @@ export const TopMenu = () => {
 			break
 		}
 	}, [pathname])
+
+	useEffect(() => {
+		Navigation.add('.navbar-link-top-menu')
+	}, [])
 
 	return (
 		<div id="top-menu" className={`top-menu ${scroll ? 'bgcolor' : 'bggradient'}`} ref={topMenuRef}>
