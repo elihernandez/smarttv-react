@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function Link({ className, href, children }) {
+export function MemoizedLink({ className, href, children }) {
 	const dataUia = `${className}-label`
 
 	return (
@@ -9,3 +9,5 @@ export function Link({ className, href, children }) {
 		</a>
 	)
 }
+
+export const Link = React.memo(MemoizedLink)

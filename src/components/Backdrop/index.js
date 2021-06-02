@@ -8,17 +8,17 @@ import './styles.css'
 
 export function Backdrop() {
 	const { globalState } = useContext(GlobalContext)
-	const { isBackdrop, isLoading, isErrorMessage, errorMessage } = globalState
+	const { isShowBackdrop, isShowLoading, isShowErrorMessage, errorMessage } = globalState
 
 	return ReactDOM.createPortal(
-		<CSSTransition in={isBackdrop} timeout={100} classNames="fade" unmountOnExit>
+		<CSSTransition in={isShowBackdrop} timeout={100} classNames="fade" unmountOnExit>
 			<div className="backdrop-content">
-				<CSSTransition in={isLoading} timeout={100} classNames="fade" unmountOnExit>
+				<CSSTransition in={isShowLoading} timeout={100} classNames="fade" unmountOnExit>
 					<div className="backdrop-spinner">
 						<CircularProgress disableShrink />
 					</div>
 				</CSSTransition>
-				<ErrorMessage show={isErrorMessage} message={errorMessage} />
+				<ErrorMessage show={isShowErrorMessage} message={errorMessage} />
 			</div>
 		</CSSTransition>,
 		document.body

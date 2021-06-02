@@ -36,7 +36,7 @@ export const useLoaderApp = () => {
 			}else{
 				setTimeout(() => {
 					setLoadedLoader(true)
-				}, 5000)
+				}, 1000)
 			}
 		}
 	}, [stateTvDevice])

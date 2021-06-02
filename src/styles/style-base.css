@@ -36,11 +36,11 @@ $color-blue: #102754;
 @custom-media --min-laptop-medium-viewport (width: 1024px);
 
 /* App */
-$padding-content: 45px;
+$padding-content: 90px;
 $full-padding-content: 90px;
 
 /* Top Menu */
-$height-top-menu: 100px;
+$height-top-menu: 120px;
 
 $height-header: $height-top-menu;
 

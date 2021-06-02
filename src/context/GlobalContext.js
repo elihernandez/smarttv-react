@@ -12,8 +12,14 @@ const initialState = {
 		type: null,
 		message: ''
 	},
+	error: {
+		show: false,
+		type: null,
+		message: null
+	},
 	isShowKeyboard: false,
 	networkConnection: {
+		show: false,
 		type: null,
 		status: null,
 		connection: {}
@@ -31,16 +37,16 @@ const reducer = (state, action) => {
 			errorMessage: ''
 		}
 	}
-	case 'setIsLoading': {
+	case 'setIsShowLoading': {
 		return {
 			...state,
 			isShowLoading: action.payload
 		}
 	}
-	case 'setIsErrorMessage': {
+	case 'setIsShowErrorMessage': {
 		return {
 			...state,
-			isErrorMessage: action.payload
+			isShowErrorMessage: action.payload
 		}
 	}
 	case 'setTypeError': {

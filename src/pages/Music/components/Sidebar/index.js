@@ -1,21 +1,19 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
-import { useHistory, NavLink } from 'react-router-dom'
 import { useRouteMatch, useLocation } from 'react-router-dom'
 import UserContext from '../../../../context/UserContext'
 import MusicContext from '../../../../context/MusicContext'
 import { getMyPlaylists } from '../../../../services/getMyPlaylists'
-// import { Sidebar } from '../../../../components/Sidebar'
 import { limitString } from '../../../../js/String'
 import { Navigation } from '../../../../js/SpatialNavigation'
-import { isKeyUp, isKeyEnter } from '../../../../js/Keyboard'
+import { List } from './components/List'
 import './styles.css'
 
-export function SidebarMusic(){
+export function MemoizedSidebarMusic(){
 	const location = useLocation()
 	const { url } = useRouteMatch()
 	const { stateUser } = useContext(UserContext)
-	const { stateMusic, dispatchMusic } = useContext(MusicContext)
-	const { isSidebarOpen } = stateMusic
+	const { dispatchMusic } = useContext(MusicContext)
+	const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 	const [ links ] = useState([
 		{
 			listTitle: '',
@@ -41,6 +39,13 @@ export function SidebarMusic(){
                 		title: 'Tu Biblioteca',
                 		type: 'link',
                 		id: 'link-music-library'
+                	},
+                	{ 
+                		url: location.pathname.includes(`${url}/megusta`) ? location.pathname : `${url}/megusta`,
+                		icon: 'fas fa-heart',
+                		title: 'Tus me gusta',
+                		type: 'link',
+                		id: 'link-music-liked'
                 	},
                 	{ 
                 		url: location.pathname.includes(`${url}/playlists`) ? location.pathname : `${url}/playlists`,
@@ -99,95 +104,23 @@ export function SidebarMusic(){
 		dispatchMusic({ type: 'setModal', payload: modal })
 	}, [])
 
-	const handleCloseSidebar = useCallback(() => {
-		dispatchMusic({ type: 'setIsSidebarOpen', payload: false })
+	const handleOpen = useCallback(() => {
+		setIsSidebarOpen(true)
+	}, []) 
+
+	const handleClose = useCallback(() => {
+		setIsSidebarOpen(false)
 	}, []) 
 
 	return (
-		<div className={`sidebar sidebar-music ${isSidebarOpen ? 'open' : ''}`} onMouseLeave={handleCloseSidebar}>
+		<div className={`sidebar sidebar-music ${isSidebarOpen ? 'open' : ''}`} onMouseLeave={handleClose}>
 			{
 				links.map(({ listTitle, data }) => {
-					return <MemoizedList key={listTitle} title={listTitle} data={data} />
+					return <List key={listTitle} title={listTitle} data={data} handleCloseSidebar={handleClose} handleOpenSidebar={handleOpen} />
 				})
 			}
 		</div>
 	)
 }
 
-function Button({ title, handleClick, icon }) {
-	return (
-		<li className="list-item" onClick={handleClick} tabIndex="-1">
-			{icon && (
-				<i className={icon} />
-			)}
-			<p>{title}</p>
-		</li>
-	)
-}
-
-function Link({ title, url, icon, id }) {
-	let history = useHistory()
-	const { dispatchMusic } = useContext(MusicContext)
-
-	const handleOpenSidebar = () => {
-		dispatchMusic({ type: 'setIsSidebarOpen', payload: true })
-	}
-
-	const handleCloseSidebar = () => {
-		dispatchMusic({ type: 'setIsSidebarOpen', payload: false })
-	}
-
-	const onKeyDown = (e) => {
-		if(e.nativeEvent.target.id === 'link-music-home' && isKeyUp(e)){
-			document.getElementById('link-music').focus()
-		}
-
-		if(isKeyEnter(e)){
-			history.push(url)
-		}
-	}
-
-	return (
-		<NavLink
-			to={url}
-			activeClassName="active"
-		>
-			<li
-				id={id}
-				className="list-item"
-				tabIndex="-1"
-				onFocus={handleOpenSidebar}
-				onBlur={handleCloseSidebar}
-				onMouseOver={handleOpenSidebar}
-				onKeyDown={onKeyDown}
-			>
-				{icon && (
-					<i className={icon} />
-				)}
-				<p>{title}</p>
-			</li>
-		</NavLink>
-	)
-}
-
-const List = ({ title, data }) => {
-	console.log('Hola 2')
-	return (
-		<div className="list-section">
-			<h3 className="list-title">{title}</h3>
-			<ul className="list-menu">
-				{data !== null &&
-					data.map(({ title, url, handleClick, icon, type, id }) => {
-						if(type === 'link'){
-							return <Link key={title} title={title} url={url} icon={icon} id={id} />
-						}else{
-							return <Button key={title} title={title} handleClick={handleClick} icon={icon} />
-						}
-					})
-				}
-			</ul>
-		</div>
-	)
-}
-
-const MemoizedList = React.memo(List)
+export const SidebarMusic = React.memo(MemoizedSidebarMusic)

@@ -13,12 +13,12 @@ export const useUserSuscription = (username, response) => {
 		dispatchUser({ type: 'setUserLogged', payload: username })
 		dispatchUser({ type: 'setUserToken', payload: SuscriberID })
 		dispatchUser({ type: 'setSuscriptionStatus', payload: ResponseCode})
-		globalDispatch({ type: 'setIsBackdrop', payload: false })
+		globalDispatch({ type: 'setIsShowBackdrop', payload: false })
 	}
 
 	const setErrorMessage = (message) => {
-		globalDispatch({ type: 'setIsLoading', payload: false })
-		globalDispatch({ type: 'setIsErrorMessage', payload: true })
+		globalDispatch({ type: 'setIsShowLoading', payload: false })
+		globalDispatch({ type: 'setIsShowErrorMessage', payload: true })
 		globalDispatch({ type: 'setErrorMessage', payload: message })
 	}
     

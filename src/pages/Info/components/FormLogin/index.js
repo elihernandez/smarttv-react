@@ -44,27 +44,27 @@ export const FormLogin = () => {
 		}
 		
 		return true
-	}, [])
+	}, [username, password])
 
 	const handleSubmit = useCallback(async(e) => {
 		if(dataIsValid()){
 			if(isKeyEnter(e)){
 				try{
-					globalDispatch({ type: 'setIsBackdrop', payload: true })
-					globalDispatch({ type: 'setIsLoading', payload: true })
+					globalDispatch({ type: 'setIsShowBackdrop', payload: true })
+					globalDispatch({ type: 'setIsShowLoading', payload: true })
 					const hashPassword = await encryptService(password, 10)
 					const response = await getLogin(username, btoa(hashPassword), stateTvDevice)
 					setResponseService(response)
 				}catch(e){
 					console.log(e)
-					globalDispatch({ type: 'setIsLoading', payload: false })
-					globalDispatch({ type: 'setIsErrorMessage', payload: true })
+					globalDispatch({ type: 'setIsShowLoading', payload: false })
+					globalDispatch({ type: 'setIsShowErrorMessage', payload: true })
 					globalDispatch({ type: 'setErrorMessage', payload: 'No se pudo iniciar sesión, vuelve a intentarlo.' })
 					globalDispatch({ type: 'setTypeError', payload: 'password' })
 				}
 			}
 		}
-	}, [])
+	}, [username, password])
 
 	useEffect(() => {
 		if(globalState.typeError === 'username'){

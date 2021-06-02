@@ -1,8 +1,9 @@
-@import '../../styles/style-base.css';
+@import "../../styles/style-base.css";
 
-.wrapper-home{
+.wrapper-home {
     position: relative;
-    min-height: calc(100vh - $height-header);
+    height: calc(100% - $height-header);
+    top: $height-header;
     padding: 0 $full-padding-content;
     display: flex;
     flex-direction: column;

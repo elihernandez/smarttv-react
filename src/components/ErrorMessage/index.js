@@ -15,7 +15,7 @@ export const ErrorMessage = ({ show, message }) => {
 	}, [show])
 
 	const handleClick = () => {
-		globalDispatch({ type: 'setIsBackdrop', payload: false })
+		globalDispatch({ type: 'setIsShowBackdrop', payload: false })
 	}
     
 	return (

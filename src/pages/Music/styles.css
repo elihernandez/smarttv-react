@@ -3,8 +3,8 @@
 .wrapper-music{
       position: absolute;
       width: 100%;
-      top: $height-top-menu;
-      height: calc(100vh - ($height-top-menu + $height-player-music));
+      /* top: $height-top-menu; */
+      height: 100%;
 
       .music-content{
             width: 100%;

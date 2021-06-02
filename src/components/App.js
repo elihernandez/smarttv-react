@@ -33,7 +33,7 @@ export function App() {
 	if(appIsReady){
 		return (
 			<div className="app-content">
-				{/* <Router /> */}
+				<Router />
 			</div>    
 		)
 	}

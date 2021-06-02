@@ -96,7 +96,6 @@ const reducer = (state, action) => {
 }
 
 export function MusicPage() {	
-
 	return (
 		<MusicContextProvider>
 			<AudioContextProvider state={initialState} reducer={reducer}>
@@ -105,7 +104,7 @@ export function MusicPage() {
 						<div className="music-content">
 							<SidebarMusic/>
 							{/* <Sections /> */}
-							<Player />
+							{/* <Player /> */}
 						</div>
 						<PlaylistModal />
 						<TopSnackbar />
@@ -114,5 +113,4 @@ export function MusicPage() {
 			</AudioContextProvider>
 		</MusicContextProvider>
 	)
-
 }
