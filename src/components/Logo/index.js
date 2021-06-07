@@ -5,7 +5,7 @@ import imgLogoPurple from '../../assets/images/logos/guiahtv/guiahtv-logo-purple
 import logoForeground from '../../assets/images/logos/guiahtv/logo_foreground.png'
 import './styles.css'
 
-export default function Logo({ color = 'purple', size = 'md', to = '/' }) {
+export function MemoizedLogo({ color = 'purple', size = 'md', to = '/' }) {
 
 	const listSrc = {
 		'blue': imgLogoBlue,
@@ -13,11 +13,11 @@ export default function Logo({ color = 'purple', size = 'md', to = '/' }) {
 	}
 
 	return (
-		<MemoizedNavLink to={to} activeClassName="active">
-			<div className="logo-guiahtv">
+		<div className="logo-guiahtv">
+			<MemoizedNavLink to={to} activeClassName="active">
 				<img className={`img-logo ${size}`} src={listSrc[color] || imgLogoPurple} alt="logo-guiahtv" />
-			</div>
-		</MemoizedNavLink>
+			</MemoizedNavLink>
+		</div>
 	)
 }
 
@@ -29,4 +29,5 @@ export function IconLogo() {
 	)
 }
 
+export default React.memo(MemoizedLogo)
 const MemoizedNavLink = React.memo(NavLink)

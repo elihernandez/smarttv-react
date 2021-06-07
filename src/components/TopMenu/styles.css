@@ -110,7 +110,7 @@
         justify-content: center;
         align-items: center;
         align-content: center;
-        opacity: 0;
+        display: none;
         transition: all 50ms ease-in-out;
 
         .group-content{
@@ -121,18 +121,18 @@
 
             i{
                 color: $color-grey-4;
-                font-size: 1.3rem;
+                font-size: 20px;
             }
 
             p{
                 color: $color-grey-4;
-                font-size: 1.3rem;
+                font-size: 20px;
                 font-weight: 500;
             }
         }
 
         &.show{
-            opacity: 1;
+            display: flex;
         }
     }
 }

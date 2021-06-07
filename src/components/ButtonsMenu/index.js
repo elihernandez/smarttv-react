@@ -3,7 +3,7 @@ import { H6 } from '../Typography'
 import { imgSourceSetPng } from '../../js/Image'
 import { useHistory } from 'react-router-dom'
 import { useAxios } from '../../hooks/useAxios'
-import { SlickSlider } from '../SlickCarousel'
+import { SlickSliderHorizontal } from '../SlickCarousel'
 import { Navigation } from '../../js/SpatialNavigation'
 import './styles.css'
 
@@ -72,13 +72,13 @@ export function ButtonsMenu() {
 
 	return (
 		<div className="buttons-menu-wrapper">
-			<SlickSlider settings={settings}>
+			<SlickSliderHorizontal settings={settings}>
 				{data.map((button) => {
 					if(button.ContentType !== 'leon_music'){
 						return <Button key={button.orden} data={button} length={data.length} handleClick={handleClick} />
 					}
 				})}
-			</SlickSlider>
+			</SlickSliderHorizontal>
 		</div>
 	)
 }

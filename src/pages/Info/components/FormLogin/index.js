@@ -53,6 +53,7 @@ export const FormLogin = () => {
 					globalDispatch({ type: 'setIsShowBackdrop', payload: true })
 					globalDispatch({ type: 'setIsShowLoading', payload: true })
 					const hashPassword = await encryptService(password, 10)
+					console.log(hashPassword)
 					const response = await getLogin(username, btoa(hashPassword), stateTvDevice)
 					setResponseService(response)
 				}catch(e){

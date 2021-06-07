@@ -10,6 +10,7 @@
     position: relative;
     height: 100%;
     width: calc(160px + $padding-content);
+    min-width: calc(160px + $padding-content);
     padding-left: calc($padding-content);
     display: flex;
     align-items: center;
@@ -21,16 +22,16 @@
     }
 
     &.open {
-        width: 600px;
-        max-width: 600px;
+        min-width: 650px;
+        max-width: 650px;
 
         p {
             display: block;
         }
 
         .list-section{
-            width: 600px;
-            max-width: 600px;
+            width: 750px;
+            max-width: 750px;
             justify-content: flex-start;
         }
     }

@@ -58,7 +58,7 @@ const MemoizedList = ({ title, data, handleCloseSidebar, handleOpenSidebar }) =>
 	return (
 		<div className="list-section">
 			<h3 className="list-title">{title}</h3>
-			<ul className="list-menu">
+			<div className="list-menu">
 				{data !== null &&
 					data.map(({ title, url, handleClick, icon, type, id }) => {
 						if(type === 'link'){
@@ -68,7 +68,7 @@ const MemoizedList = ({ title, data, handleCloseSidebar, handleOpenSidebar }) =>
 						}
 					})
 				}
-			</ul>
+			</div>
 		</div>
 	)
 }

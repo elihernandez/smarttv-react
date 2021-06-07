@@ -1,0 +1,66 @@
+@import "../../../../../../styles/style-base.css";
+
+.slider-collection-tracks, .slider-collection-playlists{
+    /* position: relative; */
+    /* overflow: hidden; */
+
+    > .slick-list{
+
+        > .slick-track{
+          
+            > .slick-slide{
+
+                .item-track{
+                    position: relative;
+
+                    a{
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    span{
+                        position: relative;
+                        width: 100%;
+                        transform: scale(0.88);
+    
+                        img{
+                            width: 100%;
+                            border-radius: 4px;
+                        }
+                    }
+                    
+                    &:after{
+                        content: '';
+                        top: 0;
+                        left: 0;
+                        position: absolute;
+                        width: 96.5%;
+                        height: 96%;
+                        border: 5px solid transparent;
+                        border-radius: 6px;
+                    }
+
+                    &:focus, &:hover{
+                        span{
+                            transform: scale(0.94);
+                        }
+                        
+                        &:after{
+                            content: '';
+                           top: 0;
+                           left: 0;
+                            position: absolute;
+                            width: 96.5%;
+                            height: 96%;
+                            border: 5px solid $color-white;
+                            border-radius: 6px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

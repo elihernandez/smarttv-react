@@ -28,7 +28,7 @@ export function NextArrowSlider(props) {
 	)
 }
 
-export function SlickSlider({ children, 
+export function SlickSliderHorizontal({ children, 
 	sliderRef = null,
 	settings = {
 		dots: true,
@@ -41,6 +41,34 @@ export function SlickSlider({ children,
 		variableWidth: false,
 		pauseOnHover: true,
 		swipeToSlide: true,
+	}
+}){
+
+	settings.prevArrow = <PrevArrowSlider />
+	settings.nextArrow = <NextArrowSlider />
+	
+	return (	
+		<Slider ref={sliderRef} {...settings}>
+			{ children }
+		</Slider>
+	)
+}
+
+export function SlickSliderVertical({ children, 
+	sliderRef = null,
+	settings = {
+		accessibility: false,
+		dots: false,
+		infinite: false,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		vertical: true,
+		verticalSwiping: false,
+		swipeToSlide: false,
+		focusOnSelect: false,
+		speed: 0,
+		variableWidth: false,
+		className: ''
 	}
 }){
 

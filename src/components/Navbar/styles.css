@@ -1,6 +1,7 @@
 @import '../../styles/style-base.css';
 
 .navbar{
+    opacity: 0;
 
     .section-wrapper{ 
     
@@ -87,5 +88,9 @@
                 }
             }
         }
+    }
+
+    &.show{
+        opacity: 1;
     }
 }

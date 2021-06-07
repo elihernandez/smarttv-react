@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { useAxios } from '../../../../../../hooks/useAxios'
-import { List } from '../../../../../../components/List'
+import { SliderVertical } from '../SliderVertical'
 import { LoaderSpinnerMUI } from '../../../../../../components/Loader'
 
 export function Home(){
@@ -10,13 +10,16 @@ export function Home(){
 		return <LoaderSpinnerMUI />
 	}
 
-	return (
-		<Fragment>
-			{   data?.musicSections &&
-				data.musicSections.map((sectionData) => {
-					return <List key={sectionData.title} data={sectionData} listType={sectionData.contentType} indexList={0} tabValues={0}/>
-				})
-			}
-		</Fragment>
-	)
+	if(data?.musicSections){
+		return <SliderVertical data={data} />
+	}
+
+	return null
 }
+{/* <ListVertical sliderVerticalRef={sliderVerticalRef}>
+	{
+		data.musicSections.map((listData) => {
+			return <ListHorizontal key={listData.title} listType={listData.contentType} description={listData.description} data={listData} sliderVerticalRef={sliderVerticalRef} />
+		})
+	}
+</ListVertical> */}

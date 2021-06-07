@@ -103,7 +103,7 @@ export function MusicPage() {
 					<div className="wrapper-music">
 						<div className="music-content">
 							<SidebarMusic/>
-							{/* <Sections /> */}
+							<Sections />
 							{/* <Player /> */}
 						</div>
 						<PlaylistModal />

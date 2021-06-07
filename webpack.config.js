@@ -16,15 +16,22 @@ const javascriptRules = {
 				[
 					'@babel/preset-env',
 					{
+						// 'useBuiltIns': 'entry',  
 						'targets': {
-							'chrome': '38'
-						}
+							'browsers': ['last 2 versions', 'Chrome >= 18']
+						},
+						'modules': false
 					}
-				]
+				],
+				// 'minify'
+				
 			],
 			plugins: [
+				'@babel/transform-runtime',
 				'@babel/plugin-proposal-optional-chaining',
-				'@babel/transform-runtime'
+				'@babel/plugin-transform-strict-mode',
+				'@babel/plugin-transform-react-constant-elements',
+				'@babel/plugin-transform-react-inline-elements'
 			]
 		}
 	}
@@ -76,6 +83,7 @@ const productionPlugins = [
 ]
 
 module.exports = (_env, { mode }) => ({
+	entry: './src/index.js',
 	output: {
 		path: path.resolve(process.cwd(), __dirname + '/webOS/app/'),
 		filename: 'app.min.js',

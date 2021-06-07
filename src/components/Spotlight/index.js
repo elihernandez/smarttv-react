@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { useAxios } from '../../hooks/useAxios'
 import { LazyImage } from '../Image'
-import { SlickSlider } from '../SlickCarousel'
+import { SlickSliderHorizontal } from '../SlickCarousel'
 import { Navigation } from '../../js/SpatialNavigation'
 import './styles.css'
 
@@ -53,7 +53,7 @@ export function Spotlight() {
 
 	return (
 		<div className="spotlight-wrapper">
-			<SlickSlider sliderRef={sliderRef} settings={settings}>
+			<SlickSliderHorizontal sliderRef={sliderRef} settings={settings}>
 				{data.map(({ Registro, ImgLandscape }) => {
 					return (
 						<div className="spotlight-item" key={Registro} style={{ width: '100%' }}>
@@ -66,7 +66,7 @@ export function Spotlight() {
 						</div>
 					)
 				})}
-			</SlickSlider>
+			</SlickSliderHorizontal>
 		</div>
 	)
 }

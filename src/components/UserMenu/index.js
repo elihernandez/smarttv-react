@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie'
 import { PopperMenu } from '../PopperMenu'
 import './styles.css'
 
-export function UserMenu() {
+export function MemoizedUserMenu() {
 	const [cookies, setCookie, removeCookie] = useCookies()
 
 	const handleLogout = (e) => {
@@ -25,6 +25,8 @@ export function UserMenu() {
 		</div>
 	)
 }
+
+export const UserMenu = React.memo(MemoizedUserMenu)
 // <div>
 //   <Button
 //     ref={anchorRef}

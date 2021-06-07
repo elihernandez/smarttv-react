@@ -1,56 +1,31 @@
 .logo-guiahtv{
+      position: relative;
+      width: auto;
+      height: auto;
       display: flex;
       justify-content: center;
 
+      a{
+            position: relative;
+            width: auto;
+            height: auto;
+      }
+
       .img-logo{
             position: relative;
-          
             min-width: 1px;
+            height: auto;  
 
             &.sm{
                   width: 160px;
-                  height: 45px;  
             }
 
             &.md{
-                  height: 70px;  
+                  width: 200px;
             }
 
             &.lg{
-                  height: 80px;  
-            }
-      }
-
-      @media (--movil-large-viewport){
-            .img-logo{
-
-                  &.sm{
-                        height: 35px;  
-                  }
-      
-                  &.md{
-                        height: 55px;  
-                  }
-      
-                  &.lg{
-                        height: 75px;  
-                  } 
-            }
-      }
-
-      @media (--movil-small-viewport){
-            .img-logo{
-                  &.sm{
-                        height: 30px;  
-                  }
-      
-                  &.md{
-                        height: 50px;  
-                  }
-      
-                  &.lg{
-                        height: 70px;  
-                  } 
+                  width: 240px;
             }
       }
 }

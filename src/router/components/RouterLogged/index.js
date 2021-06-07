@@ -2,10 +2,12 @@ import React, { Fragment } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { Home } from '../../../pages/Home'
 import { MusicPage } from '../../../pages/Music'
+import { TopMenu } from '../../../components/TopMenu'
 
 export function RouterLogged() {
 	return (
 		<Fragment>
+			<TopMenu />
 			<Switch>
 				<Route exact path="/inicio">
 					<Home />

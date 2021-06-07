@@ -1,21 +1,32 @@
 @import '../../styles/style-base.css';
 
+
 .list{
       position: relative;
       width: 100%;
       height: auto;
-      margin: 40px 0;
-      padding: 0 $full-padding-content;
+      /* margin: 40px 0; */
+      /* padding: 0 $full-padding-content; */
+
+      &.list-vertical{
+            position: relative;
+            height: auto;
+            overflow: hidden;
+
+            &.music{
+                  /* width: calc(100% + (160px + $padding-content)); */
+            }
+      }
 
       .title-list{
-            font-size: 1.1vw;
+            font-size: 25px;
             font-weight: 600;
             letter-spacing: .5px;
             margin: 10px 0 10px 14px;
       }
 
       .description-list{
-            font-size: 0.8vw;
+            font-size: 19px;
             font-weight: 500;
             letter-spacing: .5px;
             margin: -10px 0 10px 14px;
@@ -152,15 +163,15 @@
       }
 
       &.list-tracks{
-            padding: 0 $full-padding-content 0 calc($full-padding-content / 2);
+            padding: 0;
             margin: 25px 0;
-            width: 1770px;
+            /* width: calc(100% + (160px + $padding-content)); */
 
             &.square{
 
                   .background-item{
-                        height: 11vw;
-                        transform: scale(0.93);
+                        height: 250px;
+                        transform: scale(0.90);
                   }
       
                   .item-link{

@@ -44,7 +44,6 @@ const RightContent = ({ isShow }) => {
 
 const MemoizedTopMenu = () => {
 	const { pathname } = useLocation()
-	console.log(pathname)
 	const [isShow, setIsShow] = useState(true)
 
 	useEffect(() => {
@@ -58,7 +57,7 @@ const MemoizedTopMenu = () => {
 	}, [pathname])
 
 	const handleShow = useCallback(() => {
-		if(pathname !== '/inicio' ){
+		if(pathname !== '/inicio'){
 			setIsShow(true)
 		}
 	}, [pathname])

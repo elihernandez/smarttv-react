@@ -4,7 +4,7 @@ import { encryptString } from '../../js/Encrypt'
 export const encryptService = (string, rounds) => {
 	return new Promise(function(resolve, reject){
 		if(Platform('webos')){
-			// eslint-disable-next-line no-undef
+			//eslint-disable-next-line no-undef
 			webOS.service.request(
 				'luna://com.guiahtv.smarttv.encryptpasswordservice/',
 				{
@@ -21,6 +21,7 @@ export const encryptService = (string, rounds) => {
 					},
 				}
 			)
+			console.log('Hola')
 		}else{
 			resolve(encryptString(string, 10))
 		}

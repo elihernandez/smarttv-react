@@ -19,9 +19,10 @@ import { LoaderSpinnerMUI } from '../Loader'
 import imgRecoverErrorTV from '../../assets/images/backgrounds/onerror/error-tv.png'
 import imgRecoverErrorPortrait from '../../assets/images/backgrounds/onerror/error-portrait.png'
 import imgRecoverErrorLandscape from '../../assets/images/backgrounds/onerror/error-landscape.png'
+import { isKeyDown, isKeyUp } from '../../js/Keyboard'
 import './styles.css'
 
-export function Item({ data, posterType, listType, titleCategory, category, listTracks, collection }) {
+export function Item({ data, posterType, listType, titleCategory, category, listTracks, collection, sliderVerticalRef }) {
 	let Item = () => null
 	const { url } = useRouteMatch()
 	const { ContentType } = data
@@ -44,13 +45,13 @@ export function Item({ data, posterType, listType, titleCategory, category, list
 		Item = <ItemCatalogue posterType={posterType} data={data} />
 		break
 	case 'tracks':
-		Item = <ItemCollectionTrack posterType={posterType} titleCategory={titleCategory} data={data} listTracks={listTracks} collection={collection} />
+		Item = <ItemCollectionTrack posterType={posterType} titleCategory={titleCategory} data={data} listTracks={listTracks} collection={collection} sliderVerticalRef={sliderVerticalRef} />
 		break
 	case 'playlists':
-		Item = <ItemPlaylist posterType={posterType} titleCategory={titleCategory} data={data} listTracks={listTracks} />
+		Item = <ItemPlaylist posterType={posterType} titleCategory={titleCategory} data={data} listTracks={listTracks} sliderVerticalRef={sliderVerticalRef} />
 		break
 	case 'myplaylists':
-		Item = <ItemPlaylist posterType={posterType} titleCategory={titleCategory} data={data} listTracks={listTracks} />
+		Item = <ItemPlaylist posterType={posterType} titleCategory={titleCategory} data={data} listTracks={listTracks} sliderVerticalRef={sliderVerticalRef} />
 		break
 	case 'albums':
 		Item = <ItemAlbum posterType={posterType} data={data} />
@@ -212,7 +213,7 @@ function ItemCardChannel({ posterType, data }) {
 	)
 }
 
-function ItemCollectionTrack({ posterType, data, collection }) {
+export function ItemCollectionTrack({ posterType = 2, data, collection, sliderVerticalRef }) {
 	const { title, albumID, artists, portadaURL, portadaLandscapeURL } = data
 	const [ matchTrack, setMatchTrack ] = useState(false)
 	const { stateAudio, dispatchAudio } = useContext(AudioContext)
@@ -258,9 +259,21 @@ function ItemCollectionTrack({ posterType, data, collection }) {
 		dispatchMusic({ type: 'setTrack', payload: collection.tracks[0] })
 	}
 
+	const handleMove = (e) => {
+		// console.log(sliderVerticalRef)
+		if(isKeyDown(e)){
+			sliderVerticalRef.current.slickNext()
+			console.log(sliderVerticalRef.current)
+		}
+
+		if(isKeyUp(e)){
+			sliderVerticalRef.current.slickPrev()
+		}
+	}
+
 	return (
 		<div className="item-link">
-			<div className="item">
+			<div className="item item-track" tabIndex="-1" onKeyDown={handleMove}>
 				<NavLink
 					to={{
 						pathname: `/musica/album/${albumID}`
@@ -279,9 +292,9 @@ function ItemCollectionTrack({ posterType, data, collection }) {
 						}, 100)
 					}}>
 					<Img title={title} posterType={posterType} imgSquare={portadaURL} imgLandscape={portadaLandscapeURL} />
-					<MatchTrack matchTrack={matchTrack} playing={playing} handleClick={handleClick} handlePlay={handlePlay}/>
+					{/* <MatchTrack matchTrack={matchTrack} playing={playing} handleClick={handleClick} handlePlay={handlePlay}/> */}
 				</NavLink>
-				<InfoTrack title={title} artists={artists} />
+				{/* <InfoTrack title={title} artists={artists} /> */}
 			</div>
 		</div>
 	)
@@ -432,7 +445,7 @@ function ItemTrackAlbum({ data }) {
 	)
 }
 
-function ItemPlaylist({ posterType, data }) {
+export function ItemPlaylist({ posterType = 2, data, sliderVerticalRef }) {
 	const [params, setParams] = useState(false)
 	const [sendRequestPlaylist, setSendRequestPlaylist] = useState(false)
 	const { data: dataPlaylist } = useAxios('music-playlist', sendRequestPlaylist, params)
@@ -480,9 +493,20 @@ function ItemPlaylist({ posterType, data }) {
 		}
 	}, [dataPlaylist])
 
+	const handleMove = (e) => {
+		// console.log(sliderVerticalRef)
+		if(isKeyDown(e)){
+			sliderVerticalRef.current.slickNext()
+		}
+
+		if(isKeyUp(e)){
+			sliderVerticalRef.current.slickPrev()
+		}
+	}
+
 	return (
 		<div className="item-link">
-			<div className="item">
+			<div className="item item-track" tabIndex="-1" onKeyDown={handleMove}>
 				<NavLink
 					to={`/musica/playlist/${regID}`}
 					className="background-item"
@@ -499,9 +523,9 @@ function ItemPlaylist({ posterType, data }) {
 						}, 100)
 					}}>
 					<Img title={title} posterType={posterType} imgSquare={portadaURL} imgLandscape={portadaURL} />
-					<MatchTrack matchTrack={matchTrack} playing={playing} handleClick={handleClick} handlePlay={handlePlay}/>
+					{/* <MatchTrack matchTrack={matchTrack} playing={playing} handleClick={handleClick} handlePlay={handlePlay}/> */}
 				</NavLink>
-				<InfoAlbum title={title} />
+				{/* <InfoAlbum title={title} /> */}
 			</div>
 		</div>
 	)
