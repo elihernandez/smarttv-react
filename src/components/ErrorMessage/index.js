@@ -1,25 +1,26 @@
-import React, { useRef, useContext, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import GlobalContext from '../../context/GlobalContext'
+import { useDispatch } from 'react-redux'
+import { setShowBackdrop } from '../../redux/reducers/backdropReducer'
 import styled from 'styled-components'
 import { colors } from '../../styles/styles'
 
-export const ErrorMessage = ({ show, message }) => {
+export const ErrorMessage = ({ isShow, message }) => {
 	const buttonRef = useRef(null)
-	const { globalDispatch } = useContext(GlobalContext)
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		if(buttonRef?.current){
 			buttonRef.current.focus()
 		}
-	}, [show])
+	}, [isShow])
 
 	const handleClick = () => {
-		globalDispatch({ type: 'setIsShowBackdrop', payload: false })
+		dispatch(setShowBackdrop(false))
 	}
     
 	return (
-		<CSSTransition in={show} timeout={100} classNames="fade" unmountOnExit>
+		<CSSTransition in={isShow} timeout={300} classNames="fade" unmountOnExit>
 			<Container>
 				<ErrorWrapper>
 					<ErrorText>
@@ -62,22 +63,22 @@ const ErrorText = styled.div`
 `
 
 const BackButton = styled.button`
-    width: auto;
+    width: 250px;
     color: ${colors.white};
     transition: all 150ms ease;
     border-radius: 4px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.50);
     font-family: "Poppins", sans-serif !important;
     letter-spacing: .5px;
-    font-weight: 400;
-    padding: 15px 45px;
+    font-weight: 599;
+    padding: 15px 30px;
     cursor: pointer;
     text-transform: uppercase;
     background: transparent;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
     border: 2px solid ${colors.white};
     margin-top: 30px;
-    font-size: 16px;
+    font-size: 20px;
 
     &:hover{
         background: ${colors.white};

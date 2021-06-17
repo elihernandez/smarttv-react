@@ -1,40 +1,22 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { useLoaderApp } from '../hooks/useLoaderApp'
-import { useDeviceInfo } from '../hooks/useDeviceInfo'
 import { LoaderLogo, LoaderVideo } from '../components/Loader'
 import { Router } from '../router/index'
 import '../styles/app.css'
 import './styles.css'
 
 export function App() {
-	const [ appIsReady, setAppIsReady ] = useState(false)
-	const { loaderVideo, loaderLogo, loadedLoader } = useLoaderApp()
-	useDeviceInfo()
+	console.log('App')
+	const loaderState = useSelector(state => state.loader)
+	const { isShowLoaderVideo, isShowLoaderLogo } = loaderState
+	const { isLoadedData } = useLoaderApp()
 
-	useEffect(() => {
-		if(loadedLoader){
-			setAppIsReady(true)
-		}
-	}, [loadedLoader])
-
-	if(!appIsReady){
-		return (
-			<Fragment>
-				{loaderVideo && (
-					<LoaderVideo />
-				)}
-				{loaderLogo && (
-					<LoaderLogo />
-				)}
-			</Fragment>
-		)
-	}
-
-	if(appIsReady){
-		return (
-			<div className="app-content">
-				<Router />
-			</div>    
-		)
-	}
+	return <div className="app-content">
+		<LoaderVideo isShow={isShowLoaderVideo} />
+		<LoaderLogo isShow={isShowLoaderLogo} />
+		{isLoadedData && (
+			<Router />
+		)}
+	</div>    
 }

@@ -47,9 +47,9 @@ export function LiveTvContextProvider({children}){
 		}
 	}
 
-	const [state, dispatchTV] = useReducer(reducer, initialState)
+	const [liveTvState, liveTvDispatch] = useReducer(reducer, initialState)
 
-	return <Context.Provider value={{state, dispatchTV}}>
+	return <Context.Provider value={{liveTvState, liveTvDispatch}}>
 		{children}
 	</Context.Provider>
 }

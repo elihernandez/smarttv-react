@@ -1,19 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setShowTopMenu } from '../../redux/reducers/topMenuReducer'
 import { InfoMovie } from '../../components/InfoContent'
-import { CSSTransition } from 'react-transition-group'
+import { Navigation } from '../../js/SpatialNavigation'
 
-export function ContentMovie({data}){
-      const [show, setShow] = useState(false)
+export function MoviePage(){
+	console.log('Movie Page')
+	const dispatch = useDispatch()
+	const movie = useSelector(state => state.vod.movie)
+	
+	useEffect(() => {
+		Navigation.disable('#catalogue-vod')
+		Navigation.disable('#top-menu')
+		dispatch(setShowTopMenu(false))
+		
+		return () => {
+			dispatch(setShowTopMenu(true))
+			Navigation.enable('#top-menu')
+			Navigation.enable('#catalogue-vod')
+			Navigation.focus('#catalogue-vod')
+		}
+	}, [])
 
-      useEffect(() => {
-            setShow(true)
-      }, [])
-
-      return (
-            <CSSTransition in={show} timeout={300} classNames="fade" unmountOnExit>
-                  <div className="movie-info info-wrapper">
-                        <InfoMovie data={data}/>
-                  </div>
-            </CSSTransition>
-      )
+	return (
+		<div className="movie-info info-wrapper">
+			<InfoMovie data={movie} />
+		</div>
+	)
 }

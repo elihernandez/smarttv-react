@@ -8,9 +8,11 @@
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.50);
       font-family: "Poppins", sans-serif !important;
       letter-spacing: .5px;
-      font-weight: 400;
-      padding: 15px 45px;
+      font-weight: 500;
+      padding: 15px 30px;
+      font-size: 20px;
       cursor: pointer;
+      min-width: 250px;
 
       &.width-auto{
             width: auto;

@@ -1,21 +1,20 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { HashRouter } from 'react-router-dom'
-import UserContext from '../context/UserContext'
+import { useSelector } from 'react-redux'
 import { RouterLogged } from './components/RouterLogged'
 import { RouterLoggedOut } from './components/RouterLoggedOut'
 
 export function Router() {
-	const { stateUser } = useContext(UserContext)
+	console.log('Router')
+	const userState = useSelector(state => state.user)
 
 	return (
-		<React.Fragment>
-			<HashRouter>
-				{stateUser?.userLogged && stateUser?.userToken ? (
-					<RouterLogged />
-				) : (
-					<RouterLoggedOut />
-				)}
-			</HashRouter>
-		</React.Fragment>
+		<HashRouter>
+			{userState?.userLogged && userState?.userToken ? (
+				<RouterLogged />
+			) : (
+				<RouterLoggedOut />
+			)}
+		</HashRouter>
 	)
 }

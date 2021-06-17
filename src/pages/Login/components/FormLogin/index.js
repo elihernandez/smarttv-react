@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react'
-import GlobalContext from '../../../../context/GlobalContext'
-import TvDeviceContext from '../../../../context/TvDeviceContext'
+import React, { useState, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setShowBackdrop, setShowLoading } from '../../../../redux/reducers/backdropReducer'
 import { useUserSuscription } from '../../../../hooks/useUserSuscription'
 import { encryptService } from '../../../../services/webosServices/encryptService'
 import { getLogin } from '../../../../services/getLogin'
@@ -9,14 +9,14 @@ import { isKeyEnter } from '../../../../js/Keyboard'
 import './styles.css'
 
 export const FormLogin = () => {
+	const dispatch = useDispatch()
+	const loaderState = useSelector(state => state.loader)
+	const deviceState = useSelector(state => state.device)
 	const [username, setUsername] = useState('')
-	const [usernameLabel, setUsernameLabel] = useState('Correo electrónico')
 	const [password, setPassword] = useState('')
-	const [passwordLabel, setPasswordLabel] = useState('Password')
 	const [responseService, setResponseService] = useState(null)
-	const {globalState, globalDispatch} = useContext(GlobalContext)
-	const {stateTvDevice} = useContext(TvDeviceContext)
 	useUserSuscription(username, responseService)
+	console.log(loaderState)
 	
 	const onKeyDownInputUsername = useCallback((e) => {
 		if((isKeyEnter(e)) && e.target.value !== ''){
@@ -32,13 +32,11 @@ export const FormLogin = () => {
 
 	const dataIsValid = useCallback(() => {
 		if(username === ''){
-			setUsernameLabel('Ingresa tu correo electrónico')
 			document.getElementById('username').focus()
 			return false
 		}
 
 		if(password === ''){
-			setPasswordLabel('Ingresa tu contraseña')
 			document.getElementById('password').focus()
 			return false
 		}
@@ -50,37 +48,39 @@ export const FormLogin = () => {
 		if(dataIsValid()){
 			if(isKeyEnter(e)){
 				try{
-					globalDispatch({ type: 'setIsShowBackdrop', payload: true })
-					globalDispatch({ type: 'setIsShowLoading', payload: true })
+					// globalDispatch({ type: 'setIsShowBackdrop', payload: true })
+					// globalDispatch({ type: 'setIsShowLoading', payload: true })
+					dispatch(setShowBackdrop(true))
+					dispatch(setShowLoading(true))
 					const hashPassword = await encryptService(password, 10)
-					console.log(hashPassword)
-					const response = await getLogin(username, btoa(hashPassword), stateTvDevice)
+					// console.log(hashPassword)
+					const response = await getLogin(username, btoa(hashPassword), deviceState)
 					setResponseService(response)
 				}catch(e){
 					console.log(e)
-					globalDispatch({ type: 'setIsShowLoading', payload: false })
-					globalDispatch({ type: 'setIsShowErrorMessage', payload: true })
-					globalDispatch({ type: 'setErrorMessage', payload: 'No se pudo iniciar sesión, vuelve a intentarlo.' })
-					globalDispatch({ type: 'setTypeError', payload: 'password' })
+					// globalDispatch({ type: 'setIsShowLoading', payload: false })
+					// globalDispatch({ type: 'setIsShowErrorMessage', payload: true })
+					// globalDispatch({ type: 'setErrorMessage', payload: 'No se pudo iniciar sesión, vuelve a intentarlo.' })
+					// globalDispatch({ type: 'setTypeError', payload: 'password' })
 				}
 			}
 		}
 	}, [username, password])
 
-	useEffect(() => {
-		if(globalState.typeError === 'username'){
-			document.getElementById('username').focus()
-		}
+	// useEffect(() => {
+	// 	if(globalState.typeError === 'username'){
+	// 		document.getElementById('username').focus()
+	// 	}
 
-		if(globalState.typeError === 'password'){
-			document.getElementById('password').focus()
-		}
-	}, [globalState.isBackdrop])
+	// 	if(globalState.typeError === 'password'){
+	// 		document.getElementById('password').focus()
+	// 	}
+	// }, [globalState.isBackdrop])
 
 	return (
-		<div className="form-login">
+		<form className="form-login">
 			<div className="form-group">
-				<p>{usernameLabel}</p>
+				<p>Correo electrónico</p>
 				<input
 					id="username"
 					type="text"
@@ -88,18 +88,20 @@ export const FormLogin = () => {
 					tabIndex="-1"
 					value={username}
 					autoFocus
+					autoComplete="username"
 					onKeyDown={(e) => onKeyDownInputUsername(e)}
 					onChange={(e) => setUsername(e.target.value)}
 				/>
 			</div>
 			<div className="form-group">
-				<p>{passwordLabel}</p>
+				<p>Contraseña</p>
 				<input
 					id="password"
 					type="password"
 					className="input-login"
 					tabIndex="-1"
 					value={password}
+					autoComplete="current-password"
 					onKeyDown={(e) => onKeyDownInputPassword(e)}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
@@ -114,6 +116,6 @@ export const FormLogin = () => {
 				classes="btn-register body-3">
 				Iniciar sesión
 			</Button>	
-		</div>
+		</form>
 	)
 }

@@ -1,19 +1,22 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { Info } from '../../../pages/Info'
+import { Route, Redirect } from 'react-router-dom'
+import { LoginPage } from '../../../pages/Login'
+import { AnimatedSwitch } from 'react-router-transition'
 
 export function RouterLoggedOut() {
 	return (
-		<Switch>
+		<AnimatedSwitch
+			atEnter={{ opacity: 0 }}
+			atLeave={{ opacity: 0 }}
+			atActive={{ opacity: 1 }}
+			className="switch-wrapper"
+	  	>
 			<Route exact path="/">
-				<Redirect to="/info" />
+				<Redirect to="/login/info" />
 			</Route>
-			<Route exact path="/info">
-				<Info/>
+			<Route exact path="/login/:type?">
+				<LoginPage />
 			</Route>
-			<Route exact path="/login">
-				<Info/>
-			</Route>
-		</Switch>
+		</AnimatedSwitch>
 	)
 }

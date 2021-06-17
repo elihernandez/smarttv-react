@@ -3,6 +3,7 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const MiniCSSExtract = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const path = require('path')
 
 const javascriptRules = {
@@ -29,9 +30,12 @@ const javascriptRules = {
 			plugins: [
 				'@babel/transform-runtime',
 				'@babel/plugin-proposal-optional-chaining',
-				'@babel/plugin-transform-strict-mode',
+				// '@babel/plugin-transform-strict-mode',
 				'@babel/plugin-transform-react-constant-elements',
-				'@babel/plugin-transform-react-inline-elements'
+				'@babel/plugin-transform-react-inline-elements',
+				['@babel/plugin-transform-modules-commonjs', {
+					'strictMode': false
+				}],
 			]
 		}
 	}
@@ -74,6 +78,7 @@ const fontsRules = {
 }
 
 const developmentPlugins = [
+	new CssMinimizerPlugin()
 ]
 
 const productionPlugins = [
@@ -90,6 +95,14 @@ module.exports = (_env, { mode }) => ({
 		publicPath: 'app',
 	},
 	watch: (mode === 'production' ? false : true),
+	optimization: {
+		minimize:  (mode === 'production' ? true : false),
+		minimizer: [
+			new TerserPlugin({
+				parallel: true,
+			}),
+		],
+	},
 	module: {
 		rules: [
 			javascriptRules,

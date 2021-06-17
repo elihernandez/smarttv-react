@@ -15,10 +15,8 @@ export function Guide() {
 	const history = useHistory()
 	const { url } = useRouteMatch()
 	const { channelId } = useParams() 
-	const { state, dispatchTV } = useContext(LiveTVContext)
-	const { guideOnce } = state
-	// const { stateVideo } = useContext(VideoContext)
-	// const { dataChannel } = stateVideo
+	const { liveTvState, liveTvDispatch } = useContext(LiveTVContext)
+	const { guideOnce } = liveTvState
 	const [dataTabs, setDataTabs] = useState(null)
 	const [showGuide, setShowGuide] = useState(false)
 	const [sendRequest, setSendRequest] = useState(false)
@@ -55,21 +53,15 @@ export function Guide() {
 		if(!guideOnce){
 			setShowGuideLoader(true)
 			setSendRequest(true)
-			dispatchTV({ type: 'setGuideOnce', payload: true })
+			liveTvDispatch({ type: 'setGuideOnce', payload: true })
 		}
 
 		if(isNotEmptyArray(data)){
-			dispatchTV({ type: 'updateData', payload: data })
+			liveTvDispatch({ type: 'updateData', payload: data })
 			loadChannel(data)
 			handleData(data)
 		}
 	}, [data])
-
-	// useEffect(() => {
-	// 	let id = undefined
-	// 	if(dataChannel) id = dataChannel.Id ? dataChannel.Id : dataChannel.Registro
-	// 	if(id != channelId) handleData(data)		
-	// }, [channelId, dataChannel])
 
 	useEffect(() =>{
 		if(sendRequest){

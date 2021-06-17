@@ -42,8 +42,8 @@ export function searchMovie(data, contentId) {
 
 export function InfoContent() {
 	const { contentId, contentType } = useParams()
-	const { stateVod, dispatchVod } = useContext(VodContext)
-	const { dataVod, movieVod, seasonVod, serieVod } = stateVod
+	const { vodState, vodDispatch } = useContext(VodContext)
+	const { dataVod, movieVod, seasonVod, serieVod } = vodState
 	const [loading, setLoading] = useState(true)
 	const [content, setContent] = useState('')
 
@@ -55,7 +55,7 @@ export function InfoContent() {
 					setLoading(false)
 					setContent('movie')
 				} else {
-					dispatchVod({ type: 'setMovie', payload: searchMovie(dataVod, contentId) })
+					vodDispatch({ type: 'setMovie', payload: searchMovie(dataVod, contentId) })
 					setLoading(false)
 					setContent('movie')
 				}
@@ -65,7 +65,7 @@ export function InfoContent() {
 					setLoading(false)
 					setContent('serie')
 				} else {
-					dispatchVod({ type: 'setSerie', payload: searchSerie(dataVod, contentId) })
+					vodDispatch({ type: 'setSerie', payload: searchSerie(dataVod, contentId) })
 					setLoading(false)
 					setContent('serie')
 				}
@@ -81,72 +81,72 @@ export function InfoContent() {
 	return (
 		<Fragment>
 			{content == 'movie' && movieVod &&
-                        <ContentMovie data={movieVod} />
+                <ContentMovie data={movieVod} />
                        
 			}
 			{content == 'serie' && serieVod &&
-                        <ContentSerie data={serieVod} />
+                <ContentSerie data={serieVod} />
 			}
 		</Fragment>
 	)
 }
 
-export function CatalogueVod({ requestApi }) {
-	const { url } = useRouteMatch()
-	const { stateVod, dispatchVod } = useContext(VodContext)
-	const { dataVod } = stateVod
-	const { loading, data } = useRequest(requestApi, dispatchVod, dataVod)
+// export function CatalogueVod({ requestApi }) {
+// 	const { url } = useRouteMatch()
+// 	const { stateVod, vodDispatch } = useContext(VodContext)
+// 	const { dataVod } = stateVod
+// 	const { loading, data } = useRequest(requestApi, vodDispatch, dataVod)
 
-	return (
-		<Fragment>
-			<CSSTransition in={loading} timeout={300} classNames="fade" unmountOnExit>
-				<LoaderSpinnerMUI />
-			</CSSTransition>
-			<CSSTransition in={!loading} timeout={300} classNames="fade" unmountOnExit>
-				<Switch>
-					<Route exact path={`${url}`} >
-						<div className={`content-catalogue ${requestApi}`}>
-							{data && !loading &&
-                                                data.map((category) => {
-                                                	return <List key={category.category} data={category} listType="catalogue" />
-                                                })
-							}
-						</div>
-					</Route>
-					<Route exact path={`${url}/:contentType/:contentId`} >
-						<InfoContent />
-					</Route>
-					<Route exact path={`${url}/:contentType/:contentId/video`} >
-						<VideoVod state={stateVod} dispatchVod={dispatchVod} />
-					</Route>
-				</Switch>
-			</CSSTransition>
-		</Fragment>
-	)
-}
+// 	return (
+// 		<Fragment>
+// 			<CSSTransition in={loading} timeout={300} classNames="fade" unmountOnExit>
+// 				<LoaderSpinnerMUI />
+// 			</CSSTransition>
+// 			<CSSTransition in={!loading} timeout={300} classNames="fade" unmountOnExit>
+// 				<Switch>
+// 					<Route exact path={`${url}`} >
+// 						<div className={`content-catalogue ${requestApi}`}>
+// 							{data && !loading &&
+//                                                 data.map((category) => {
+//                                                 	return <List key={category.category} data={category} listType="catalogue" />
+//                                                 })
+// 							}
+// 						</div>
+// 					</Route>
+// 					<Route exact path={`${url}/:contentType/:contentId`} >
+// 						<InfoContent />
+// 					</Route>
+// 					<Route exact path={`${url}/:contentType/:contentId/video`} >
+// 						<VideoVod state={stateVod} vodDispatch={vodDispatch} />
+// 					</Route>
+// 				</Switch>
+// 			</CSSTransition>
+// 		</Fragment>
+// 	)
+// }
 
-export function CatalogueRadio({ requestApi }) {
+// export function CatalogueRadio({ requestApi }) {
 
-	const { stateRadio, dispatchRadio } = useContext(RadioContext)
-	const { dataRadio } = stateRadio
-	const { loading, data } = useRequest(requestApi, dispatchRadio, dataRadio)
+// 	const { stateRadio, dispatchRadio } = useContext(RadioContext)
+// 	const { dataRadio } = stateRadio
+// 	const { loading, data } = useRequest(requestApi, dispatchRadio, dataRadio)
 
-	return (
-		<Fragment>
-			<CSSTransition in={loading} timeout={300} classNames="active" unmountOnExit>
-				<LoaderSpinnerMUI />
-			</CSSTransition>
-			<CSSTransition in={!loading} timeout={300} classNames="active" unmountOnExit>
+// 	return (
+// 		<Fragment>
+// 			<CSSTransition in={loading} timeout={300} classNames="active" unmountOnExit>
+// 				<LoaderSpinnerMUI />
+// 			</CSSTransition>
+// 			<CSSTransition in={!loading} timeout={300} classNames="active" unmountOnExit>
 
-				<div className={`content-catalogue ${requestApi}`}>
-					{data && !loading &&
-                                    data.map((category, index) => {
-                                    	return <List key={`${category.category}-${index}`} data={category} listType="radio" />
-                                    })
-					}
-				</div>
+// 				<div className={`content-catalogue ${requestApi}`}>
+// 					{data && !loading &&
+//                                     data.map((category, index) => {
+//                                     	return <List key={`${category.category}-${index}`} data={category} listType="radio" />
+//                                     })
+// 					}
+// 				</div>
 
-			</CSSTransition>
-		</Fragment>
-	)
-}
+// 			</CSSTransition>
+// 		</Fragment>
+// 	)
+// }

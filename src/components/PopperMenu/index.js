@@ -52,22 +52,16 @@ export function PopperMenu({textButton, itemsMenu}){
 				{textButton}
 			</Button>
 			<Popper open={open} anchorEl={anchorRef.current} placement="bottom" role={undefined} transition disablePortal >
-				{({ TransitionProps, placement }) => (
-             
+				{() => (
 					<Paper>
 						<ClickAwayListener onClickAway={handleClose}>
 							<MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
 								{
 									itemsMenu.map(({title, href, func}) => {
-										if(func != ''){
-											return <a key={title} href={href} target="_blank" rel="noreferrer" onClick={handleClose}>
-												<MenuItem onClick={func}>{title}</MenuItem>
-											</a>
-										}else{
-											return <a key={title} href={href} target="_blank" rel="noreferrer" onClick={handleClose}>
-												<MenuItem className="body-3">{title}</MenuItem>
-											</a>
-										}
+										return <a key={title} href={href} target="_blank" rel="noreferrer" onClick={handleClose}>
+											<MenuItem onClick={func}>{title}</MenuItem>
+										</a>
+										
 									})
 								}
 							</MenuList>

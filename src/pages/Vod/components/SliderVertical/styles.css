@@ -1,0 +1,76 @@
+@import "../../../../styles/style-base.css";
+
+.catalogue-vod{
+    position: relative;
+    padding-top: $height-top-menu;
+    /* top: $height-top-menu;
+    height: calc(100% - $height-top-menu); */
+    overflow: hidden;
+}
+
+.slider-vod {
+
+    > .slick-list {
+
+        > .slick-track {
+
+            > .slick-slide {
+                opacity: 0;
+                width: 100%;
+                padding: 15px $padding-content 15px $padding-content;
+                transition: all 250ms ease-in-out;
+
+                &.slick-active{
+                    opacity: 1;
+                }
+
+                + .slick-active{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .title-list {
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin: 10px 0 0 14px;
+    }
+
+    .description-list {
+        font-size: 22px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        margin: -10px 0 10px 14px;
+        color: $color-grey-3;
+    }
+
+    .slick-dots{
+        left: -4px;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        width: auto;
+
+        li{
+            margin: 5px 0;
+
+            button{
+                &:before{
+                    color: $color-grey-2;
+                    font-size: 12px;
+                }
+            }
+
+            &.slick-active{
+                button{
+                   &:before{
+                       color: $color-white;
+                   }
+                }
+            }
+        }
+    }
+}

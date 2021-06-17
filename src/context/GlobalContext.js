@@ -2,9 +2,12 @@ import React, { createContext, useReducer } from 'react'
 const Context = createContext({})
 
 const initialState = {
+	userData: [],
+	deviceData: [],
 	isShowBackdrop: false,
 	isShowLoading: false,
 	isShowErrorMessage: false,
+	isShowTopMenu: true,
 	typeError: null,
 	errorMessage: '',
 	snackbarOptions : {
@@ -23,11 +26,28 @@ const initialState = {
 		type: null,
 		status: null,
 		connection: {}
+	},
+	vodData: {
+		data: [],
+		loading: true,
+		lastDateRequest: null
 	}
 }
 
 const reducer = (state, action) => {
 	switch (action.type) {
+	case 'setDeviceData': {
+		return {
+			...state,
+			deviceData: action.payload
+		}
+	}
+	case 'setUserData': {
+		return {
+			...state,
+			userData: action.payload
+		}
+	}
 	case 'setIsShowBackdrop': {
 		return {
 			...state,
@@ -47,6 +67,12 @@ const reducer = (state, action) => {
 		return {
 			...state,
 			isShowErrorMessage: action.payload
+		}
+	}
+	case 'setIsShowTopMenu': {
+		return {
+			...state,
+			isShowTopMenu: action.payload
 		}
 	}
 	case 'setTypeError': {
@@ -77,6 +103,12 @@ const reducer = (state, action) => {
 		return {
 			...state,
 			networkConnection: action.payload,
+		}
+	}
+	case 'setVodData': {
+		return {
+			...state,
+			vodData: action.payload,
 		}
 	}
 	default: return state

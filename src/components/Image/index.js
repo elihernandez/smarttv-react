@@ -36,13 +36,25 @@ export function LazyImage({img, alt, type, recoverType, imgError = '', effect = 
 		e.target.src = imgError
 	}
 
+	// return (
+	// 	<LazyLoadImage
+	// 		alt={alt}
+	// 		effect={effect}
+	// 		src={src}
+	// 		placeholder={null}
+	// 		onError={onError}
+	// 	/>
+	// )
+
 	return (
-		<LazyLoadImage
-			alt={alt}
-			effect={effect}
-			src={src}
-			placeholder={null}
-			onError={onError}
-		/>
+		<span style={{ 'display': 'inline-block' }}>
+			<img
+				alt={alt}
+				effect={effect}
+				src={src}
+				placeholder={null}
+				onError={onError}
+			/>
+		</span>
 	)
 }

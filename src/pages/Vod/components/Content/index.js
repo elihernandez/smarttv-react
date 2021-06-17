@@ -1,38 +1,25 @@
-import React, { useContext, useEffect } from 'react'
-import { Switch, Route, useRouteMatch } from 'react-router-dom'
-import VodContext from '../../../../context/VodContext'
-import { VideoVod } from '../../../Video'
+import React, { Fragment } from 'react'
 import { Catalogue } from '../Catalogue'
-import { InfoContent } from '../../../../components/Catalogue'
-import { LoaderSpinnerMUI } from '../../../../components/Loader'
-import { useAxios } from '../../../../hooks/useAxios'
+import { MoviePage } from '../../../Movie'
+import { SeriePage } from '../../../Serie'
 
-export function Content() {
-	const { url } = useRouteMatch()
-	const { stateVod, dispatchVod } = useContext(VodContext)
-	const { loading, data } = useAxios('catalogue-vod')
+export const Content = () => {
 	
-	useEffect(() => {
-		dispatchVod({ type: 'setData', payload: data })
-	}, [data])
-
 	return (
-		<Switch>
-			<Route exact path={`${url}`} >
-				{loading &&
-                    <LoaderSpinnerMUI />
-				}
-                        
-				{!loading && data &&
-                    <Catalogue data={data} />
-				}
+		<Fragment>
+			<Catalogue />
+			<MoviePage />
+			<SeriePage />
+			
+			{/* <Route path={`${url}/pelicula/:contentId`} >
 			</Route>
-			<Route exact path={`${url}/:contentType/:contentId`} >
-				<InfoContent />
+			<Route path={`${url}/serie/:contentId`} >
+				<SeriePage />
 			</Route>
-			<Route exact path={`${url}/:contentType/:contentId/video`} >
-				<VideoVod state={stateVod} dispatchVod={dispatchVod} />
-			</Route>
-		</Switch>
+			<Route path={`${url}/:contentType/:contentId/video`} >
+				<VideoVod state={vodState} vodDispatch={vodDispatch} />
+			</Route> */}
+		
+		</Fragment>
 	)
 }

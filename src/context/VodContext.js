@@ -60,9 +60,9 @@ export function VodContextProvider({ children }) {
 		}
 	}
 
-	const [stateVod, dispatchVod] = useReducer(reducer, initialState)
+	const [vodState, vodDispatch] = useReducer(reducer, initialState)
 
-	return <Context.Provider value={{ stateVod, dispatchVod }}>
+	return <Context.Provider value={{ vodState, vodDispatch }}>
 		{children}
 	</Context.Provider>
 }

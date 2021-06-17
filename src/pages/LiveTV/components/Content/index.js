@@ -7,8 +7,8 @@ export function Content({ children }) {
 	const contentRef = useRef()
 	const timerRef = useRef(null)
 	const [isVisible, setIsVisible] = useState(true)
-	const { stateVideo } = useContext(VideoContext)
-	const { activeChannel } = stateVideo
+	const { videoState } = useContext(VideoContext)
+	const { activeChannel } = videoState
 
 	const fadeInContent = () => {
 		setIsVisible(true)

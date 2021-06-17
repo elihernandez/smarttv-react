@@ -1,5 +1,8 @@
-import React, { Fragment, useState, useContext, useEffect } from 'react'
-import { NavLink, Link, useRouteMatch, useParams } from 'react-router-dom'
+import React, { Fragment, useState, useContext, useEffect, useCallback, useMemo } from 'react'
+import { NavLink, Link, useRouteMatch, useParams, useHistory } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
+import { useDispatch } from 'react-redux'
+import { setMovie, setSerie } from '../../redux/reducers/vodReducer'
 import { v4 as uuid } from 'uuid'
 import VodContext from '../../context/VodContext'
 import RadioContext from '../../context/RadioContext'
@@ -8,25 +11,24 @@ import VideoContext from '../../context/VideoContext'
 import MusicContext from '../../context/MusicContext'
 import { useAxios } from '../../hooks/useAxios'
 import { getContactInfo } from '../../services/getContactInfo'
+import { isKeyDown, isKeyEnter, isKeyUp } from '../../js/Keyboard'
 import { getProgressMovie, isLive, isEvent, getProgressTimeEvent, getEventTime, secondsToString } from '../../js/Time'
-import {  limitString, isLimitString, isSerie, typeContent, replaceString, containsString, createUrlString } from '../../js/String'
+import {  limitString, isLimitString, isMovie, isSerie, contentType, replaceString, createUrlString, posterTypeSize } from '../../js/String'
 import Tooltip from '@material-ui/core/Tooltip'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import { CSSTransition } from 'react-transition-group'
 import { LazyImage } from '../Image'
 import { AnimatedBars } from '../AnimatedBars'
 import { LoaderSpinnerMUI } from '../Loader'
 import imgRecoverErrorTV from '../../assets/images/backgrounds/onerror/error-tv.png'
 import imgRecoverErrorPortrait from '../../assets/images/backgrounds/onerror/error-portrait.png'
 import imgRecoverErrorLandscape from '../../assets/images/backgrounds/onerror/error-landscape.png'
-import { isKeyDown, isKeyUp } from '../../js/Keyboard'
 import './styles.css'
 
 export function Item({ data, posterType, listType, titleCategory, category, listTracks, collection, sliderVerticalRef }) {
 	let Item = () => null
 	const { url } = useRouteMatch()
 	const { ContentType } = data
-	const type = typeContent(ContentType)
+	const type = contentType(ContentType)
 
 	switch (listType) {
 	case 'catalogue':
@@ -67,48 +69,49 @@ export function Item({ data, posterType, listType, titleCategory, category, list
 	return Item
 }
 
-function ItemCatalogue({ type, posterType, data, titleCategory }) {
-	let urlNavLink
+export function ItemCatalogue({ id, posterType, data, sliderVerticalRef }) {
+	console.log('ItemCatalogue')
+	const history = useHistory()
+	const dispatch = useDispatch()
+	const className = posterTypeSize(posterType)
 	const { Title, Registro, ContentType, HDPosterUrlPortrait, HDPosterUrlLandscape, ResumePos, Length } = data
-	const { dispatchVod } = useContext(VodContext)
 
-	const handleClick = () => {
-		if (isSerie(ContentType)) {
-			dispatchVod({ type: 'setSerie', payload: data })
-		} else {
-			dispatchVod({ type: 'setMovie', payload: data })
+	const handleMove = useCallback((e) => {
+		if(isKeyEnter(e)){
+			if(isMovie(ContentType)){
+				dispatch(setMovie(data))
+			}else{
+				dispatch(setSerie(data))
+			}
+			const url = `${history.location.pathname}/${contentType(ContentType)}/${Registro}`
+			history.push(url)
 		}
-	}
 
-	if (titleCategory == 'Continuar Viendo') {
-		if(containsString(ContentType, 'kids')){
-			urlNavLink = `zonakids/${type}/${Registro}/video`
-		}else{
-			urlNavLink = `alacarta/${type}/${Registro}/video`
+		if(isKeyDown(e)){
+			sliderVerticalRef.current.slickNext()
 		}
-	} else {
-		if(containsString(ContentType, 'kids')){
-			urlNavLink = `zonakids/${type}/${Registro}`
-			
-		}else{
-			urlNavLink = `alacarta/${type}/${Registro}`
-		}
-	}
 
-	return (
-		<NavLink to={urlNavLink} className="item-link">
-			<div className="item" onClick={handleClick}>
-				<div className="background-item">
-					<Img title={Title} posterType={posterType} imgPortrait={HDPosterUrlPortrait} imgLandscape={HDPosterUrlLandscape} />
-					{ResumePos &&
+		if(isKeyUp(e)){
+			sliderVerticalRef.current.slickPrev()
+		}
+	}, [data])
+
+	return useMemo(() =>  {
+		return (
+			<div className="item-link">
+				<div id={id} className={`item-catalogue ${className}`} tabIndex="-1" onClick={handleMove} onKeyDown={handleMove}>
+					<div className="background-item">
+						<Img title={Title} posterType={posterType} imgPortrait={HDPosterUrlPortrait} imgLandscape={HDPosterUrlLandscape} />
+						{ResumePos &&
 						<div className="progress-bar-content">
 							<LinearProgress variant="determinate" value={getProgressMovie(ResumePos, Length)} />
 						</div>
-					}
+						}
+					</div>
 				</div>
 			</div>
-		</NavLink>
-	)
+		)
+	}, [data])
 }
 
 function ItemSeason({ url, posterType, data }) {
@@ -263,7 +266,6 @@ export function ItemCollectionTrack({ posterType = 2, data, collection, sliderVe
 		// console.log(sliderVerticalRef)
 		if(isKeyDown(e)){
 			sliderVerticalRef.current.slickNext()
-			console.log(sliderVerticalRef.current)
 		}
 
 		if(isKeyUp(e)){

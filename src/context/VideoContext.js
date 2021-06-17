@@ -5,9 +5,9 @@ const Context = React.createContext({})
 export function VideoContextProvider({ state, reducer, children }) {
 	const initialState = state
 
-	const [stateVideo, dispatch] = useReducer(reducer, initialState)
+	const [videoState, videoDispatch] = useReducer(reducer, initialState)
 
-	return <Context.Provider value={{ stateVideo, dispatch }}>
+	return <Context.Provider value={{ videoState, videoDispatch }}>
 		{children}
 	</Context.Provider>
 }

@@ -1,24 +1,24 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import * as ReactDOM from 'react-dom'
-import GlobalContext from '../../context/GlobalContext'
+import { useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { ErrorMessage } from '../ErrorMessage'
 import './styles.css'
 
 export function Backdrop() {
-	const { globalState } = useContext(GlobalContext)
-	const { isShowBackdrop, isShowLoading, isShowErrorMessage, errorMessage } = globalState
+	const backdropState = useSelector(state => state.backdrop)
+	const { isShowBackdrop, isShowLoading, isShowErrorMessage, errorMessage } = backdropState
 
 	return ReactDOM.createPortal(
-		<CSSTransition in={isShowBackdrop} timeout={100} classNames="fade" unmountOnExit>
+		<CSSTransition in={isShowBackdrop} timeout={300} classNames="fade" unmountOnExit>
 			<div className="backdrop-content">
-				<CSSTransition in={isShowLoading} timeout={100} classNames="fade" unmountOnExit>
+				<CSSTransition in={isShowLoading} timeout={300} classNames="fade" unmountOnExit>
 					<div className="backdrop-spinner">
 						<CircularProgress disableShrink />
 					</div>
 				</CSSTransition>
-				<ErrorMessage show={isShowErrorMessage} message={errorMessage} />
+				<ErrorMessage isShow={isShowErrorMessage} message={errorMessage} />
 			</div>
 		</CSSTransition>,
 		document.body

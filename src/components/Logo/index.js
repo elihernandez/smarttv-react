@@ -14,9 +14,7 @@ export function MemoizedLogo({ color = 'purple', size = 'md', to = '/' }) {
 
 	return (
 		<div className="logo-guiahtv">
-			<MemoizedNavLink to={to} activeClassName="active">
-				<img className={`img-logo ${size}`} src={listSrc[color] || imgLogoPurple} alt="logo-guiahtv" />
-			</MemoizedNavLink>
+			<img className={`img-logo ${size}`} src={listSrc[color] || imgLogoPurple} alt="logo-guiahtv" />
 		</div>
 	)
 }

@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { InfoSerie } from '../../components/InfoContent'
 import { TabsContent } from './components/Tabs'
-import { CSSTransition } from 'react-transition-group'
+import { Navigation } from '../../js/SpatialNavigation'
 
-export function ContentSerie({data}){
-	const [show, setShow] = useState(false)
-	const { ContentTypeOrder, ContactID } = data
+export function SeriePage(){
+	console.log('Serie')
+	const serie = useSelector(state => state.vod.serie)
 
 	useEffect(() => {
-		setShow(true)
+		Navigation.disable('#catalogue-vod')
+		
+		return () => {
+			Navigation.enable('#catalogue-vod')
+			Navigation.focus('#catalogue-vod')
+		}
 	}, [])
 
 	return (
-		<CSSTransition in={show} timeout={300} classNames="fade" unmountOnExit>
-			<div className="serie-info info-wrapper">
-				<InfoSerie data={data}/>
-				<TabsContent serieId={ContentTypeOrder} contactId={ContactID} />
-			</div>
-		</CSSTransition>
+		<div className="serie-info info-wrapper">
+			<InfoSerie data={serie}/>
+			{/* <TabsContent serieId={serie.ContentTypeOrder} contactId={serie.ContactID} /> */}
+		</div>
 	)
 }

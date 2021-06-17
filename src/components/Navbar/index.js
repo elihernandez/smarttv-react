@@ -1,31 +1,62 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { CSSTransition } from 'react-transition-group'
+import { useHistory } from 'react-router-dom'
+import { isKeyEnter, isKeyDown } from '../../js/Keyboard'
+import { setLinkActive, setShowNavbar } from '../../redux/reducers/topMenuReducer'
+import { useDispatch, useSelector } from 'react-redux' 
 import './styles.css'
 
-function MemoizedNavbar({ isShow, navLinks, classNavbar, classItems, show = true, handleHide, handleShow }) {
+const Link = ({ linkData }) => {
+	const history = useHistory()
+	const dispatch = useDispatch()
+	const isShowNavbar = useSelector(state => state.topMenu.isShowNavbar)
+	const linkActive = useSelector(state => state.topMenu.linkActive)
+	const { title, href, icon, id } = linkData
     
+	const handleClick = (e) => {
+		if(isKeyDown(e)){
+			dispatch(setShowNavbar(false))
+		}
+
+		if(isKeyEnter(e) && linkActive != id){
+			history.push(href)
+			dispatch(setLinkActive(id))
+
+			if(id !== 'link-home'){
+				dispatch(setShowNavbar(false))
+			}
+		}
+	}
+
+	const handleFocus = () => {
+		if(!isShowNavbar){
+			dispatch(setShowNavbar(true))
+		}
+	}
+
+	return  <li key={title} className="navbar-item">
+		<div to={href} className={`navbar-link navbar-link-top-menu ${linkActive === id ? 'active' : '' }`} tabIndex="-1" id={id} onClick={handleClick} onKeyDown={handleClick} onFocus={handleFocus}>
+			{icon}
+			<p>{title}</p>
+		</div>
+	</li>
+}
+
+function MemoizedNavbar({ navLinks }) {
+	const isShowNavbar = useSelector(state => state.topMenu.isShowNavbar)
+
 	return (
-		// <CSSTransition in={isShow} timeout={300} classNames="fade">
-		<div className={`navbar ${isShow ? 'show' : ''} ${classNavbar}`}>
+		<div className={`navbar ${isShowNavbar ? 'show' : ''} navbar-top-menu`}>
 			<div className="section-wrapper">
 				<ul className="navbar-list">
 					{
-						navLinks.map(({ title, href, icon, id }) => {
-							return  <li key={title} className="navbar-item">
-								<MemoizedNavLink to={href} className={`navbar-link ${classItems}`} activeClassName="active" tabIndex="-1" id={id} onKeyDown={(e) => handleHide(e)} onFocus={handleShow}>
-									{icon}
-									<p>{title}</p>
-								</MemoizedNavLink>
-							</li>
+						navLinks.map((linkData) => {
+							return <Link key={linkData.id} linkData={linkData} />
 						})
 					}
 				</ul>
 			</div>
 		</div>
-		// </CSSTransition>
 	)
 }
 
-const MemoizedNavLink = React.memo(NavLink)
 export const Navbar = React.memo(MemoizedNavbar)

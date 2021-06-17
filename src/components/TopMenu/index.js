@@ -1,30 +1,28 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { useLocation, NavLink } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { Navbar } from '../Navbar/index'
 import { UserMenu } from '../UserMenu/index'
 import Logo from '../Logo/index'
 import { Navigation } from '../../js/SpatialNavigation'
-import { isKeyDown } from '../../js/Keyboard'
 import './styles.css'
 
-const LeftContent = ({ isShow, handleHide, handleShow }) => {
-	const classItems = 'navbar-link-top-menu'
-	const classNavbar = 'navbar-top-menu'
-	const [navLinks] = useState([
+const LeftContent = () => {
+	const navLinks = [
 		{ id: 'link-home', title: 'Inicio', href: '/inicio', icon: <i className="fas fa-home"></i> },
 		// { id: 'link-tv', title: 'En vivo', href: pathname.includes('tv') ? location : '/tv', icon: <i className="fas fa-tv"></i> },
-		{ id: 'link-tv', title: 'En vivo', href: '/tv', icon: <i className="fas fa-tv"></i> },
+		{ id: 'link-tv', title: 'En vivo', href: '/envivo', icon: <i className="fas fa-tv"></i> },
 		{ id: 'link-vod', title: 'A la carta', href: '/alacarta', icon: <i className="fas fa-popcorn"></i> },
 		{ id: 'link-radio', title: 'Radio', href: '/radio', icon: <i className="fas fa-radio"></i> },
 		// { id: 'link-music', title: 'Musica', href: pathname.includes('musica') ? location : '/musica/inicio', icon: <i className="fas fa-headphones"></i> },
 		{ id: 'link-music', title: 'Musica', href: '/musica/inicio', icon: <i className="fas fa-headphones"></i> },
 		{ id: 'link-kids', title: 'Zona kids', href: '/zonakids', icon: <i className="fas fa-child"></i> }
-	]) 
-
+	]
+	
 	return (
 		<div className='left-content'>
 			<Logo color="purple" size="sm" />
-			<Navbar isShow={isShow} navLinks={navLinks} classNavbar={classNavbar} classItems={classItems} handleHide={handleHide} handleShow={handleShow} />
+			<Navbar navLinks={navLinks} />
 		</div>
 	)
 }
@@ -37,38 +35,26 @@ const RightContent = ({ isShow }) => {
 					Búsqueda &nbsp;&nbsp;<i className="fas fa-search"></i> 
 				</span>
 			</NavLink>
-			<UserMenu />
+			{/* <UserMenu /> */}
 		</div>
 	)
 }
 
 const MemoizedTopMenu = () => {
-	const { pathname } = useLocation()
-	const [isShow, setIsShow] = useState(true)
-
+	const isShowTopMenu = useSelector(state => state.topMenu.isShowTopMenu)
+	const isShowNavbar = useSelector(state => state.topMenu.isShowNavbar)
+	
 	useEffect(() => {
-		Navigation.add('.navbar-link-top-menu')
+		Navigation.add('.navbar-link-top-menu', '', '#top-menu')
 	}, [])
-
-	const handleHide = useCallback((e) => {
-		if(pathname !== '/inicio' && isKeyDown(e)){
-			setIsShow(false)
-		}
-	}, [pathname])
-
-	const handleShow = useCallback(() => {
-		if(pathname !== '/inicio'){
-			setIsShow(true)
-		}
-	}, [pathname])
 
 	return (
 		<div id="top-menu" className='top-menu bggradient'>
 			<div className='show-menu-wrapper'>
-				<MemoizedLeftContent isShow={isShow} handleHide={handleHide} handleShow={handleShow} />
-				<MemoizedRightContent isShow={isShow} />
+				<MemoizedLeftContent />
+				{/* <MemoizedRightContent isShow={isShowTopMenu} /> */}
 			</div>
-			<div className={`hide-menu-wrapper ${!isShow ? 'show' : ''}`}>
+			<div className={`hide-menu-wrapper ${isShowTopMenu && !isShowNavbar ? 'show' : ''}`}>
 				<div className="group-content">
 					<i className="far fa-chevron-up"></i>
 					<p>Menú</p>

@@ -1,7 +1,7 @@
 @import '../../../../styles/style-base.css';
 
 .content-catalogue.alacarta{
-      position: absolute;
+      position: relative;
       overflow: hidden;
       width: 100%;
       top: $height-top-menu;

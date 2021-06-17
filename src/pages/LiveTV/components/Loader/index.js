@@ -5,8 +5,8 @@ import { LoaderSpinnerMUI } from '../../../../components/Loader/index'
 import './styles.css'
 
 export function Loader() {
-	const { stateVideo } = useContext(VideoContext)
-	const { loadingChannel } = stateVideo
+	const { videoState } = useContext(VideoContext)
+	const { loadingChannel } = videoState
 
 	return (
 		<CSSTransition in={loadingChannel} timeout={100} classNames="active" unmountOnExit>

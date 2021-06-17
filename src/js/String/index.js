@@ -56,8 +56,17 @@ export function capitalizeFirstLetter(str) {
 	return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+export function isMovie(str) {
+	if (str.includes('movie')) {
+		return true
+	}
+
+	return false
+}
+
+
 export function isSerie(str) {
-	if (str.includes('series')) {
+	if (str.includes('serie')) {
 		return true
 	}
 
@@ -72,8 +81,8 @@ export function isEpisode(str) {
 	return false
 }
 
-export function typeContent(str = '') {
-	if (str.includes('series')) {
+export function contentType(str = '') {
+	if (str.includes('serie')) {
 		return 'serie'
 	} else {
 		return 'pelicula'
@@ -86,4 +95,14 @@ export function containsString(str, strContains){
 	}
 
 	return false
+}
+
+export function posterTypeSize(type){
+	const listTypes = {
+		0: 'portrait',
+		1: 'landscape',
+		2: 'square'
+	}
+
+	return listTypes[type]
 }

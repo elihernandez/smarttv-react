@@ -2,7 +2,7 @@
 
 .main-buttons-wrapper{
       position: relative;
-      min-height: 130px;
+      min-height: 150px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -15,11 +15,6 @@
                   margin-right: 3vw;
                   display: flex;
                   align-items: center;
-
-                  button {
-                        margin-right: 1vw;
-                        min-width: 200px;
-                  }
             }
       }
 }

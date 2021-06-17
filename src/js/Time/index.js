@@ -168,7 +168,11 @@ export function getNowDateTime(){
 }
 
 export function addToDate(date, amount, unit){
-	return date.add(amount, unit)
+	if(!date){
+		return dayjs().add(amount, unit)
+	}
+
+	return dayjs(date).add(amount, unit) 
 }
 
 export function isSameOrBeforeDate(date){
@@ -179,4 +183,38 @@ export function isSameOrBeforeDate(date){
 	}
 
 	return false
+}
+
+export function isSameOrAfterDate(date){
+	dayjs.extend(isSameOrAfter)
+
+	if(dayjs().isSameOrAfter(date)){
+		return true
+	}
+
+	return false
+}
+
+export function addMinutesToDate(date = null, minutesToAdd){
+	if(!date){
+		return dayjs().add(minutesToAdd, 'minute')
+	}
+	
+	return dayjs(date).add(minutesToAdd, 'minute')
+}
+
+export function addHoursToDate(date = null, hoursToAdd){
+	if(!date){
+		return dayjs().add(hoursToAdd, 'hour')
+	}
+	
+	return dayjs(date).add(hoursToAdd, 'hour')
+}
+
+export function addDaysToDate(date = null, daysToAdd){
+	if(!date){
+		return dayjs().add(daysToAdd, 'day')
+	}
+	
+	return dayjs(date).add(daysToAdd, 'day')
 }

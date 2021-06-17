@@ -4,7 +4,7 @@ import { PopperMenu } from '../PopperMenu'
 import './styles.css'
 
 export function MemoizedUserMenu() {
-	const [cookies, setCookie, removeCookie] = useCookies()
+	const [,, removeCookie] = useCookies()
 
 	const handleLogout = (e) => {
 		e.preventDefault()

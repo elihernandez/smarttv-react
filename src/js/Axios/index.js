@@ -1,6 +1,4 @@
-
 import axios from 'axios'
-import config from '../../../config.js'
 import { isEmptyArray } from '../Array'
 
 const instance = axios.create({
@@ -25,6 +23,10 @@ instance.interceptors.response.use(
 			}
 
 			return response.data
+		}else if(response.status >= 400 && response.status <= 499){
+			throw new Error(response.status)
+		}else if(response.status >= 500 && response.status <= 599){
+			throw new Error(response.status)
 		}
 	}, 
 	function (e) {

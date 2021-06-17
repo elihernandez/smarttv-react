@@ -9,16 +9,33 @@ class Navigate {
 		SpatialNavigation.init()
 	}
 
-	add (selector, rememberSource = true, enterTo = 'last-focused') {
-		SpatialNavigation.add({
+	add (selector, defaultElement = '', section = '') {
+		SpatialNavigation.add(section, {
 			selector: selector,
-			rememberSource: rememberSource,
-			enterTo: enterTo,
+			rememberSource: true,
+			defaultElement: defaultElement,
+			enterTo: 'last-focused'
 		})
 	}
 
 	focus (selector) {
 		SpatialNavigation.focus(selector)
+	}
+	
+	makeFocusable () {
+		SpatialNavigation.makeFocusable()
+	}
+
+	remove (section) {
+		SpatialNavigation.remove(section)
+	}
+
+	disable (section) {
+		SpatialNavigation.disable(section)
+	}
+
+	enable (section) {
+		SpatialNavigation.enable(section)
 	}
 
 	clear () {
