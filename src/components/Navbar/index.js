@@ -18,7 +18,7 @@ const Link = ({ linkData }) => {
 		}
 
 		if(isKeyEnter(e) && linkActive != id){
-			history.push(href)
+			history.replace(href)
 			dispatch(setLinkActive(id))
 
 			if(id !== 'link-home'){
