@@ -18,7 +18,7 @@
                 opacity: 0;
                 width: 100%;
                 padding: 15px $padding-content 15px $padding-content;
-                transition: all 250ms ease-in-out;
+                transition: opacity 300ms linear;
 
                 &.slick-active{
                     opacity: 1;

@@ -1,12 +1,12 @@
 import React from 'react'
-import { MusicContextProvider } from '../../context/MusicContext'
-import { AudioContextProvider } from '../../context/AudioContext'
-import { GlobalContextProvider } from '../../context/GlobalContext'
+// import { MusicContextProvider } from '../../context/MusicContext'
+// import { AudioContextProvider } from '../../context/AudioContext'
+// import { GlobalContextProvider } from '../../context/GlobalContext'
 // import { Player } from './components/Player/index'
-import { Sections } from './components/Sections'
 import { SidebarMusic } from './components/Sidebar'
-import { PlaylistModal } from './components/Modal'
-import { TopSnackbar } from '../../components/Snackbar'
+import { Sections } from './components/Sections'
+// import { PlaylistModal } from './components/Modal'
+// import { TopSnackbar } from '../../components/Snackbar'
 import './styles.css'
 
 const initialState = {
@@ -97,20 +97,14 @@ const reducer = (state, action) => {
 
 export function MusicPage() {	
 	return (
-		<MusicContextProvider>
-			<AudioContextProvider state={initialState} reducer={reducer}>
-				<GlobalContextProvider>
-					<div className="wrapper-music">
-						<div className="music-content">
-							<SidebarMusic/>
-							<Sections />
-							{/* <Player /> */}
-						</div>
-						<PlaylistModal />
-						<TopSnackbar />
-					</div>
-				</GlobalContextProvider>
-			</AudioContextProvider>
-		</MusicContextProvider>
+		<div className="wrapper-music">
+			<div className="music-content">
+				<SidebarMusic/>
+				<Sections />
+				{/* <Player /> */}
+			</div>
+			{/* <PlaylistModal />
+			<TopSnackbar /> */}
+		</div>
 	)
 }

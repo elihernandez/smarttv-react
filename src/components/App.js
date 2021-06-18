@@ -8,15 +8,19 @@ import './styles.css'
 
 export function App() {
 	console.log('App')
-	const loaderState = useSelector(state => state.loader)
-	const { isShowLoaderVideo, isShowLoaderLogo } = loaderState
 	const { isLoadedData } = useLoaderApp()
+	const isShowLoaderLogo = useSelector(state => state.loader.isShowLoaderLogo)
+	const isShowLoaderVideo = useSelector(state => state.loader.isShowLoaderVideo)
 
 	return <div className="app-content">
-		<LoaderVideo isShow={isShowLoaderVideo} />
-		<LoaderLogo isShow={isShowLoaderLogo} />
-		{isLoadedData && (
+		{isShowLoaderVideo &&
+			<LoaderVideo />
+		}
+		{isShowLoaderLogo &&
+			<LoaderLogo />
+		}
+		{isLoadedData &&
 			<Router />
-		)}
+		}
 	</div>    
 }

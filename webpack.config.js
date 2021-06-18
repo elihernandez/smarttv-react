@@ -90,12 +90,16 @@ const productionPlugins = [
 module.exports = (_env, { mode }) => ({
 	entry: './src/index.js',
 	output: {
-		path: path.resolve(process.cwd(), __dirname + '/webOS/app/'),
 		filename: 'app.min.js',
+		chunkFilename: '[name].bundle.js',
+		path: path.resolve(process.cwd(), __dirname + '/webOS/app/'),
 		publicPath: 'app',
 	},
 	watch: (mode === 'production' ? false : true),
 	optimization: {
+		splitChunks: {
+			chunks: 'all',
+		},
 		minimize:  (mode === 'production' ? true : false),
 		minimizer: [
 			new TerserPlugin({

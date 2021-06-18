@@ -4,7 +4,7 @@ import { AnimatedSwitch } from 'react-router-transition'
 import {  TopMenu } from '../../../components/TopMenu'
 import { Home } from '../../../pages/Home'
 import { VodPage } from '../../../pages/Vod'
-// import { MusicPage } from '../../../pages/Music'
+import { MusicPage } from '../../../pages/Music'
 // import { LiveTvPage } from '../../../pages/LiveTV'
 
 export function RouterLogged() {
@@ -19,7 +19,7 @@ export function RouterLogged() {
 				className="switch-wrapper"
 			>
 				<Route exact path="/inicio">
-					<Home />
+					{/* <Home /> */}
 				</Route>
 				<Route path="/alacarta">
 					<VodPage />
@@ -27,13 +27,12 @@ export function RouterLogged() {
 
 				{/* <Route exact path="/envivo">
 					<LiveTvPage />
-				</Route>
-
+				</Route>*/}
 
 				<Route path="/musica">
 					<MusicPage />
 				</Route>
-				*/}
+				
 
 				<Route exact path="/">
 					<Redirect to="/inicio" />

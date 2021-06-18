@@ -5,6 +5,7 @@ import loaderReducer from './reducers/loaderReducer'
 import backdropReducer from './reducers/backdropReducer'
 import topMenuReducer from './reducers/topMenuReducer'
 import vodReducer from './reducers/vodReducer'
+import musicReducer from './reducers/musicReducer'
 
 export default configureStore({
 	reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
 		user: userReducer,
 		topMenu: topMenuReducer,
 		vod: vodReducer,
+		music: musicReducer,
 	},
 })

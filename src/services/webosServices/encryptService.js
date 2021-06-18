@@ -1,10 +1,9 @@
-import { Platform } from 'react-tv'
+/* eslint-disable no-undef */
 import { encryptString } from '../../js/Encrypt'
 
 export const encryptService = (string, rounds) => {
 	return new Promise(function(resolve, reject){
-		if(Platform('webos')){
-			//eslint-disable-next-line no-undef
+		if (webOS.platform.tv === true) {
 			webOS.service.request(
 				'luna://com.guiahtv.smarttv.encryptpasswordservice/',
 				{

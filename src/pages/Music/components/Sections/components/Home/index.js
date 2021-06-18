@@ -1,14 +1,19 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { useAxios } from '../../../../../../hooks/useAxios'
+import { setLoading, setData } from '../../../../../../redux/reducers/musicReducer'
 import { SliderVertical } from '../SliderVertical'
-import { LoaderSpinnerMUI } from '../../../../../../components/Loader'
 
-export function Home(){
-	const { loading, data } = useAxios('music-home')
+export const Home = () => {
+	const data = useSelector(state => state.music.data)
 
-	if(loading){
-		return <LoaderSpinnerMUI />
-	}
+	useAxios({
+		section: 'music-home',
+		setLoading: setLoading,
+		setData: setData
+	})
+
+	console.log('Home')
 
 	if(data?.musicSections){
 		return <SliderVertical data={data} />
@@ -16,10 +21,3 @@ export function Home(){
 
 	return null
 }
-{/* <ListVertical sliderVerticalRef={sliderVerticalRef}>
-	{
-		data.musicSections.map((listData) => {
-			return <ListHorizontal key={listData.title} listType={listData.contentType} description={listData.description} data={listData} sliderVerticalRef={sliderVerticalRef} />
-		})
-	}
-</ListVertical> */}

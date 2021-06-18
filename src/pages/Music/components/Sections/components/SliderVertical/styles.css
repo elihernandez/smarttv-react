@@ -9,8 +9,14 @@
         > .slick-track {
           
             > .slick-slide {
+                opacity: 0;
                 width: 100%;
                 padding: 50px $padding-content 25px 50px;
+                transition: opacity 300ms linear;
+
+                &.slick-active{
+                    opacity: 1;
+                }
             }
         }
     }

@@ -18,7 +18,9 @@ export const MemoizedCatalogue = () => {
 	
 	return (
 		<Fragment>
-			<SliderVertical data={cmData} />
+			{cmData.length > 0 &&
+				<SliderVertical data={cmData} />
+			}
 			<LoaderSpinner isShow={isLoading} />
 		</Fragment>
 	)

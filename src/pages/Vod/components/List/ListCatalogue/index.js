@@ -14,6 +14,7 @@ export const ListCatalogue = ({ data, sliderVerticalRef }) => {
 		accesibilty: false,
 		dots: false,
 		infinite: false,
+		// lazyLoad: 'progressive',
 		speed: 250,
 		autoplay: false,
 		autoplaySpeed: 6000,

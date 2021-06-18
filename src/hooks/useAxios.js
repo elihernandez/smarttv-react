@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react'
-import axios from '../js/Axios'
 import { useDispatch, useSelector } from 'react-redux'
+import axios from '../js/Axios'
+import { getURL } from '../api/endpoints'
 // import { ErrorMessage } from '../components/ErrorMessage'
 import { validateSuscription } from '../js/Auth/validateSuscription'
-import { getURL } from '../api/endpoints'
 
-export function useAxios(section, sendRequest = true, params = {}){
+export function useAxios({section = null, setLoading = null, setData = null, params = {}}){
 	const dispatch = useDispatch()
-	const stateUser = useSelector(state => state.user)
-	const { userToken } = stateUser
-	const [data, setData] = useState([])
-	const [error, setError] = useState(false)
+	const userToken = useSelector(state => state.user.userToken)
 	const [count, setCount] = useState(0)
 
 	const handleRequest = () => {
@@ -20,12 +17,12 @@ export function useAxios(section, sendRequest = true, params = {}){
 	useEffect(() => {
 		async function getData() {
 			try {
-				// setLoading(true)
+				dispatch(setLoading(true))
 				const url = getURL(section, userToken, params)
 				const response = await axios.get(url)
 				validateSuscription(response, dispatch)
-				setData(response)
-				// setLoading(false)
+				dispatch(setData(response))
+				setTimeout(() => dispatch(setLoading(false)), 2000)
 			} catch (error) {
 				// console.log(error)
 				// setLoading(false)
@@ -39,13 +36,10 @@ export function useAxios(section, sendRequest = true, params = {}){
 			}
 		}
 
-		if(count <= 3 && sendRequest){
-			// setError(false)
-			// setData([])
+		if(section && count <= 3){
 			getData()
 		}
-	}, [section, count, sendRequest])
+	}, [section, count])
 
-	// return { loading, data, error, handleRequest }
-	return { error, data }
+	return { handleRequest }
 }

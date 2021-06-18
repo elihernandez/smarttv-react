@@ -35,28 +35,21 @@ export const ListPlaylists = ({ data, sliderVerticalRef }) => {
 		className: 'slider-collection-playlists'
 	}
 
-	useEffect(() => {
-		Navigation.add('.item-track')
-		setShow(true)
-	}, [])
-
 	return (
 		<Fragment>
 			<TitleList title={title} />
 			<DescriptionList description={description} />
-			<CSSTransition in={show} timeout={300} classNames="fade" unmountOnExit>
-				<div>
-					<SlickSliderHorizontal sliderRef={sliderRef} settings={settings}>
-						{
-							playLists.map((dataPlaylist, index) => {
-								if(index < slidesToShow){
-									return <ItemPlaylist key={dataPlaylist.regID} data={dataPlaylist} sliderVerticalRef={sliderVerticalRef} />
-								}
-							})   
-						}
-					</SlickSliderHorizontal>
-				</div>
-			</CSSTransition>
+			<div>
+				<SlickSliderHorizontal sliderRef={sliderRef} settings={settings}>
+					{
+						playLists.map((dataPlaylist, index) => {
+							if(index < slidesToShow){
+								return <ItemPlaylist key={dataPlaylist.regID} data={dataPlaylist} sliderVerticalRef={sliderVerticalRef} />
+							}
+						})   
+					}
+				</SlickSliderHorizontal>
+			</div>
 		</Fragment>
 	)
 }

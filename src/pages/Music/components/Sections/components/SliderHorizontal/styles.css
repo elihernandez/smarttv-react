@@ -24,7 +24,7 @@
                     span{
                         position: relative;
                         width: 100%;
-                        transform: scale(0.88);
+                        transform: scale(0.95);
     
                         img{
                             width: 100%;
@@ -45,7 +45,7 @@
 
                     &:focus, &:hover{
                         span{
-                            transform: scale(0.94);
+                            transform: scale(1);
                         }
                         
                         &:after{

@@ -27,7 +27,7 @@
         list-style: none;
         width: 100%;
 
-        .list-item {
+        .link-sidebar-music {
             position: relative;
             font-weight: 500;
             padding: 20px 20px;
@@ -91,24 +91,16 @@
                     border: 5px solid $color-white;
                 }
             }
-        }
-
-        a {
-            text-decoration: none;
-            color: $color-white;
 
             &.active {
+                background: $color-grey-5;
 
-                .list-item {
-                    background: $color-grey-5;
+                p {
+                    color: $color-white;
+                }
 
-                    p {
-                        color: $color-white;
-                    }
-
-                    i {
-                        color: $color-white;
-                    }
+                i {
+                    color: $color-white;
                 }
             }
         }

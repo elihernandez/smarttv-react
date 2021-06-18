@@ -54,7 +54,7 @@ export const getDataAPI = (userToken, lastDateRequest) => (dispatch) => {
 			const response = await axios.get(url)
 			validateSuscription(response, dispatch)
 			dispatch(setCmData(response))
-			dispatch(setLastDateRequest(JSON.stringify(addToDate(null, 3, 'minutes'))))
+			// dispatch(setLastDateRequest(JSON.stringify(addToDate(null, 3, 'minutes'))))
 			setTimeout(() => dispatch(setLoading(false)), 1500)
 		}catch(e){
 			console.log(e)

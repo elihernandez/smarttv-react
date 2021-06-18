@@ -219,28 +219,29 @@ function ItemCardChannel({ posterType, data }) {
 export function ItemCollectionTrack({ posterType = 2, data, collection, sliderVerticalRef }) {
 	const { title, albumID, artists, portadaURL, portadaLandscapeURL } = data
 	const [ matchTrack, setMatchTrack ] = useState(false)
-	const { stateAudio, dispatchAudio } = useContext(AudioContext)
-	const { audioRef, playing, pauseList } = stateAudio
-	const { stateMusic, dispatchMusic } = useContext(MusicContext)
-	const { track, collection: list } = stateMusic
+	// const { stateAudio, dispatchAudio } = useContext(AudioContext)
+	// const { audioRef, playing, pauseList } = stateAudio
+	// const { stateMusic, dispatchMusic } = useContext(MusicContext)
+	// const { track, collection: list } = stateMusic
 	// data.id = collection.id
 	data.type = 'playlist'
+	console.log(title)
 
 	const handleClick = (e) => {
-		e.preventDefault()
-		if(matchTrack){
-			if(playing){
-				audioRef.current.pause()
-			}else{
-				audioRef.current.play()
-			}
-		}
+		// e.preventDefault()
+		// if(matchTrack){
+		// 	if(playing){
+		// 		audioRef.current.pause()
+		// 	}else{
+		// 		audioRef.current.play()
+		// 	}
+		// }
 
-		if(pauseList){
-			dispatchAudio({ type: 'setPauseList', payload: false })
-		}
+		// if(pauseList){
+		// 	dispatchAudio({ type: 'setPauseList', payload: false })
+		// }
 
-		dispatchAudio({ type: 'setListRandomTracks', payload: [] })
+		// dispatchAudio({ type: 'setListRandomTracks', payload: [] })
 	}
 
 	const handlePlay = (e) => {
@@ -254,12 +255,12 @@ export function ItemCollectionTrack({ posterType = 2, data, collection, sliderVe
 		console.log(collection)
 		console.log(collection.id)
 		console.log(data.id)
-		dispatchAudio({ type: 'setPlaying', payload: true })
-		dispatchAudio({ type: 'setPause', payload: false })
-		dispatchMusic({ type: 'setPlaylist', payload: collection })
-		dispatchMusic({ type: 'setListTracks', payload: collection.tracks })
-		dispatchMusic({ type: 'setCollection', payload: collection })
-		dispatchMusic({ type: 'setTrack', payload: collection.tracks[0] })
+		// dispatchAudio({ type: 'setPlaying', payload: true })
+		// dispatchAudio({ type: 'setPause', payload: false })
+		// dispatchMusic({ type: 'setPlaylist', payload: collection })
+		// dispatchMusic({ type: 'setListTracks', payload: collection.tracks })
+		// dispatchMusic({ type: 'setCollection', payload: collection })
+		// dispatchMusic({ type: 'setTrack', payload: collection.tracks[0] })
 	}
 
 	const handleMove = (e) => {
@@ -448,52 +449,52 @@ function ItemTrackAlbum({ data }) {
 }
 
 export function ItemPlaylist({ posterType = 2, data, sliderVerticalRef }) {
-	const [params, setParams] = useState(false)
-	const [sendRequestPlaylist, setSendRequestPlaylist] = useState(false)
-	const { data: dataPlaylist } = useAxios('music-playlist', sendRequestPlaylist, params)
+	// const [params, setParams] = useState(false)
+	// const [sendRequestPlaylist, setSendRequestPlaylist] = useState(false)
+	// const { data: dataPlaylist } = useAxios('music-playlist', sendRequestPlaylist, params)
 	const { regID, title, portadaURL } = data
-	const [matchTrack, setMatchTrack] = useState(false)
-	const { stateAudio, dispatchAudio } = useContext(AudioContext)
-	const { audioRef, playing, pauseList } = stateAudio
-	const { stateMusic, dispatchMusic } = useContext(MusicContext)
-	const { playlist, collection } = stateMusic
+	// const [matchTrack, setMatchTrack] = useState(false)
+	// const { stateAudio, dispatchAudio } = useContext(AudioContext)
+	// const { audioRef, playing, pauseList } = stateAudio
+	// const { stateMusic, dispatchMusic } = useContext(MusicContext)
+	// const { playlist, collection } = stateMusic
 
 	const handleClick = (e) => {
-		e.preventDefault()
-		if(matchTrack){
-			if(playing){
-				audioRef.current.pause()
-			}else{
-				audioRef.current.play()
-			}
-		}
+		// e.preventDefault()
+		// if(matchTrack){
+		// 	if(playing){
+		// 		audioRef.current.pause()
+		// 	}else{
+		// 		audioRef.current.play()
+		// 	}
+		// }
 
-		if(pauseList){
-			dispatchAudio({ type: 'setPauseList', payload: false })
-		}
+		// if(pauseList){
+		// 	dispatchAudio({ type: 'setPauseList', payload: false })
+		// }
 
-		dispatchAudio({ type: 'setListRandomTracks', payload: [] })
+		// dispatchAudio({ type: 'setListRandomTracks', payload: [] })
 	}
 
 	const handlePlay = (e) => {
-		e.preventDefault()
-		setParams({ playlistID: data.regID })
-		setSendRequestPlaylist(true)
+		// e.preventDefault()
+		// setParams({ playlistID: data.regID })
+		// setSendRequestPlaylist(true)
 	}
 
-	useEffect(() => {
-		if(dataPlaylist.length > 0){
-			dataPlaylist.playlistID = data.regID
-			dataPlaylist.id = uuid()
-			dispatchAudio({ type: 'setPlaying', payload: true })
-			dispatchAudio({ type: 'setPause', payload: false })
-			dispatchMusic({ type: 'setPlaylist', payload: dataPlaylist })
-			dispatchMusic({ type: 'setListTracks', payload: dataPlaylist.tracks })
-			dispatchMusic({ type: 'setCollection', payload: dataPlaylist })
-			dataPlaylist.tracks[0].id = dataPlaylist.id
-			dispatchMusic({ type: 'setTrack', payload: dataPlaylist.tracks[0] })
-		}
-	}, [dataPlaylist])
+	// useEffect(() => {
+	// 	if(dataPlaylist.length > 0){
+	// 		dataPlaylist.playlistID = data.regID
+	// 		dataPlaylist.id = uuid()
+	// 		dispatchAudio({ type: 'setPlaying', payload: true })
+	// 		dispatchAudio({ type: 'setPause', payload: false })
+	// 		dispatchMusic({ type: 'setPlaylist', payload: dataPlaylist })
+	// 		dispatchMusic({ type: 'setListTracks', payload: dataPlaylist.tracks })
+	// 		dispatchMusic({ type: 'setCollection', payload: dataPlaylist })
+	// 		dataPlaylist.tracks[0].id = dataPlaylist.id
+	// 		dispatchMusic({ type: 'setTrack', payload: dataPlaylist.tracks[0] })
+	// 	}
+	// }, [dataPlaylist])
 
 	const handleMove = (e) => {
 		// console.log(sliderVerticalRef)
