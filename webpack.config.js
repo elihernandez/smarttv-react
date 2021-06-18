@@ -90,16 +90,18 @@ const productionPlugins = [
 module.exports = (_env, { mode }) => ({
 	entry: './src/index.js',
 	output: {
-		filename: 'app.min.js',
-		chunkFilename: '[name].bundle.js',
+		filename: '[name].min.js',
+		// chunkFilename: '[name].[hash].[chunkhash].chunk.js',
+		chunkFilename: '[name].chunk.js',
 		path: path.resolve(process.cwd(), __dirname + '/webOS/app/'),
-		publicPath: 'app',
+		publicPath: 'app/',
 	},
 	watch: (mode === 'production' ? false : true),
 	optimization: {
-		splitChunks: {
-			chunks: 'all',
-		},
+		runtimeChunk: 'single',
+		// splitChunks: {
+		// 	chunks: 'initial',
+		// },
 		minimize:  (mode === 'production' ? true : false),
 		minimizer: [
 			new TerserPlugin({
@@ -127,8 +129,8 @@ module.exports = (_env, { mode }) => ({
 			filename: '../index.html',
 		}),
 		new MiniCSSExtract({
-			filename: 'app.min.css',
-			chunkFilename: 'main.min.css',
+			filename: '[name].min.css',
+			chunkFilename: '[name].chunk.min.css',
 		}),
 	].filter(Boolean)
 })

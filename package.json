@@ -4,7 +4,7 @@
   "description": "El mejor contenido espiritual y de valores reunidos en una sola plataforma para toda la familia.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --env.device='webos'",
     "dev": "webpack --mode development",
     "ares-package": "ares-package -o webOS webOS webOS/service/com.guiahtv.smarttv.encryptpasswordService",
     "ares-install-em": "ares-install --device emulator webOS/com.guiahtv.smarttv_1.1.0_all.ipk",
@@ -90,6 +90,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "@loadable/component": "^5.15.0",
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
     "@noriginmedia/react-spatial-navigation": "^2.12.6",

@@ -3,5 +3,6 @@ module.exports = {
 	devBasenameRouter: 'app/',
 	devPath: 'app/',
 	prodBasenameRouter: 'app/',
-	prodPath: 'app/'
+	prodPath: 'app/',
+	device: 'web'
 }

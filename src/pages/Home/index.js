@@ -4,7 +4,7 @@ import { ButtonsMenu } from '../../components/ButtonsMenu/index'
 import { useDidMount } from 'rooks'
 import './styles.css'
 
-export function Home() {
+const Home = () => {
 	
 	useDidMount(function () {
 		setTimeout(() => {
@@ -19,3 +19,5 @@ export function Home() {
 		</div>
 	)
 }
+
+export default Home

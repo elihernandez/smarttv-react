@@ -95,7 +95,7 @@ const reducer = (state, action) => {
 	}
 }
 
-export function MusicPage() {	
+const MusicPage = () => {	
 	return (
 		<div className="wrapper-music">
 			<div className="music-content">
@@ -108,3 +108,5 @@ export function MusicPage() {
 		</div>
 	)
 }
+
+export default MusicPage

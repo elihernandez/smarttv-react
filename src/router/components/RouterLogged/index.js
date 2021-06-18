@@ -1,14 +1,21 @@
 import React, { Fragment } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { AnimatedSwitch } from 'react-router-transition'
-import {  TopMenu } from '../../../components/TopMenu'
-import { Home } from '../../../pages/Home'
-import { VodPage } from '../../../pages/Vod'
-import { MusicPage } from '../../../pages/Music'
+import loadable from '@loadable/component'
+// import TopMenu from '../../../components/TopMenu'
+const TopMenu = loadable(() => import('../../../components/TopMenu'))
+const Home = loadable(() => import('../../../pages/Home'))
+const VodPage = loadable(() => import('../../../pages/Vod'))
+const MusicPage = loadable(() => import('../../../pages/Music'))
+// import { Home } from '../../../pages/Home'
+// import { VodPage } from '../../../pages/Vod'
+// import { MusicPage } from '../../../pages/Music'
 // import { LiveTvPage } from '../../../pages/LiveTV'
 
 export function RouterLogged() {
 	console.log('Router Logged')
+
+	const RedirectHome = () => <Redirect to="/inicio" />
 	return (
 		<Fragment>
 			<TopMenu />
@@ -18,28 +25,12 @@ export function RouterLogged() {
 				atActive={{ opacity: 1 }}
 				className="switch-wrapper"
 			>
-				<Route exact path="/inicio">
-					{/* <Home /> */}
-				</Route>
-				<Route path="/alacarta">
-					<VodPage />
-				</Route>
+				<Route exact path="/inicio" />
+				<Route path="/alacarta" component={VodPage} />
+				<Route path="/musica" component={MusicPage} />
 
-				{/* <Route exact path="/envivo">
-					<LiveTvPage />
-				</Route>*/}
-
-				<Route path="/musica">
-					<MusicPage />
-				</Route>
-				
-
-				<Route exact path="/">
-					<Redirect to="/inicio" />
-				</Route>
-				<Route exact path="/login/form">
-					<Redirect to="/inicio" />
-				</Route>
+				<Route exact path="/" component={RedirectHome} />
+				<Route exact path="/login/form" component={RedirectHome} />
 			</AnimatedSwitch>
 		</Fragment>
 	)

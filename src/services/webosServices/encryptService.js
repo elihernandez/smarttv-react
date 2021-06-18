@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
+import config from '../../../config'
 import { encryptString } from '../../js/Encrypt'
 
 export const encryptService = (string, rounds) => {
 	return new Promise(function(resolve, reject){
-		if (webOS.platform.tv === true) {
+		if (config.device === 'webos' &&  webOS.platform.tv === true) {
 			webOS.service.request(
 				'luna://com.guiahtv.smarttv.encryptpasswordservice/',
 				{

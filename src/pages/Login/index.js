@@ -7,7 +7,7 @@ import { Footer } from './components/Footer'
 import backgroundHome from '../../assets/images/backgrounds/background-login.jpg'
 import './styles.css'
 
-export const LoginPage = () => {
+export default function LoginPage () {
 	return (
 		<div className="wrapper-main-home">
 			<div className="main-section">
@@ -27,3 +27,4 @@ export const LoginPage = () => {
 		</div>
 	)
 }
+

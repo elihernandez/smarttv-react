@@ -6,7 +6,7 @@ import { MoviePage } from '../Movie'
 import { SeriePage } from '../Serie'
 import './styles.css'
 
-export const MemoizedVodPage = () => {
+const VodPage = () => {
 	console.log('Vod Page')
 	return (
 		<div className="wrapper-alacarta">
@@ -28,4 +28,4 @@ export const MemoizedVodPage = () => {
 	)
 }
 
-export const VodPage = React.memo(MemoizedVodPage)
+export default VodPage

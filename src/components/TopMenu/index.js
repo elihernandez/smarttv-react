@@ -40,7 +40,7 @@ const RightContent = ({ isShow }) => {
 	)
 }
 
-const MemoizedTopMenu = () => {
+const TopMenu = () => {
 	const isShowTopMenu = useSelector(state => state.topMenu.isShowTopMenu)
 	const isShowNavbar = useSelector(state => state.topMenu.isShowNavbar)
 	
@@ -65,6 +65,6 @@ const MemoizedTopMenu = () => {
 }
 
 
-export const TopMenu = React.memo(MemoizedTopMenu)
+export default React.memo(TopMenu)
 const MemoizedLeftContent = React.memo(LeftContent)
 const MemoizedRightContent = React.memo(RightContent)
