@@ -1,9 +1,7 @@
 import React, { useRef, useMemo, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import { SlickSliderVertical } from '../../../../components/SlickCarousel'
 import { SliderHorizontal } from '../SliderHorizontal'
 import { Navigation } from '../../../../js/SpatialNavigation'
-import { CSSTransition } from 'react-transition-group'
 import './styles.css'
 
 export const MemoizedSlider = ({ data = [] }) => {

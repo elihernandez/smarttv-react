@@ -4,10 +4,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const MiniCSSExtract = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const RemoveStrictPlugin = require( 'remove-strict-webpack-plugin' )
 const path = require('path')
 
 const javascriptRules = {
-	test: /\.js$/,
+	test: /\.(js|jsx|ts|tsx)$/,
 	exclude: /node_modules/,
 	use: {
 		loader: 'babel-loader',
@@ -17,14 +18,15 @@ const javascriptRules = {
 				[
 					'@babel/preset-env',
 					{
-						// 'useBuiltIns': 'entry',  
+						'useBuiltIns': 'entry',
 						'targets': {
-							'browsers': ['last 2 versions', 'Chrome >= 18']
+							chrome: 18
 						},
-						'modules': false
+						'modules': false,
+						'forceAllTransforms': true
 					}
 				],
-				// 'minify'
+				'minify'
 				
 			],
 			plugins: [
@@ -78,10 +80,12 @@ const fontsRules = {
 }
 
 const developmentPlugins = [
-	new CssMinimizerPlugin()
+	new CssMinimizerPlugin(),
+	new RemoveStrictPlugin()
 ]
 
 const productionPlugins = [
+	new RemoveStrictPlugin(),
 	new CleanWebpackPlugin(),
 	new CompressionPlugin(),
 	new CssMinimizerPlugin(),
@@ -103,11 +107,11 @@ module.exports = (_env, { mode }) => ({
 		// 	chunks: 'initial',
 		// },
 		minimize:  (mode === 'production' ? true : false),
-		minimizer: [
-			new TerserPlugin({
-				parallel: true,
-			}),
-		],
+		// minimizer: [
+		// 	new TerserPlugin({
+		// 		parallel: true,
+		// 	}),
+		// ],
 	},
 	module: {
 		rules: [

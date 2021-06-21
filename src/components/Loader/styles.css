@@ -1,16 +1,17 @@
 @import '../../styles/style-base.css';
 
 .loader-logo{
-    position: relative;
+    position: absolute;
     z-index: 999;
     width: 100%;
     height: 100%;
+    top: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     align-content: center;
-    background-color: $color-background-app;
+    background: $color-background-app;
     overflow: hidden;
 
     .logo{
@@ -22,8 +23,11 @@
 
 .loader-video{
     position: absolute;
+    z-index: 999;
     width: 100%;
     height: 100%;
+    top: 0;
+    overflow: hidden;
 
     video{
         position: relative;
@@ -34,6 +38,7 @@
 
 .loader-wrapper{
     position: absolute;
+    z-index: 999;
     top: 0;
     width: 100%;
     height: 100%;

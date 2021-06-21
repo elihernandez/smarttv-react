@@ -1,8 +1,7 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import { CSSTransition } from 'react-transition-group'
+import React, { Fragment } from 'react'
 import { TitleList } from '../../../../../components/List/components/Title'
 import { SlickSliderHorizontal } from '../../../../../components/SlickCarousel'
-import { ItemCatalogue } from '../../../../../components/ListItem'
+import { ItemCatalogue } from '../../../../../components/ListItem/ItemCatalogue'
 
 export const ListCatalogue = ({ data, sliderVerticalRef }) => {
 	console.log('List Catalogue')

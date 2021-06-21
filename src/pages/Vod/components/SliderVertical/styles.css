@@ -37,40 +37,4 @@
         letter-spacing: 0.5px;
         margin: 10px 0 0 14px;
     }
-
-    .description-list {
-        font-size: 22px;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        margin: -10px 0 10px 14px;
-        color: $color-grey-3;
-    }
-
-    .slick-dots{
-        left: -4px;
-        display: flex !important;
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-        width: auto;
-
-        li{
-            margin: 5px 0;
-
-            button{
-                &:before{
-                    color: $color-grey-2;
-                    font-size: 12px;
-                }
-            }
-
-            &.slick-active{
-                button{
-                   &:before{
-                       color: $color-white;
-                   }
-                }
-            }
-        }
-    }
 }

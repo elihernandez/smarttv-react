@@ -7,10 +7,6 @@ const TopMenu = loadable(() => import('../../../components/TopMenu'))
 const Home = loadable(() => import('../../../pages/Home'))
 const VodPage = loadable(() => import('../../../pages/Vod'))
 const MusicPage = loadable(() => import('../../../pages/Music'))
-// import { Home } from '../../../pages/Home'
-// import { VodPage } from '../../../pages/Vod'
-// import { MusicPage } from '../../../pages/Music'
-// import { LiveTvPage } from '../../../pages/LiveTV'
 
 export function RouterLogged() {
 	console.log('Router Logged')

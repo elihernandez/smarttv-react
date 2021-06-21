@@ -69,51 +69,6 @@ export function Item({ data, posterType, listType, titleCategory, category, list
 	return Item
 }
 
-export function ItemCatalogue({ id, posterType, data, sliderVerticalRef }) {
-	console.log('ItemCatalogue')
-	const history = useHistory()
-	const dispatch = useDispatch()
-	const className = posterTypeSize(posterType)
-	const { Title, Registro, ContentType, HDPosterUrlPortrait, HDPosterUrlLandscape, ResumePos, Length } = data
-
-	const handleMove = useCallback((e) => {
-		if(isKeyEnter(e)){
-			if(isMovie(ContentType)){
-				dispatch(setMovie(data))
-			}else{
-				dispatch(setSerie(data))
-			}
-			const url = `${history.location.pathname}/${contentType(ContentType)}/${Registro}`
-			history.push(url)
-		}
-
-		if(isKeyDown(e)){
-			sliderVerticalRef.current.slickNext()
-		}
-
-		if(isKeyUp(e)){
-			sliderVerticalRef.current.slickPrev()
-		}
-	}, [data])
-
-	return useMemo(() =>  {
-		return (
-			<div className="item-link">
-				<div id={id} className={`item-catalogue ${className}`} tabIndex="-1" onClick={handleMove} onKeyDown={handleMove}>
-					<div className="background-item">
-						<Img title={Title} posterType={posterType} imgPortrait={HDPosterUrlPortrait} imgLandscape={HDPosterUrlLandscape} />
-						{ResumePos &&
-						<div className="progress-bar-content">
-							<LinearProgress variant="determinate" value={getProgressMovie(ResumePos, Length)} />
-						</div>
-						}
-					</div>
-				</div>
-			</div>
-		)
-	}, [data])
-}
-
 function ItemSeason({ url, posterType, data }) {
 	const { Title, Description, ContentType, HDPosterUrlPortrait, HDPosterUrlLandscape, ResumePos, Length } = data
 	const { dispatchVod } = useContext(VodContext)
@@ -668,24 +623,6 @@ function DescriptionItem({ description }) {
 		<div className="description-content">
 			<h3 className="description-item">{limitString(description, 100)}</h3>
 		</div>
-	)
-}
-
-function Img({ title, posterType, imgPortrait, imgLandscape, imgSquare, imgError }) {
-	const altImg = `img-${title}`
-
-	return (
-		<Fragment>
-			{posterType == 0 &&
-                <LazyImage img={imgPortrait} alt={altImg} type="webp" recoverType="jpg" imgError={imgError ? imgError : imgRecoverErrorPortrait} />
-			}
-			{posterType == 1 &&
-                <LazyImage img={imgLandscape} alt={altImg} type="webp" recoverType="jpg" imgError={imgError ? imgError : imgRecoverErrorLandscape} />
-			}
-			{posterType == 2 &&
-				<LazyImage img={imgSquare} alt={altImg} type="webp" recoverType="jpg" imgError={imgError ? imgError : imgRecoverErrorLandscape} />
-			}
-		</Fragment>
 	)
 }
 

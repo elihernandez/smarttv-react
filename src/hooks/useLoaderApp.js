@@ -24,7 +24,8 @@ export const useLoaderApp = () => {
 			}
 		}else{
 			dispatch(setLoaderVideo(true))
-			localStorage.setItem('_deviceLoader', addToDate(getNowDateTime(), 31, 'day'))
+			const date = addToDate(getNowDateTime(), 31, 'day')
+			localStorage.setItem('_deviceLoader', date)
 		}
 	}, [])
 
@@ -84,8 +85,7 @@ export const useLoaderApp = () => {
 		}
 
 		if(isLoadedData){
-			if(loaderState.isShowloaderVideo){
-				console.log(loaderState.isShowloaderVideo)
+			if(loaderState.isShowLoaderVideo){
 				document.getElementById('loader-video').addEventListener('ended', onEndedLoaderVideo)
 			}else{
 				setTimeout(() => {
@@ -95,7 +95,7 @@ export const useLoaderApp = () => {
 		}
 
 		return () => {
-			if(document.getElementById('loader-video')){
+			if(document.getElementById('loader-video') && isLoadedData){
 				document.getElementById('loader-video').removeEventListener('ended', onEndedLoaderVideo)
 			}
 		}

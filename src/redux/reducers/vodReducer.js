@@ -7,7 +7,7 @@ import { validateSuscription } from '../../js/Auth/validateSuscription'
 export const vodSlice = createSlice({
 	name: 'vod',
 	initialState: {
-		cmData: [],
+		data: [],
 		movie: [],
 		serie: [],
 		season: [],
@@ -17,8 +17,8 @@ export const vodSlice = createSlice({
 		typeError: null
 	},
 	reducers: {
-		setCmData: (state, action) => {
-			state.cmData = action.payload
+		setData: (state, action) => {
+			state.data = action.payload
 		},
 		setMovie: (state, action) => {
 			state.movie = action.payload
@@ -43,33 +43,6 @@ export const vodSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setCmData, setMovie, setSerie, setSeason, setLoading, setLastDateRequest } = vodSlice.actions
-
-export const getDataAPI = (userToken, lastDateRequest) => (dispatch) => {
-	dispatch(setLoading(true))
-	const url = getURL('catalogue-vod', userToken)
-	
-	const handleRequest = async() => {
-		try{
-			const response = await axios.get(url)
-			validateSuscription(response, dispatch)
-			dispatch(setCmData(response))
-			// dispatch(setLastDateRequest(JSON.stringify(addToDate(null, 3, 'minutes'))))
-			setTimeout(() => dispatch(setLoading(false)), 1500)
-		}catch(e){
-			console.log(e)
-		}
-	}
-	
-	if(!lastDateRequest){
-		handleRequest()
-	}else{
-		if(isSameOrAfterDate(lastDateRequest)){
-			handleRequest()
-		}else{
-			setTimeout(() => dispatch(setLoading(false)), 1500)
-		}
-	}
-}
+export const { setData, setMovie, setSerie, setSeason, setLoading, setLastDateRequest } = vodSlice.actions
 
 export default vodSlice.reducer

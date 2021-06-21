@@ -1,29 +1,37 @@
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as vodActions from '../../../../redux/reducers/vodReducer'
 import { LoaderSpinner } from '../../../../components/Loader'
 import { SliderVertical } from '../SliderVertical'
+import { useAxios } from '../../../../hooks/useAxios'
+import { setLoading, setData } from '../../../../redux/reducers/vodReducer'
 
-export const MemoizedCatalogue = () => {
+const Catalogue = () => {
 	const dispatch = useDispatch()
-	const cmData = useSelector(state => state.vod.cmData)
+	useAxios({
+		section: 'catalogue-vod',
+		setLoading: setLoading,
+		setData: setData
+	})
+
+	const data = useSelector(state => state.vod.data)
 	const isLoading = useSelector(state => state.vod.isLoading)
-	const lastDateRequest = useSelector(state => state.vod.lastDateRequest)
-	const userState = useSelector(state => state.user)
 	console.log('Catalogue')
 
 	useEffect(() => {
-		dispatch(vodActions.getDataAPI(userState.userToken, lastDateRequest))
+		
+		return () => {
+			dispatch(setData([]))
+		}
 	}, [])
 	
 	return (
 		<Fragment>
-			{cmData.length > 0 &&
-				<SliderVertical data={cmData} />
+			{data.length > 0 &&
+				<SliderVertical data={data} />
 			}
 			<LoaderSpinner isShow={isLoading} />
 		</Fragment>
 	)
 }
 
-export const Catalogue = React.memo(MemoizedCatalogue)
+export default React.memo(Catalogue)

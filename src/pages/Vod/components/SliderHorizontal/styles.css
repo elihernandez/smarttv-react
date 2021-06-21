@@ -11,14 +11,6 @@
                 .item-catalogue{
                     position: relative;
 
-                    a{
-                        position: relative;
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-
                     span{
                         position: relative;
                         width: 100%;

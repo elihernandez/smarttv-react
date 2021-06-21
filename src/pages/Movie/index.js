@@ -4,7 +4,7 @@ import { setShowTopMenu } from '../../redux/reducers/topMenuReducer'
 import { InfoMovie } from '../../components/InfoContent'
 import { Navigation } from '../../js/SpatialNavigation'
 
-export function MoviePage(){
+const MoviePage = () => {
 	console.log('Movie Page')
 	const dispatch = useDispatch()
 	const movie = useSelector(state => state.vod.movie)
@@ -28,3 +28,5 @@ export function MoviePage(){
 		</div>
 	)
 }
+
+export default React.memo(MoviePage)

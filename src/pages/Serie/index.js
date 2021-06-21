@@ -4,7 +4,7 @@ import { InfoSerie } from '../../components/InfoContent'
 import { TabsContent } from './components/Tabs'
 import { Navigation } from '../../js/SpatialNavigation'
 
-export function SeriePage(){
+const SeriePage = () => {
 	console.log('Serie')
 	const serie = useSelector(state => state.vod.serie)
 
@@ -24,3 +24,5 @@ export function SeriePage(){
 		</div>
 	)
 }
+
+export default React.memo(SeriePage)

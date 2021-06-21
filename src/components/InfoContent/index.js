@@ -28,8 +28,7 @@ export function InfoMovie({ data }) {
 		Rating: rating,
 		StarRating,
 		ResumePos
-	} = data
-	const textButton = ResumePos == '' ? 'Ver ahora' : 'Reanudar'
+	} = data 
 
 	const handleClick = (e) => {
 		if(isKeyEnter(e)){
@@ -82,18 +81,20 @@ export function InfoMovie({ data }) {
 					<Artist artist={artist} />
 				}
 				{director &&
-					<Director artist={director} />
+					<Director director={director} />
 				}
 				<div className="group-actions" id="movie-group-actions">
 					<button type="button" className="button button-watch" onClick={handleClick} onKeyDown={handleClick} tabIndex="-1">
-						<i className="fas fa-play" />{textButton}
+						<i className="fas fa-play" />{ResumePos !== '' || ResumePos !== 0 ? 'Ver ahora' : 'Reanudar'}
 						<div className="progress-bar-content">
 							<LinearProgress variant="determinate" value={getProgressMovie(ResumePos, Length)} />
 						</div>
 					</button>
-					<button type="button" className="button button-start" onClick={handleClick} onKeyDown={handleClick} tabIndex="-1">
-						Desde el comienzo
-					</button>
+					{ResumePos !== '' && ResumePos !== 0 &&
+						<button type="button" className="button button-start" onClick={handleClick} onKeyDown={handleClick} tabIndex="-1">
+							Desde el comienzo
+						</button>
+					}
 				</div>
 			</div>
 		</Fragment>
