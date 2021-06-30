@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { LoaderSpinner } from '../../../../components/Loader'
+import { LoaderSection } from '../../../../components/Loader'
 import { SliderVertical } from '../SliderVertical'
 import { useAxios } from '../../../../hooks/useAxios'
 import { setLoading, setData } from '../../../../redux/reducers/vodReducer'
@@ -18,7 +18,6 @@ const Catalogue = () => {
 	console.log('Catalogue')
 
 	useEffect(() => {
-		
 		return () => {
 			dispatch(setData([]))
 		}
@@ -29,7 +28,7 @@ const Catalogue = () => {
 			{data.length > 0 &&
 				<SliderVertical data={data} />
 			}
-			<LoaderSpinner isShow={isLoading} />
+			<LoaderSection isShow={isLoading} />
 		</Fragment>
 	)
 }

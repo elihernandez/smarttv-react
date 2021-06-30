@@ -1,6 +1,14 @@
-@import '../../styles/style-base.css';
+@import "../../styles/style-base.css";
 
-.loader-logo{
+.spinner-mui {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: $color-background-app;
+}
+
+.loader-logo {
     position: absolute;
     z-index: 999;
     width: 100%;
@@ -13,15 +21,33 @@
     align-content: center;
     background: $color-background-app;
     overflow: hidden;
+    opacity: 0;
 
-    .logo{
+    .logo {
         position: relative;
         width: 25%;
         height: auto;
     }
+
+    .spinner-mui {
+        position: absolute;
+        bottom: 0rem;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        background: transparent;
+
+        .MuiCircularProgress-root{
+            position: relative;
+            bottom: 60px;
+        }
+    }
 }
 
-.loader-video{
+.loader-video {
     position: absolute;
     z-index: 999;
     width: 100%;
@@ -29,14 +55,14 @@
     top: 0;
     overflow: hidden;
 
-    video{
+    video {
         position: relative;
         width: 100%;
-        height: 100%; 
+        height: 100%;
     }
 }
 
-.loader-wrapper{
+.loader-wrapper {
     position: absolute;
     z-index: 999;
     top: 0;
@@ -44,29 +70,24 @@
     height: 100%;
     background: $color-background-app;
 
-    .spinner-mui{
+    .spinner-mui {
         position: relative;
         width: 100%;
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-     
+    }
+
+    &.loader-section {
+        z-index: 998;
     }
 }
 
-.spinner-mui{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    background: $color-background-app;
-}
-
-.MuiCircularProgress-colorPrimary{
+.MuiCircularProgress-colorPrimary {
     color: $color-white !important;
 }
 
-.MuiCircularProgress-indeterminate{
+.MuiCircularProgress-indeterminate {
     animation: MuiCircularProgress-keyframes-circular-rotate 1s linear infinite !important;
 }

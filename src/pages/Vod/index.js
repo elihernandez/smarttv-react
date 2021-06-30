@@ -1,6 +1,6 @@
 import React from 'react'
 import { AnimatedSwitch } from 'react-router-transition'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Catalogue from './components/Catalogue'
 import loadable from '@loadable/component'
 const MoviePage = loadable(() => import('../Movie'))

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setMovie, setSerie } from '../../redux/reducers/vodReducer'
@@ -14,16 +14,19 @@ export function ItemCatalogue({ id, posterType, data, sliderVerticalRef }) {
 	const dispatch = useDispatch()
 	const className = posterTypeSize(posterType)
 	const { Title, Registro, ContentType, HDPosterUrlPortrait, HDPosterUrlLandscape, ResumePos, Length } = data
+	const url = `${history.location.pathname}/${contentType(ContentType)}/${Registro}`
 
-	const handleMove = useCallback((e) => {
+	const handleMove = (e) => {
 		if(isKeyEnter(e)){
 			if(isMovie(ContentType)){
 				dispatch(setMovie(data))
 			}else{
 				dispatch(setSerie(data))
-			}
-			const url = `${history.location.pathname}/${contentType(ContentType)}/${Registro}`
-			history.push(url)
+			}	
+
+			setTimeout(() => {
+				history.push(url)
+			}, 100)
 		}
 
 		if(isKeyDown(e)){
@@ -33,22 +36,20 @@ export function ItemCatalogue({ id, posterType, data, sliderVerticalRef }) {
 		if(isKeyUp(e)){
 			sliderVerticalRef.current.slickPrev()
 		}
-	}, [data])
+	}
 
-	return useMemo(() =>  {
-		return (
-			<div className="item-link">
-				<div id={id} className={`item-catalogue ${className}`} tabIndex="-1" onClick={handleMove} onKeyDown={handleMove}>
-					<div className="background-item">
-						<Img title={Title} posterType={posterType} imgPortrait={HDPosterUrlPortrait} imgLandscape={HDPosterUrlLandscape} />
-						{ResumePos &&
-						<div className="progress-bar-content">
-							<LinearProgress variant="determinate" value={getProgressMovie(ResumePos, Length)} />
-						</div>
-						}
+	return (
+		<div className="item-link">
+			<div id={id} className={`item-catalogue ${className}`} tabIndex="-1" onClick={handleMove} onKeyDown={handleMove}>
+				<div className="background-item">
+					<Img title={Title} posterType={posterType} imgPortrait={HDPosterUrlPortrait} imgLandscape={HDPosterUrlLandscape} />
+					{ResumePos &&
+					<div className="progress-bar-content">
+						<LinearProgress variant="determinate" value={getProgressMovie(ResumePos, Length)} />
 					</div>
+					}
 				</div>
 			</div>
-		)
-	}, [data])
+		</div>
+	)
 }

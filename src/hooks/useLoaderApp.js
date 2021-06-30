@@ -72,7 +72,9 @@ export const useLoaderApp = () => {
 				suscriptionStatus: localSuscriptionStatus
 			}))
 
-			setIsLoadedData(true)
+			setTimeout(() => {
+				setIsLoadedData(true)
+			}, 1500)
 		}
 
 		loadInformation()

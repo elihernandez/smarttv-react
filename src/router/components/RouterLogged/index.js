@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import { AnimatedSwitch } from 'react-router-transition'
 import loadable from '@loadable/component'
 // import TopMenu from '../../../components/TopMenu'
@@ -15,7 +15,7 @@ export function RouterLogged() {
 	return (
 		<Fragment>
 			<TopMenu />
-			<AnimatedSwitch
+			<Switch
 				atEnter={{ opacity: 0 }}
 				atLeave={{ opacity: 0 }}
 				atActive={{ opacity: 1 }}
@@ -27,7 +27,7 @@ export function RouterLogged() {
 
 				<Route exact path="/" component={RedirectHome} />
 				<Route exact path="/login/form" component={RedirectHome} />
-			</AnimatedSwitch>
+			</Switch>
 		</Fragment>
 	)
 }

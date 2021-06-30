@@ -1,10 +1,10 @@
-import React, { useRef, useMemo, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { SlickSliderVertical } from '../../../../components/SlickCarousel'
 import { SliderHorizontal } from '../SliderHorizontal'
 import { Navigation } from '../../../../js/SpatialNavigation'
 import './styles.css'
 
-export const MemoizedSlider = ({ data = [] }) => {
+export const MemoizedSliderVertical = ({ data = [] }) => {
 	console.log('Vertical Slider')
 	const sliderRef = useRef(null)
 	
@@ -38,20 +38,16 @@ export const MemoizedSlider = ({ data = [] }) => {
 		}
 	}, [data])
 
-	const Slider = useMemo(() => {
-		return <SlickSliderVertical sliderRef={sliderRef} settings={settings}>
+
+	return	<div className="catalogue-vod" id="catalogue-vod">
+		<SlickSliderVertical sliderRef={sliderRef} settings={settings}>
 			{
 				data.map((data) => {
 					return <SliderHorizontal key={data.category} data={data} sliderVerticalRef={sliderRef} />
 				})
 			}
 		</SlickSliderVertical>
-	}, [data])
-
-
-	return	<div className="catalogue-vod" id="catalogue-vod">
-		{ Slider }
-	</div>
+	</div> 
 }
 
-export const SliderVertical = React.memo(MemoizedSlider)
+export const SliderVertical = React.memo(MemoizedSliderVertical)

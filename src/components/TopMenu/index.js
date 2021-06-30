@@ -21,7 +21,7 @@ const LeftContent = () => {
 	
 	return (
 		<div className='left-content'>
-			<Logo color="purple" size="sm" />
+			<Logo color="purple" size="md" />
 			<Navbar navLinks={navLinks} />
 		</div>
 	)
