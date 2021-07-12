@@ -2,15 +2,13 @@
 
 .guide{
       position: absolute;
-      bottom: 0;
+      /* bottom: 0; */
       width: 100%;
-      height: auto;
-      overflow: hidden;
+      height: 100%;
       transition: all .3s ease;
       z-index: 3;
 
       .tabs-wrapper{
-                
 
             .list{
                   margin-top: 0;

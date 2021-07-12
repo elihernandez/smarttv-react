@@ -3,11 +3,19 @@ import { useAxios } from '../../hooks/useAxios'
 import { LazyImage } from '../Image'
 import { SlickSliderHorizontal } from '../SlickCarousel'
 import { Navigation } from '../../js/SpatialNavigation'
+import { useSelector } from 'react-redux'
+import { setData, setLoading } from '../../redux/reducers/spotlightReducer'
 import './styles.css'
 
 export function Spotlight() {
 	const sliderRef = useRef(null)
-	const { data } = useAxios('spotlight')
+	const data = useSelector(state => state.spotlight.data)
+	console.log(data)
+	useAxios({
+		section: 'spotlight',
+		setData: setData,
+		setLoading: setLoading
+	})
 
 	const settings = {
 		dots: true,
@@ -55,16 +63,15 @@ export function Spotlight() {
 		<div className="spotlight-wrapper">
 			<SlickSliderHorizontal sliderRef={sliderRef} settings={settings}>
 				{data.map(({ Registro, ImgLandscape }) => {
-					return (
-						<div className="spotlight-item" key={Registro} style={{ width: '100%' }}>
-							<LazyImage
-								img={ImgLandscape}
-								alt={`spotlight-image-${Registro}`}
-								type="webp"
-								recoverType="png"
-							/>
-						</div>
-					)
+					return <div className="spotlight-item" key={Registro} style={{ width: '100%' }}>
+						<LazyImage
+							img={ImgLandscape}
+							alt={`spotlight-image-${Registro}`}
+							type="webp"
+							recoverType="png"
+						/>
+					</div>
+					
 				})}
 			</SlickSliderHorizontal>
 		</div>

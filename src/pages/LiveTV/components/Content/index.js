@@ -1,14 +1,13 @@
-import React, { useRef, useState, useContext, useEffect, useCallback } from 'react'
+import React, { useRef, useState, useEffect, useCallback } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import VideoContext from '../../../../context/VideoContext'
+import { useSelector } from 'react-redux'
 import './styles.css'
 
 export function Content({ children }) {
 	const contentRef = useRef()
 	const timerRef = useRef(null)
 	const [isVisible, setIsVisible] = useState(true)
-	const { videoState } = useContext(VideoContext)
-	const { activeChannel } = videoState
+	const isChannelActive = useSelector(state => state.video.isChannelActive)
 
 	const fadeInContent = () => {
 		setIsVisible(true)
@@ -23,14 +22,14 @@ export function Content({ children }) {
 	}
 
 	const handleUserMouseMove = useCallback(() => {
-		if (activeChannel) {
+		if (isChannelActive) {
 			clearTimeout(timerRef.current)
 			timerRef.current = setTimeout(() => fadeOutContent(), 3000)
 			fadeInContent()
 		} else {
 			clearTimeout(timerRef.current)
 		}
-	}, [activeChannel])
+	}, [isChannelActive])
 
 	const handleClick = (e) => {       
 		if (e.target == document.querySelector('.background-overlay') ||
@@ -40,7 +39,7 @@ export function Content({ children }) {
 			e.target == document.querySelector('.channel-name') ||
 			e.target == document.querySelector('.navbar-list')
 		){
-			if (isVisible && activeChannel) {
+			if (isVisible && isChannelActive) {
 				clearTimeout(timerRef.current)
 				fadeOutContent()
 			} else {

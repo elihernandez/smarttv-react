@@ -4,6 +4,9 @@ import { CSSTransition } from 'react-transition-group'
 import LiveTVContext from '../../../../context/LiveTvContext'
 import VideoContext from '../../../../context/VideoContext'
 import { useAxios } from '../../../../hooks/useAxios'
+import { useSelector } from 'react-redux'
+import { SliderVertical } from '../SliderVertical'
+import { setData, setLoading } from '../../../../redux/reducers/livetvReducer'
 import { GuideLoader } from './components/Loader'
 import { ButtonLoader } from './components/Button'
 import { CustomTabs } from '../../../../components/Tabs'
@@ -11,74 +14,80 @@ import { findInitialValues, findFirstChannel, getDataArray } from './scripts'
 import { isNotEmptyArray } from '../../../../js/Array'
 import './styles.css'
 
-export function Guide() {
-	const history = useHistory()
-	const { url } = useRouteMatch()
-	const { channelId } = useParams() 
-	const { liveTvState, liveTvDispatch } = useContext(LiveTVContext)
-	const { guideOnce } = liveTvState
-	const [dataTabs, setDataTabs] = useState(null)
-	const [showGuide, setShowGuide] = useState(false)
-	const [sendRequest, setSendRequest] = useState(false)
-	const [showGuideLoader, setShowGuideLoader] = useState(false)
-	const [initialValues, setInitialValues] = useState({ initialSlide: 0, tabContent: 0})
-	const { data, error, handleRequest } = useAxios('livetv', sendRequest)
+export const Guide = () => {
+	useAxios({
+		section: 'catalogue-tv',
+		setLoading: setLoading,
+		setData: setData
+	})
+	const data = useSelector(state => state.livetv.data)
+	// const history = useHistory()
+	// const { url } = useRouteMatch()
+	// const { channelId } = useParams() 
+	// const { liveTvState, liveTvDispatch } = useContext(LiveTVContext)
+	// const { guideOnce } = liveTvState
+	// const [dataTabs, setDataTabs] = useState(null)
+	// const [showGuide, setShowGuide] = useState(false)
+	// const [sendRequest, setSendRequest] = useState(false)
+	// const [showGuideLoader, setShowGuideLoader] = useState(false)
+	// const [initialValues, setInitialValues] = useState({ initialSlide: 0, tabContent: 0})
+	// const { data, error, handleRequest } = useAxios('livetv', sendRequest)
 
-	const handleSendRequest = () => {
-		setSendRequest(true)
-	}
+	// const handleSendRequest = () => {
+	// 	setSendRequest(true)
+	// }
 
-	const handleData = (data) => {
-		const findedValues = findInitialValues(data, channelId)
-		setInitialValues(findedValues)
-		const dataTabs = getDataArray(data, findedValues)
-		setDataTabs(dataTabs)
-		setTimeout(() => {
-			setShowGuideLoader(false)
-			setShowGuide(true)
-			if(sendRequest === true){
-				setSendRequest(false)
-			}
-		}, 500)
-	}
+	// const handleData = (data) => {
+	// 	const findedValues = findInitialValues(data, channelId)
+	// 	setInitialValues(findedValues)
+	// 	const dataTabs = getDataArray(data, findedValues)
+	// 	setDataTabs(dataTabs)
+	// 	setTimeout(() => {
+	// 		setShowGuideLoader(false)
+	// 		setShowGuide(true)
+	// 		if(sendRequest === true){
+	// 			setSendRequest(false)
+	// 		}
+	// 	}, 500)
+	// }
 
-	const loadChannel = (data) => {
-		if(!channelId){
-			const firstChannel = findFirstChannel(data)
-			history.replace(`${url}/${firstChannel.Id}`)
-		}
-	}
+	// const loadChannel = (data) => {
+	// 	if(!channelId){
+	// 		const firstChannel = findFirstChannel(data)
+	// 		history.replace(`${url}/${firstChannel.Id}`)
+	// 	}
+	// }
 
-	useEffect(() => {
-		if(!guideOnce){
-			setShowGuideLoader(true)
-			setSendRequest(true)
-			liveTvDispatch({ type: 'setGuideOnce', payload: true })
-		}
+	// useEffect(() => {
+	// 	if(!guideOnce){
+	// 		setShowGuideLoader(true)
+	// 		setSendRequest(true)
+	// 		liveTvDispatch({ type: 'setGuideOnce', payload: true })
+	// 	}
 
-		if(isNotEmptyArray(data)){
-			liveTvDispatch({ type: 'updateData', payload: data })
-			loadChannel(data)
-			handleData(data)
-		}
-	}, [data])
+	// 	if(isNotEmptyArray(data)){
+	// 		liveTvDispatch({ type: 'updateData', payload: data })
+	// 		loadChannel(data)
+	// 		handleData(data)
+	// 	}
+	// }, [data])
 
-	useEffect(() =>{
-		if(sendRequest){
-			setShowGuideLoader(true)
-		}
-	}, [sendRequest])
+	// useEffect(() =>{
+	// 	if(sendRequest){
+	// 		setShowGuideLoader(true)
+	// 	}
+	// }, [sendRequest])
 
-	useEffect(() => {
-		if(error){
-			setShowGuide(false)
-			setShowGuideLoader(false)
-		}
-	}, [error])
+	// useEffect(() => {
+	// 	if(error){
+	// 		setShowGuide(false)
+	// 		setShowGuideLoader(false)
+	// 	}
+	// }, [error])
 
 	return (
 		<div className="guide">
-			{	showGuideLoader && 
+			{/* {	showGuideLoader && 
                 <GuideLoader />
 			}
 			{	!showGuide && !showGuideLoader && guideOnce &&
@@ -92,7 +101,8 @@ export function Guide() {
 						}
 					</div>
 				</CSSTransition>
-			}
+			} */}
+			<SliderVertical data={data} />
 		</div>
 	)
 }

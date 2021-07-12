@@ -14,8 +14,8 @@ const Home = () => {
 
 	return (
 		<div className="wrapper-home">
-			<Spotlight />
-			<ButtonsMenu />
+			{/* <Spotlight /> */}
+			{/* <ButtonsMenu /> */}
 		</div>
 	)
 }

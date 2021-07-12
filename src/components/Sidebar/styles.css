@@ -1,5 +1,39 @@
 @import '../../styles/style-base.css';
 
+.main-sidebar{
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: auto;
+      border: 1px solid red;
+
+      .list-items{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 10px;
+
+            .item{
+                  position: relative;
+                  width: auto;
+                  color: $color-white;
+                  font-size: 25px;
+                  display: flex;
+                  padding: 0 10px;
+                  margin: 20px 0;
+                  
+                  .icon-item{
+                        position: relative;
+                        color: $color-white;
+                        font-size: 30px;
+                        min-width: 90px;
+                        text-align: center;
+                  }
+            }
+      }
+}
+
 .sidebar{
       position: relative;
       overflow-y: scroll;

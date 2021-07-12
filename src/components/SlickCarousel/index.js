@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -48,11 +48,9 @@ export function SlickSliderHorizontal({ children,
 	settings.nextArrow = <NextArrowSlider />
 	
 	return (	
-		useMemo(() => {
-			return <Slider ref={sliderRef} {...settings}>
-				{ children }
-			</Slider>
-		}, [])
+		<Slider ref={sliderRef} {...settings}>
+			{ children }
+		</Slider>
 	)
 }
 
@@ -78,10 +76,8 @@ export function SlickSliderVertical({ children,
 	settings.nextArrow = <NextArrowSlider />
 	
 	return (	
-		useMemo(() => {
-			return <Slider ref={sliderRef} {...settings}>
-				{ children }
-			</Slider>
-		}, [])
+		<Slider ref={sliderRef} {...settings}>
+			{ children }
+		</Slider>
 	)
 }

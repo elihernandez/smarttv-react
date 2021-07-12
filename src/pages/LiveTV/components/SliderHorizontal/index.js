@@ -1,0 +1,50 @@
+import React, { Fragment } from 'react'
+import { TitleList } from '../../../../components/List/components/Title'
+import { SlickSliderHorizontal } from '../../../../components/SlickCarousel'
+import { ItemChannel } from '../../../../components/ListItem/ItemChannel'
+import './styles.css'
+
+export const SliderHorizontal = ({ data, sliderVerticalRef }) => {
+	console.log('List Catalogue')
+	const { category, poster_type } = data
+	const listID = `list-${category}`
+	const slidesToShow = poster_type == 0 ? 7 : 5
+
+	const settings = {
+		accesibilty: false,
+		dots: false,
+		infinite: false,
+		// lazyLoad: 'progressive',
+		speed: 250,
+		autoplay: false,
+		autoplaySpeed: 6000,
+		slidesToShow: slidesToShow,
+		focusOnSelect: false,
+		slidesToScroll: 1,
+		variableWidth: false,
+		pauseOnHover: true,
+		swipeToSlide: false,
+		className: 'slider-collection-livetv'
+	}
+
+	return (
+		<Fragment>
+			<TitleList title={category} />
+			<div id={listID}>
+				<SlickSliderHorizontal settings={settings}>
+					{data.cmData.map((dataItem) => {
+						return (
+							<ItemChannel
+								id={`list-${dataItem.SignalID}-${dataItem.SignalID}`}
+								data={dataItem}
+								key={dataItem.Registro}
+								posterType={data.poster_type}
+								titleCategory={data.category}
+								sliderVerticalRef={sliderVerticalRef} />
+						)
+					})}
+				</SlickSliderHorizontal>
+			</div>
+		</Fragment>
+	)
+}
