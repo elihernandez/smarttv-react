@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLoaderLogo } from '../../redux/reducers/loaderReducer'
 import { CSSTransition } from 'react-transition-group'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import imgLogoBlue from '../../assets/images/logos/guiahtv/guiahtv-logo-blue.png'
 import imgLogoPurple from '../../assets/images/logos/guiahtv/guiahtv-logo-purple.png'
 
 export const MemoizedLoaderLogo = ({ color = 'purple' }) => {
+	const dispatch = useDispatch()
 	const isShow = useSelector(state => state.loader.isShowLoaderLogo)
 	const [isShowSpinner, setIsShowSpinner] = useState(false)
 	const imgSrc = color === 'purple' ? imgLogoPurple : imgLogoBlue
@@ -15,8 +17,9 @@ export const MemoizedLoaderLogo = ({ color = 'purple' }) => {
 
 		if(isShow){
 			timeout = setTimeout(() => {
-				setIsShowSpinner(true)
-			}, 5000)
+				// setIsShowSpinner(true)
+				dispatch(setLoaderLogo(false))
+			}, 2000)
 		}
 		
 		return () => {

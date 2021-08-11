@@ -1,4 +1,6 @@
 require('../SpatialNavigation')
+require('../Pollyfill/includes')
+require('object-assign-polyfill')
 import config from '../../../config'
 (async() => {
 	if(config.device === 'webos'){

@@ -1,10 +1,6 @@
-// require('polyfill-library-node')
-// require('./js/Pollyfill/includes')
 const elem = document.getElementById('top-menu')
 elem.parentNode.removeChild(elem)
 require('./js/DynamicImports')
-require('object-assign-polyfill')
-require('./js/Pollyfill/includes')
 import * as React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'

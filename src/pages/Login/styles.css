@@ -21,6 +21,8 @@
             img{
                   position: relative;
                   object-fit: fill;
+                  width: 1920px;
+                  height: 1080px;
             }
       }
 
@@ -53,15 +55,16 @@
             margin: 25px 0;
       }
 
+      .info-wrapper{
+            position: relative;
+            width: 58%;
+      }
+
       .title-text{
-            width: 55%;
             font-size: 50px;
-            font-weight: 600;
-            line-height: 70px;
       }
 
       .subtitle-text{
-            width: 58%;
             font-weight: 300;
             margin: 10px 0;
             font-size: 28px;

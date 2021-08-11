@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import { TitleList } from '../../../../components/List/components/Title'
 import { SlickSliderHorizontal } from '../../../../components/SlickCarousel'
 import { ItemCatalogue } from '../../../../components/ListItem/ItemCatalogue'
-import { isMovie, isSerie, isEpisode } from '../../../../js/String'
 import './styles.css'
 
 export const SliderHorizontal = ({ data, sliderVerticalRef }) => {
@@ -34,17 +33,11 @@ export const SliderHorizontal = ({ data, sliderVerticalRef }) => {
 			<div id={listID}>
 				<SlickSliderHorizontal settings={settings}>
 					{data.cmData.map((dataItem) => {
-						{/* console.log(dataItem)
-						switch(dataItem.ContentType){
-						case isMovie():
-							break
-							
-						} */}
 						return (
 							<ItemCatalogue
 								id={`list-${category}-${dataItem.Registro}`}
 								data={dataItem}
-								key={dataItem.Registro}
+								key={`${dataItem.Title}-${dataItem.Registro}`}
 								posterType={data.poster_type}
 								titleCategory={data.category}
 								sliderVerticalRef={sliderVerticalRef} />

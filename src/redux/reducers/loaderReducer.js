@@ -1,11 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { addToDate, getNowDateTime, isSameOrBeforeDate } from '../../js/Time'
+
+const getLoaderLogo = () => {
+	const localLoaderVideo = localStorage.getItem('_deviceLoader')
+	if(localLoaderVideo){
+		if(!isSameOrBeforeDate(localLoaderVideo)){
+			localStorage.removeItem('_deviceLoader')
+		}
+
+		return true
+	}
+
+	return false
+}
+
+const getLoaderVideo = () => {
+	const localLoaderVideo = localStorage.getItem('_deviceLoader')
+	if(!localLoaderVideo){
+		const date = addToDate(getNowDateTime(), 31, 'day')
+		localStorage.setItem('_deviceLoader', date)
+
+		return true
+	}
+
+	return false
+}
 
 export const loaderSlice = createSlice({
 	name: 'loader',
 	initialState: {
 		isShowLoaderSpinner: false,
-		isShowLoaderLogo: false,
-		isShowLoaderVideo: false
+		isShowLoaderLogo: getLoaderLogo(),
+		isShowLoaderVideo: getLoaderVideo()                          
 	},
 	reducers: {
 		setLoaderSpinner: (state, action) => {

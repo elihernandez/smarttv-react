@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { AnimatedSwitch } from 'react-router-transition'
 import loadable from '@loadable/component'
+
 const LoginPage = loadable(() => import('../../../pages/Login'))
 
 export function RouterLoggedOut() {

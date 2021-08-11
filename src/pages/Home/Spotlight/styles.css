@@ -1,0 +1,120 @@
+@import '../../../styles/style-base.css';
+
+.spotlight-wrapper{
+    position: relative;
+    width: 100%;
+    height: 500px;
+
+    .slick-slider{
+        position: relative;
+        backface-visibility: hidden;
+
+        .slick-list{
+            display: block !important;
+            overflow: visible !important;
+            padding: 0 !important;
+
+            .slick-track{
+                display: flex;
+        
+                .slick-slide{
+                    display: flex;
+                    height: auto;
+                    margin: 0 10px;
+                    transform: scale(1);
+                    transition: all 300ms ease-in-out;
+                    height: auto;
+                    opacity: 0.5;              
+
+                    &:after{
+                        content: '';
+                        position: absolute;
+                        inset: 0px;
+                        border: 4px solid transparent;
+                        border-radius: 6px;
+                        transition: all 300ms ease-in-out;
+                    }
+            
+
+                    div{
+                        display: flex;
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 6px;
+
+                        div{
+                            display: flex !important;
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 6px;
+                        }
+                    }
+
+                    &.slick-active{
+                        transform: scale(1);
+                        opacity: 1;
+                        transition: all 300ms ease-in-out;
+
+                        div{
+                            position: relative;
+    
+                            div{
+                                display: flex !important;
+                                position: relative;
+                            }
+                        }
+                    }
+
+                    &.slick-cloned{
+                        height: auto;
+                        transition: all 300ms ease-in-out;
+                    }
+
+                    span{
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 6px;
+                    }
+            
+                    img{
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 6px;
+                        object-fit: cover;
+                        box-shadow: rgb(0 0 0 / 5%) 0px 26px 30px -10px, rgb(0 0 0 / 10%) 0px 16px 25px -10px;
+                    }
+
+                    &:focus{
+
+                        &:after{
+                            border: 4px solid $color-white;
+                        }
+                    }
+            }
+            }
+        }
+
+        .slick-dots{
+            bottom: 5%;
+
+            li{
+                margin: 0;
+
+                button:before{
+                    font-size: .6vw;
+                    color: rgba(255, 255, 255, 0.5);
+                }
+
+                &.slick-active{
+                    button:before{
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}

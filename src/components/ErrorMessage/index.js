@@ -1,32 +1,152 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import { useInterval } from 'rooks'
 import { CSSTransition } from 'react-transition-group'
 import { useDispatch } from 'react-redux'
-import { setShowBackdrop } from '../../redux/reducers/backdropReducer'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { setShowBackdrop } from '../../redux/reducers/backdropReducer'
+import { setUserData } from '../../redux/reducers/userReducer'
 import { colors } from '../../styles/styles'
 
-export const ErrorMessage = ({ isShow, message }) => {
-	const buttonRef = useRef(null)
+export const ErrorSession = ({ message }) => {
 	const dispatch = useDispatch()
+	const buttonRef = useRef(null)
+	const history = useHistory()
 
 	useEffect(() => {
 		if(buttonRef?.current){
 			buttonRef.current.focus()
 		}
-	}, [isShow])
+	}, [])
 
 	const handleClick = () => {
-		dispatch(setShowBackdrop(false))
+		dispatch(setUserData({
+			userLogged: null,
+			userToken: null,
+			suscriptionStatus: null
+		}))
+
+		history.push('/login/info')
+		localStorage.removeItem('_userLogged')
+		localStorage.removeItem('_userToken')
+		localStorage.removeItem('_suscriptionStatus')
 	}
     
 	return (
-		<CSSTransition in={isShow} timeout={300} classNames="fade" unmountOnExit>
+		<CSSTransition in={true} timeout={300} classNames="fade" unmountOnExit>
 			<Container>
 				<ErrorWrapper>
 					<ErrorText>
-						{message}
+						{ message }
 					</ErrorText>
-					<BackButton ref={buttonRef} tabIndex='-1' onClick={handleClick} onKeyDown={handleClick}>Volver</BackButton>
+					<BackButton
+						ref={buttonRef}
+						tabIndex='-1'
+						onClick={handleClick}
+						onKeyDown={handleClick}>
+                        Iniciar sesión
+					</BackButton>
+				</ErrorWrapper>
+			</Container>
+		</CSSTransition>
+	)
+}
+
+export const ErrorTimeout = () => {
+	const buttonRef = useRef(null)
+	const [time, setTime] = useState(30)
+
+	const { start } = useInterval(() => {
+		if(time === 0){
+			handleClick()
+		}else{
+			setTime((e) => e - 1)
+		}
+	}, 1000)
+
+	useEffect(() => {
+		if(buttonRef?.current){
+			start()
+			buttonRef.current.focus()
+		}
+	}, [])
+
+	const handleClick = () => {
+		
+	}
+    
+	return (
+		<CSSTransition in={true} timeout={300} classNames="fade" unmountOnExit>
+			<Container>
+				<ErrorWrapper>
+					<ErrorText>
+						No se pudo establecer la conexión.
+					</ErrorText>
+					<ErrorSubText>
+						Se intentará reestablecer la conexión en: {time} segundos
+					</ErrorSubText>
+					<BackButton
+						ref={buttonRef}
+						tabIndex='-1'
+						onClick={handleClick}
+						onKeyDown={handleClick}>
+                        Reintentar
+					</BackButton>
+				</ErrorWrapper>
+			</Container>
+		</CSSTransition>
+	)
+}
+
+export const ErrorMessage = ({ handleRequest, count }) => {
+	const buttonRef = useRef(null)
+	const times = { 0: 30, 1: 45, 2: 60 }
+	const [time, setTime] = useState(times[count])
+
+	const { start } = useInterval(() => {
+		if(time === 0){
+			handleClick()
+		}else{
+			setTime((e) => e - 1)
+		}
+	}, 1000)
+
+	useEffect(() => {
+		if(buttonRef?.current){
+			start()
+			buttonRef.current.focus()
+		}
+	}, [])
+
+	const handleClick = () => {
+		handleRequest()
+	}
+    
+	return (
+		<CSSTransition in={true} timeout={300} classNames="fade" unmountOnExit>
+			<Container>
+				<ErrorWrapper>
+					<ErrorText>
+						{count != 3 ? (
+							'No se pudo obtener la información, intente de nuevo.'
+						):(
+							'No se pudo obtener la información, intente más tarde.'
+						)}
+					</ErrorText>
+					{count != 3 &&
+						<>
+							<ErrorSubText>
+							Se intentará reestablecer la conexión en: {time} segundos
+							</ErrorSubText>
+							<BackButton
+								ref={buttonRef}
+								tabIndex='-1'
+								onClick={handleClick}
+								onKeyDown={handleClick}>
+							Reintentar
+							</BackButton>
+						</>
+					}
 				</ErrorWrapper>
 			</Container>
 		</CSSTransition>
@@ -62,6 +182,14 @@ const ErrorText = styled.div`
     color: ${colors.white};
 `
 
+const ErrorSubText = styled.div`
+    font-size: 29px;
+    text-align: center;
+    font-weight: 400;
+	margin: 15px 0;
+    color: ${colors.white};
+`
+
 const BackButton = styled.button`
     width: 250px;
     color: ${colors.white};
@@ -76,7 +204,7 @@ const BackButton = styled.button`
     text-transform: uppercase;
     background: transparent;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
-    border: 2px solid ${colors.white};
+    border: 3px solid ${colors.white};
     margin-top: 30px;
     font-size: 20px;
 

@@ -1,14 +1,13 @@
 import React, { Fragment, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Background, ImgBackground } from './components/Background'
-import LinearProgress from '@material-ui/core/LinearProgress'
 import { Title } from './components/Title'
 import { Rating } from './components/Rating'
 import { Description } from './components/Description'
-import { Artist } from './components/Artist'
+import { Artist } from './Artist'
 import { Director } from './components/Director'
 import { isKeyEnter } from '../../js/Keyboard'
-import { getProgressMovie } from '../../js/Time'
+import { minutesToHoursString } from '../../js/Time'
 import { Navigation } from '../../js/SpatialNavigation'
 import Imdb from '../../assets/images/clasifications-movies/imdb.png'
 import './styles.css'
@@ -30,10 +29,23 @@ export function InfoMovie({ data }) {
 		ResumePos
 	} = data 
 
-	const handleClick = (e) => {
+	const lengthMovie = Length.replace(' min', '')
+	const duration = lengthMovie * 60
+	const timeElapsed = ResumePos / 1000
+	const timeRemaining = duration - timeElapsed
+	const time = (timeElapsed / duration) * 100
+
+	const handleClick = (e, isContinue) => {
+		e.preventDefault()
 		if(isKeyEnter(e)){
-			console.log('video')
-			history.push({ pathname: `${history.location.pathname}/video`, state: { contentType: 'video', movieVod: data }})
+			if(isContinue){
+				data.ResumePos = 0
+			}
+			
+			history.push({ 
+				pathname: `${history.location.pathname}/video`, 
+				state: { data }
+			})
 		}
 	}
 
@@ -84,17 +96,25 @@ export function InfoMovie({ data }) {
 					<Director director={director} />
 				}
 				<div className="group-actions" id="movie-group-actions">
-					<button type="button" className="button button-watch" onClick={handleClick} onKeyDown={handleClick} tabIndex="-1">
-						<i className="fas fa-play" />{ResumePos !== '' || ResumePos !== 0 ? 'Ver ahora' : 'Reanudar'}
-						<div className="progress-bar-content">
-							<LinearProgress variant="determinate" value={getProgressMovie(ResumePos, Length)} />
-						</div>
-					</button>
 					{ResumePos !== '' && ResumePos !== 0 &&
-						<button type="button" className="button button-start" onClick={handleClick} onKeyDown={handleClick} tabIndex="-1">
-							Desde el comienzo
-						</button>
+						<div className="group-time-remaining">
+							<div className="progress-wrapper">
+								<div className="progress-elapsed" style={{ width: `${time}%` }} />
+							</div>
+							<p>Tiempo restante: &nbsp;{minutesToHoursString(timeRemaining)}</p>
+						</div>
 					}
+					<div className="group-buttons">
+						<button type="button" className="button button-watch" onClick={(e) => handleClick(e, false)} onKeyDown={(e) => handleClick(e, false)} tabIndex="-1">
+							<i className="fas fa-play" />{ResumePos !== '' || ResumePos !== 0 ? 'Ver ahora' : 'Reanudar'}
+						</button>
+						{ResumePos !== '' && ResumePos !== 0 &&
+							<button type="button" className="button button-start" onClick={(e) => handleClick(e, true)} onKeyDown={(e) => handleClick(e, true)} tabIndex="-1">
+								Desde el comienzo
+							</button>
+						}
+					</div>
+
 				</div>
 			</div>
 		</Fragment>

@@ -1,0 +1,27 @@
+.video-button{
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i{
+        position: relative;
+        color: white;
+        font-size: 35px;
+
+        &.fa-play{
+            left: 3px;
+        }
+    }
+
+    &:hover{
+        background: white;
+        
+        i{
+            color: black;
+        }
+    }
+}

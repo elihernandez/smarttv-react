@@ -185,6 +185,44 @@
                   margin-top: 100px;
                   width: auto;
                   display: flex;
+                  flex-direction: column;
+                  gap: 30px;
+                  
+                  .group-time-remaining{
+                        position: relative;
+                        width: auto;
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+
+                        .progress-wrapper{
+                              position: relative;
+                              width: 250px;
+                              background: rgba(255, 255, 255, 0.75);
+                              height: 10px;
+                              border-radius: 3px;
+
+                              .progress-elapsed{
+                                    position: absolute;
+                                    left: 0;
+                                    width: 30%;
+                                    height: 100%;
+                                    border-top-left-radius: 3px;
+                                    border-bottom-left-radius: 3px;
+                                    background: linear-gradient(to right, $color-guide-blue 70%, $color-violet 115%);
+                              }
+                        }
+
+                        p{
+                              font-size: 20px;
+                              font-weight: 300;
+                        }
+                  }
+
+                  .group-buttons{
+                        position: relative;
+                        display: flex;
+                  }
 
                   .button{
                         text-transform: uppercase;

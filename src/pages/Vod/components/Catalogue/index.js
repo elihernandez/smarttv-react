@@ -1,34 +1,36 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useAxios } from '../../../../hooks/useAxios'
+import { setData } from '../../../../redux/reducers/vodReducer'
 import { LoaderSection } from '../../../../components/Loader'
 import { SliderVertical } from '../SliderVertical'
-import { useAxios } from '../../../../hooks/useAxios'
-import { setLoading, setData } from '../../../../redux/reducers/vodReducer'
 
 const Catalogue = () => {
 	const dispatch = useDispatch()
-	useAxios({
-		section: 'catalogue-vod',
-		setLoading: setLoading,
-		setData: setData
-	})
-
-	const data = useSelector(state => state.vod.data)
-	const isLoading = useSelector(state => state.vod.isLoading)
-	console.log('Catalogue')
+	const { fetchData } = useAxios()
+	const catalogue = useSelector(state => state.vod.data)
+	const [error, setError] = useState(null)
 
 	useEffect(() => {
-		return () => {
-			dispatch(setData([]))
-		}
+		fetchData({ section: 'catalogue-vod' })
+			.then(response => {
+				dispatch(setData(response))
+			})
+			.catch(error => {
+				setError(error)
+			})
 	}, [])
+
+	if(error){
+		return error
+	}
 	
 	return (
 		<Fragment>
-			{data.length > 0 &&
-				<SliderVertical data={data} />
+			{catalogue.length > 0 &&
+				<SliderVertical data={catalogue} />
 			}
-			<LoaderSection isShow={isLoading} />
+			<LoaderSection />
 		</Fragment>
 	)
 }

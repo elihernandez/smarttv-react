@@ -3,82 +3,72 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setLoaderLogo, setLoaderVideo } from '../redux/reducers/loaderReducer'
 import { setUserData } from '../redux/reducers/userReducer'
 import { setDeviceData } from '../redux/reducers/deviceReducer'
-import { getTVDeviceInformation } from '../services/getTvDeviceInformation'
-import { getTvDevicePlatform } from '../services/getTvDevicePlatform'
-import { getTVDeviceUUID } from '../services/getTvDeviceUUID'
-import { addToDate, getNowDateTime, isSameOrBeforeDate } from '../js/Time'
+// import { getTVDeviceInformation } from '../services/device/getInformation'
+// import { getTvDevicePlatform } from '../services/getTvDevicePlatform'
+// import { getTVDeviceUUID } from '../services/getTvDeviceUUID'
+// import { addToDate, getNowDateTime, isSameOrBeforeDate } from '../js/Time'
 
 export const useLoaderApp = () => {
 	const dispatch = useDispatch()
 	const [isLoadedData, setIsLoadedData] = useState(false)
 	const loaderState = useSelector(state => state.loader)
 
-	useEffect(() => {
-		// localStorage.removeItem('_deviceLoader')
-		const localLoaderVideo = localStorage.getItem('_deviceLoader')
-		if(localLoaderVideo){
-			dispatch(setLoaderLogo(true))
+	// useEffect(() => {
+	// 	// localStorage.removeItem('_deviceLoader')
+	// 	const localLoaderVideo = localStorage.getItem('_deviceLoader')
+	// 	if(localLoaderVideo){
+	// 		dispatch(setLoaderLogo(true))
 			
-			if(!isSameOrBeforeDate(localLoaderVideo)){
-				localStorage.removeItem('_deviceLoader')
-			}
-		}else{
-			dispatch(setLoaderVideo(true))
-			const date = addToDate(getNowDateTime(), 31, 'day')
-			localStorage.setItem('_deviceLoader', date)
-		}
-	}, [])
+	// 		if(!isSameOrBeforeDate(localLoaderVideo)){
+	// 			localStorage.removeItem('_deviceLoader')
+	// 		}
+	// 	}else{
+	// 		dispatch(setLoaderVideo(true))
+	// 		const date = addToDate(getNowDateTime(), 31, 'day')
+	// 		localStorage.setItem('_deviceLoader', date)
+	// 	}
+	// }, [])
 
-	useEffect(() => {
-		const loadInformation = async() => {
-			const devicePlatform = await getTvDevicePlatform()
-			const deviceInfo = await getTVDeviceInformation()
-			const deviceUUID = await getTVDeviceUUID()
+	// useEffect(() => {
+	// 	const loadInformation = async() => {
+	// 		const devicePlatform = await getTvDevicePlatform()
+	// 		const deviceInfo = await getTVDeviceInformation()
+	// 		const deviceUUID = await getTVDeviceUUID()
+
+	// 		const localDevicePlatform = localStorage.getItem('_devicePlatform')
+	// 		if(!localDevicePlatform){
+	// 			localStorage.setItem('_devicePlatform', devicePlatform)
+	// 		}
+
+	// 		const localDeviceType = localStorage.getItem('_deviceType')
+	// 		if(!localDeviceType){
+	// 			localStorage.setItem('_deviceType', deviceInfo.modelName)
+	// 		}
 			
-			const localUserLogged = localStorage.getItem('_userLogged')
-			const localUserToken = localStorage.getItem('_userToken')
-			const localSuscriptionStatus = parseInt(localStorage.getItem('_suscriptionStatus'))
+	// 		const localDeviceUUID = localStorage.getItem('_deviceUUID')
+	// 		if(!localDeviceUUID){
+	// 			localStorage.setItem('_deviceUUID', deviceUUID)
+	// 		}
 
-			const localDevicePlatform = localStorage.getItem('_devicePlatform')
-			if(!localDevicePlatform){
-				localStorage.setItem('_devicePlatform', devicePlatform)
-			}
+	// 		const localDeviceVersion = localStorage.getItem('_deviceVersion')
+	// 		if(!localDeviceVersion){
+	// 			localStorage.setItem('_deviceVersion', deviceInfo.version)
+	// 		}
 
-			const localDeviceType = localStorage.getItem('_deviceType')
-			if(!localDeviceType){
-				localStorage.setItem('_deviceType', deviceInfo.modelName)
-			}
-			
-			const localDeviceUUID = localStorage.getItem('_deviceUUID')
-			if(!localDeviceUUID){
-				localStorage.setItem('_deviceUUID', deviceUUID)
-			}
+	// 		dispatch(setDeviceData({
+	// 			devicePlatform: localDevicePlatform ? localDevicePlatform : devicePlatform,
+	// 			deviceType: localDeviceType ? localDeviceType : deviceInfo.modelName,
+	// 			deviceUUID: localDeviceUUID ? localDeviceUUID : deviceUUID,
+	// 			deviceVersion: localDeviceVersion ? localDeviceVersion : deviceInfo.version
+	// 		}))
 
-			const localDeviceVersion = localStorage.getItem('_deviceVersion')
-			if(!localDeviceVersion){
-				localStorage.setItem('_deviceVersion', deviceInfo.version)
-			}
+	// 		setTimeout(() => {
+	// 			setIsLoadedData(true)
+	// 		}, 1500)
+	// 	}
 
-			dispatch(setDeviceData({
-				devicePlatform: localDevicePlatform ? localDevicePlatform : devicePlatform,
-				deviceType: localDeviceType ? localDeviceType : deviceInfo.modelName,
-				deviceUUID: localDeviceUUID ? localDeviceUUID : deviceUUID,
-				deviceVersion: localDeviceVersion ? localDeviceVersion : deviceInfo.version
-			}))
-
-			dispatch(setUserData({
-				userLogged: localUserLogged,
-				userToken: localUserToken,
-				suscriptionStatus: localSuscriptionStatus
-			}))
-
-			setTimeout(() => {
-				setIsLoadedData(true)
-			}, 1500)
-		}
-
-		loadInformation()
-	}, [])
+	// 	loadInformation()
+	// }, [])
 	
 	useEffect(() => {
 		const onEndedLoaderVideo = () => {

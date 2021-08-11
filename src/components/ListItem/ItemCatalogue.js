@@ -1,7 +1,7 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { setMovie, setSerie } from '../../redux/reducers/vodReducer'
+import { setMovie } from '../../redux/reducers/vodReducer'
 import {  isMovie, posterTypeSize, contentType } from '../../js/String'
 import { isKeyDown, isKeyEnter, isKeyUp } from '../../js/Keyboard'
 import { getProgressMovie } from '../../js/Time'
@@ -9,24 +9,31 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import { Img } from './Img'
 
 export function ItemCatalogue({ id, posterType, data, sliderVerticalRef }) {
-	console.log('ItemCatalogue')
-	const history = useHistory()
+	// console.log('ItemCatalogue')
+	const { 
+		Title, 
+		Length, 
+		Registro, 
+		ResumePos, 
+		ContentType, 
+		HDPosterUrlPortrait, 
+		HDPosterUrlLandscape
+	} = data
+
 	const dispatch = useDispatch()
+	const history = useHistory()
+	const match = useRouteMatch()
 	const className = posterTypeSize(posterType)
-	const { Title, Registro, ContentType, HDPosterUrlPortrait, HDPosterUrlLandscape, ResumePos, Length } = data
-	const url = `${history.location.pathname}/${contentType(ContentType)}/${Registro}`
+	const url = `${match.url}/${contentType(ContentType)}/${Registro}`
 
 	const handleMove = (e) => {
 		if(isKeyEnter(e)){
-			if(isMovie(ContentType)){
-				dispatch(setMovie(data))
-			}else{
-				dispatch(setSerie(data))
-			}	
-
-			setTimeout(() => {
-				history.push(url)
-			}, 100)
+			dispatch(setMovie(data))
+			
+			history.push({
+				pathname: url,
+				state: { data }
+			})
 		}
 
 		if(isKeyDown(e)){
@@ -44,9 +51,9 @@ export function ItemCatalogue({ id, posterType, data, sliderVerticalRef }) {
 				<div className="background-item">
 					<Img title={Title} posterType={posterType} imgPortrait={HDPosterUrlPortrait} imgLandscape={HDPosterUrlLandscape} />
 					{ResumePos &&
-					<div className="progress-bar-content">
-						<LinearProgress variant="determinate" value={getProgressMovie(ResumePos, Length)} />
-					</div>
+						<div className="progress-bar-content">
+							<LinearProgress variant="determinate" value={getProgressMovie(ResumePos, Length)} />
+						</div>
 					}
 				</div>
 			</div>

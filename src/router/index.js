@@ -6,11 +6,13 @@ import { RouterLoggedOut } from './components/RouterLoggedOut'
 
 export function Router() {
 	console.log('Router')
-	const userState = useSelector(state => state.user)
+	const userLogged = useSelector(state => state.user.userLogged)
+	const userToken = useSelector(state => state.user.userToken)
+	const validSession =  userLogged && userToken
 
 	return (
 		<HashRouter>
-			{userState?.userLogged && userState?.userToken ? (
+			{validSession ? (
 				<RouterLogged />
 			) : (
 				<RouterLoggedOut />

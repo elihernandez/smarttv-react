@@ -1,8 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from '../../js/Axios'
-import { getURL } from '../../api/endpoints'
-import { addToDate, isSameOrAfterDate } from '../../js/Time'
-import { validateSuscription } from '../../js/Auth/validateSuscription'
 
 export const vodSlice = createSlice({
 	name: 'vod',
@@ -22,6 +18,9 @@ export const vodSlice = createSlice({
 		},
 		setMovie: (state, action) => {
 			state.movie = action.payload
+		},
+		setPositionMovie: (state, action) => {
+			state.movie.ResumePos = action.payload
 		},
 		setSerie: (state, action) => {
 			state.serie = action.payload
@@ -43,6 +42,6 @@ export const vodSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setData, setMovie, setSerie, setSeason, setLoading, setLastDateRequest } = vodSlice.actions
+export const { setData, updatePositionMovieData, setMovie, setSerie, setSeason, setLoading, setLastDateRequest } = vodSlice.actions
 
 export default vodSlice.reducer

@@ -4,27 +4,31 @@ export const videoSlice = createSlice({
 	name: 'video',
 	initialState: {
 		data: [],
-		volume: 50,
-		isMuted: false,
-		isFullScreen: false
+		videoRef: null,
+		hls: null,
+		playing: false,
+		currentTime: 0
 	},
 	reducers: {
 		setData: (state, action) => {
 			state.data = action.payload
 		},
-		setVolume: (state, action) => {
-			state.volume = action.payload
+		setVideoRef: (state, action) => {
+			state.videoRef = action.payload
 		},
-		setIsMuted: (state, action) => {
-			state.isMuted = action.payload
+		setHls: (state, action) => {
+			state.hls = action.payload
 		},
-		setIsFullScreen: (state, action) => {
-			state.isFullScreen = action.payload
+		setPlaying: (state, action) => {
+			state.playing = action.payload
 		},
+		setCurrentTime: (state, action) => {
+			state.currentTime = action.payload
+		}
 	},
 })
 
 // Action creators are generated for each case reducer function
-export const { setData, setVolume, setIsMuted, setIsFullScreen } = videoSlice.actions
+export const { setVideoRef, setHls, setPlaying, setCurrentTime } = videoSlice.actions
 
 export default videoSlice.reducer

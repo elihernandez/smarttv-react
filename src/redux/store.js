@@ -9,6 +9,7 @@ import livetvReducer from './reducers/livetvReducer'
 import vodReducer from './reducers/vodReducer'
 import musicReducer from './reducers/musicReducer'
 import videoReducer from './reducers/videoReducer'
+import focusReducer from './reducers/focusReducer'
 
 const immutableInvariantMiddleware = createImmutableStateInvariantMiddleware({
 	ignoredPaths: [
@@ -21,7 +22,8 @@ const immutableInvariantMiddleware = createImmutableStateInvariantMiddleware({
 		livetvReducer,
 		vodReducer,
 		musicReducer,
-		videoReducer
+		videoReducer,
+		focusReducer
 	],
 })
 
@@ -36,7 +38,8 @@ export default configureStore({
 		livetv: livetvReducer,
 		vod: vodReducer,
 		music: musicReducer,
-		video: videoReducer
+		video: videoReducer,
+		focus: focusReducer
 	},
-	middleware: [immutableInvariantMiddleware],
+	middleware: [immutableInvariantMiddleware]
 })

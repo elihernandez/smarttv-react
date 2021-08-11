@@ -26,7 +26,7 @@ const javascriptRules = {
 						'forceAllTransforms': true
 					}
 				],
-				'minify'
+				['minify', { builtIns: false }]
 				
 			],
 			plugins: [
