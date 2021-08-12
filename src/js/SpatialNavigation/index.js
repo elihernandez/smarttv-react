@@ -10,7 +10,6 @@ class Navigate {
 	}
 
 	add (selector, defaultElement = '', section = '') {
-		console.log(defaultElement)
 		SpatialNavigation.add(section, {
 			selector: selector,
 			rememberSource: true,

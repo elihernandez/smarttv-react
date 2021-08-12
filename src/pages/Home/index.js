@@ -7,10 +7,10 @@ import { LoaderSpinner } from '../../components/Loader'
 import './styles.css'
 
 export default function HomePage() {
-	const { loading, fetchData, count } = useAxios()
+	const { loading, count, fetchData } = useAxios()
 	const [error, setError] = useState(null)
-	const [spotlightData, setSpotlightData] = useState([])
-	const [buttonsMenuData, setButtonsMenu] = useState([])
+	const [spotlightData, setSpotlightData] = useState(null)
+	const [buttonsMenuData, setButtonsMenu] = useState(null)
 	// useDidMount(function () {
 	// 	setTimeout(() => {
 	// 		document.getElementById('link-home')?.focus()
@@ -21,17 +21,17 @@ export default function HomePage() {
 
 	useEffect(() => {
 		setError(null)
-		// const fetchSpotlight = fetchData({ section: 'spotlight' })
-		// const fetchButtonsMenu = fetchData({ section: 'buttons-menu' })
-		// Promise.all([fetchSpotlight, fetchButtonsMenu])
-		// 	.then(values => {
-		// 		setSpotlightData(values[0])
-		// 		setButtonsMenu(values[1])
-		// 		console.log(values)
-		// 	})
-		// 	.catch(error => {
-		// 		setError(error)
-		// 	})
+		const fetchSpotlight = fetchData({ section: 'spotlight' })
+		const fetchButtonsMenu = fetchData({ section: 'buttons-menu' })
+		
+		Promise.all([fetchSpotlight, fetchButtonsMenu])
+			.then(values => {
+				setSpotlightData(values[0])
+				setButtonsMenu(values[1])
+			})
+			.catch(error => {
+				setError(error)
+			})
 	}, [count])
 	
 	if(error){
@@ -40,12 +40,12 @@ export default function HomePage() {
 	
 	return (
 		<div className="wrapper-home">
-			{loading && spotlightData.length === 0 && buttonsMenuData.length === 0 ? (
+			{loading ? (
 				<LoaderSpinner isShow={true} />
 			) : (
 				<>
-					<Spotlight data={spotlightData} />
-					<ButtonsMenu data={buttonsMenuData} />
+					{spotlightData && <Spotlight data={spotlightData} /> }
+					{buttonsMenuData && <ButtonsMenu data={buttonsMenuData} /> }
 				</>
 			)}
 		</div>

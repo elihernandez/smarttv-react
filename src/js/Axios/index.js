@@ -24,18 +24,22 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
 	function (response) {
 		let suscriptionStatus
+		const { data } = response
 
 		if(response.status === 200){
 			// Error del API
-			if(response?.length || response.data.length === 0 || isEmptyArray(response.data)){
+			if(!data || data.length === 0 || isEmptyArray(data)){
 				throw new Error(0)
 			}else{
 				// Suscription status del API
-				if(response?.SuscriptionStatus){
-					suscriptionStatus = response?.SuscriptionStatus
-				}else if(response[0]?.SuscriptionStatus){
-					suscriptionStatus = response[0]?.SuscriptionStatus
+				if(data?.SuscriptionStatus){
+					suscriptionStatus = data?.SuscriptionStatus
+				}else if(data[0]?.SuscriptionStatus){
+					suscriptionStatus = data[0]?.SuscriptionStatus
+				}else if(data?.StatusCode){
+					suscriptionStatus = data.StatusCode
 				}else{
+					console.log('No se identifico suscription code')
 					suscriptionStatus = 1
 				}
 			}
@@ -51,26 +55,24 @@ instance.interceptors.response.use(
 			throw new Error(3)
 		}
 
-		const { data } = response
-
 		return {data, suscriptionStatus}
 	}, 
 	function (e) {
-		const { code, message } = e
+		const { message } = e
 		
 		// Errores de red
-		if(code === 'ECONNABORTED'){
-			if(message === 'Network Error'){
-				throw new Error(4)
-			}
+		// if(code === 'ECONNABORTED'){
+		// }
+		if(message === 'Network Error'){
+			throw new Error(4)
+		}
 
-			if(message === 'Request aborted'){
-				throw new Error(5)
-			}
+		if(message === 'Request aborted'){
+			throw new Error(5)
+		}
 
-			if(message.includes('timeout')){
-				throw new Error(6)
-			}
+		if(message.includes('timeout')){
+			throw new Error(6)
 		}
 
 		return Promise.reject(e)

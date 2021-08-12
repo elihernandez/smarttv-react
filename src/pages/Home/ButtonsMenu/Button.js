@@ -40,7 +40,7 @@ export default function Button ({ data }) {
 						srcSet={PosterCardUrlLandscape}
 						type="image/webp"
 					/>
-					<sources
+					<source
 						srcSet={imgSourceSetPng(PosterCardUrlLandscape,'png')}
 						type="image/png"
 					/>

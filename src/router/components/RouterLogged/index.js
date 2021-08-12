@@ -1,13 +1,16 @@
 import React, { Fragment } from 'react'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import { AnimatedSwitch } from 'react-router-transition'
-import loadable from '@loadable/component'
+// import loadable from '@loadable/component'
 import { urlSections } from '../../../api/urlSections'
 // import TopMenu from '../../../components/TopMenu'
 import { Sidebar } from '../../../components/Sidebar'
-const TopMenu = loadable(() => import('../../../components/TopMenu'))
-const HomePage = loadable(() => import('../../../pages/Home'))
-const VodPage = loadable(() => import('../../../pages/Vod'))
+import TopMenu from '../../../components/TopMenu'
+import HomePage from '../../../pages/Home'
+import VodPage from '../../../pages/Vod'
+// const TopMenu = loadable(() => import('../../../components/TopMenu'))
+// const HomePage = loadable(() => import('../../../pages/Home'))
+// const VodPage = loadable(() => import('../../../pages/Vod'))
 // const MusicPage = loadable(() => import('../../../pages/Music'))
 // const LiveTV = loadable(() => import('../../../pages/LiveTV'))
 
@@ -17,7 +20,6 @@ export function RouterLogged() {
 	const RedirectHome = () => <Redirect to="/inicio" />
 	return (
 		<Fragment>
-
 			<TopMenu />
 			<Switch
 				atEnter={{ opacity: 0 }}

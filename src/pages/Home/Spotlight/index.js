@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { LazyImage } from '../../../components/Image'
 import { SlickSliderHorizontal } from '../../../components/SlickCarousel'
-import { Navigation } from '../../../js/SpatialNavigation'
+// import { Navigation } from '../../../js/SpatialNavigation'
 import './styles.css'
 
 export default function Spotlight({ data }) {

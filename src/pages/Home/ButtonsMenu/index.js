@@ -18,7 +18,6 @@ export default function ButtonsMenu({ data }) {
 
 	useEffect(() => {
 		setTimeout(() => {
-			console.log(focus)
 			Navigation.add('.item-button', focus, '#buttons-menu')
 			Navigation.focus('#buttons-menu')
 		}, 200)

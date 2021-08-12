@@ -52,9 +52,10 @@ export const ErrorSession = ({ message }) => {
 	)
 }
 
-export const ErrorTimeout = () => {
+export const ErrorTimeout = ({ handleRequest, count }) => {
 	const buttonRef = useRef(null)
-	const [time, setTime] = useState(30)
+	const times = { 0: 30, 1: 45, 2: 60 }
+	const [time, setTime] = useState(times[count])
 
 	const { start } = useInterval(() => {
 		if(time === 0){
@@ -72,26 +73,39 @@ export const ErrorTimeout = () => {
 	}, [])
 
 	const handleClick = () => {
-		
+		handleRequest()
+		console.log(1)
 	}
     
 	return (
 		<CSSTransition in={true} timeout={300} classNames="fade" unmountOnExit>
 			<Container>
 				<ErrorWrapper>
-					<ErrorText>
-						No se pudo establecer la conexión.
-					</ErrorText>
-					<ErrorSubText>
-						Se intentará reestablecer la conexión en: {time} segundos
-					</ErrorSubText>
-					<BackButton
-						ref={buttonRef}
-						tabIndex='-1'
-						onClick={handleClick}
-						onKeyDown={handleClick}>
-                        Reintentar
-					</BackButton>
+					{count != 3 ? (
+						<>
+							<ErrorText>
+								No se pudo establecer la conexión.
+							</ErrorText>
+							<ErrorSubText>
+								Se intentará reestablecer la conexión en: {time} segundos
+							</ErrorSubText>
+						</>
+					):(
+						<ErrorText>
+								No se pudo establecer la conexión, intente más tarde.
+						</ErrorText>
+					)}
+					{count != 3 &&
+						<>
+							<BackButton
+								ref={buttonRef}
+								tabIndex='-1'
+								onClick={handleClick}
+								onKeyDown={handleClick}>
+							Reintentar
+							</BackButton>
+						</>
+					}
 				</ErrorWrapper>
 			</Container>
 		</CSSTransition>
@@ -199,7 +213,7 @@ const BackButton = styled.button`
     font-family: "Poppins", sans-serif !important;
     letter-spacing: .5px;
     font-weight: 599;
-    padding: 15px 30px;
+    padding: 20px 30px;
     cursor: pointer;
     text-transform: uppercase;
     background: transparent;

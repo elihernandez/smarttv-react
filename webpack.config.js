@@ -5,6 +5,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const MiniCSSExtract = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const RemoveStrictPlugin = require( 'remove-strict-webpack-plugin' )
+const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const path = require('path')
 
 const javascriptRules = {
@@ -81,7 +82,11 @@ const fontsRules = {
 
 const developmentPlugins = [
 	new CssMinimizerPlugin(),
-	new RemoveStrictPlugin()
+	new RemoveStrictPlugin(),
+	// new PreloadWebpackPlugin({
+	// 	rel: 'preload',
+	// 	as: 'script'
+	// })
 ]
 
 const productionPlugins = [
@@ -94,15 +99,14 @@ const productionPlugins = [
 module.exports = (_env, { mode }) => ({
 	entry: './src/index.js',
 	output: {
-		filename: '[name].min.js',
-		// chunkFilename: '[name].[hash].[chunkhash].chunk.js',
-		chunkFilename: '[name].chunk.js',
+		// filename: '[name].min.js',
+		// chunkFilename: '[name].chunk.js',
 		path: path.resolve(process.cwd(), __dirname + '/webOS/app/'),
 		publicPath: 'app/',
 	},
 	watch: (mode === 'production' ? false : true),
 	optimization: {
-		runtimeChunk: 'single',
+		// runtimeChunk: 'single',
 		// splitChunks: {
 		// 	chunks: 'initial',
 		// },

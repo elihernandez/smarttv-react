@@ -40,7 +40,8 @@ export const SliderHorizontal = ({ data, sliderVerticalRef }) => {
 								key={`${dataItem.Title}-${dataItem.Registro}`}
 								posterType={data.poster_type}
 								titleCategory={data.category}
-								sliderVerticalRef={sliderVerticalRef} />
+								sliderVerticalRef={sliderVerticalRef}
+							/>
 						)
 					})}
 				</SlickSliderHorizontal>

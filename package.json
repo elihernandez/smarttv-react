@@ -78,6 +78,7 @@
     "postcss-preset-env": "^6.7.0",
     "postcss-scss": "^3.0.4",
     "precss": "^4.0.0",
+    "preload-webpack-plugin": "^2.3.0",
     "react-transition-group": "^4.4.1",
     "redux-devtools": "^3.7.0",
     "sass": "^1.27.0",

@@ -19,10 +19,10 @@ export function MemoizedLogo({ color = 'purple', size = 'md', to = '/' }) {
 	)
 }
 
-export function IconLogo() {
+export function IconLogo({ size = 'md' }) {
 	return (
 		<div className="foreground-logo">
-			<img src={logoForeground} alt="foreground-logo-guiahtv" />
+			<img className={`img-logo ${size}`} src={logoForeground} alt="foreground-logo-guiahtv" />
 		</div>
 	)
 }

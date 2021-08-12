@@ -1,43 +1,32 @@
 import React, { useRef, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setVideoRef } from '../../../redux/reducers/videoReducer'
 import useHls from '../../../hooks/useHls'
-import getLink from '../../../services/video/getLink'
+// import getLink from '../../../services/video/getLink'
+// import { useAxios } from '../../../hooks/useAxios'
 import { setPlaying } from '../../../redux/reducers/videoReducer'
 import './styles.css'
 
-export default function Player(){
-	console.log('Video')
+export default function Player({ movie, data }){
+	console.log('Player')
 	const hls = useHls()
 	const videoRef = useRef(null)
 	const dispatch = useDispatch()
-	const movie = useSelector(state => state.vod.movie)
-	const { Registro, ResumePos } = movie
-	const token = useSelector(state => state.user.userToken)
+	const { ResumePos } = movie
 
 	useEffect(() => {
-		const requestLink = async () => {
-			try{
-				const response = await getLink(Registro, token)
+		hls.loadSource({
+			url: data.Url, 
+			videoMedia: videoRef.current,
+			startPosition: parseInt(ResumePos / 1000)
+		})
 
-				hls.loadSource({
-					url: response.Url, 
-					videoMedia: videoRef.current,
-					startPosition: parseInt(ResumePos / 1000)
-				})
-
-				dispatch(setVideoRef(videoRef.current))
-			}catch(e){
-				console.log(e)
-			}
-		}
-
-		requestLink()
+		dispatch(setVideoRef(videoRef.current))
 	}, [])
 
 	const onCanPlayThrough = () => {
 		console.log('can play trough')
-		setTimeout(() => videoRef.current.play(), 1000)
+		videoRef.current.play()
 	}
 
 	const onPlay = () => {

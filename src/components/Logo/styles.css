@@ -29,6 +29,32 @@
       }
 }
 
+.foreground-logo{
+      position: relative;
+      width: auto;
+      height: auto;
+      display: flex;
+      justify-content: center;
+
+      
+      .img-logo{
+            position: relative;
+            height: 100%;  
+
+            &.sm{
+                  width: 80px;
+            }
+
+            &.md{
+                  width: 120px;
+            }
+
+            &.lg{
+                  width: 160px;
+            }
+      }
+}
+
 .fade-logo-enter {
       opacity: 0;
     }

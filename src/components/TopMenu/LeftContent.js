@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar } from '../Navbar/index'
-import Logo from '../Logo/index'
+import Logo, { IconLogo } from '../Logo/index'
 import './styles.css'
 
 export const LeftContent = () => {

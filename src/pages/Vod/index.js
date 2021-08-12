@@ -1,11 +1,13 @@
 import React from 'react'
 import { AnimatedSwitch } from 'react-router-transition'
 import { Route } from 'react-router-dom'
-import loadable from '@loadable/component'
+// import loadable from '@loadable/component'
 import Catalogue from './components/Catalogue'
-const MoviePage = loadable(() => import('../Movie'))
-// const SeriePage = loadable(() => import('../Serie'))
-const VideoPage = loadable(() => import('../Video'))
+import MoviePage from '../Movie'
+import VideoPage from '../Video'
+// const MoviePage = loadable(() => import('../Movie'))
+// // const SeriePage = loadable(() => import('../Serie'))
+// const VideoPage = loadable(() => import('../Video'))
 import './styles.css'
 
 export default function VodPage() {

@@ -22,7 +22,7 @@ export function useAxios(){
 			const url = getURL(section, userToken, params)
 			const response = await axios.get(url)
 			const { data, suscriptionStatus } = response
-
+			
 			switch(suscriptionStatus){
 			case 0: // 0 Suscripción expirada
 				console.log('Suscripción expirada')
@@ -61,7 +61,7 @@ export function useAxios(){
 
 			switch(code){
 			case 0: // error del api
-				throw(<ErrorComponent.ErrorMessage message={error} handleRequest={retryRequest} count={count} />)
+				throw(<ErrorComponent.ErrorMessage handleRequest={retryRequest} count={count} />)
 			case 1: // error de sesión
 				throw(<ErrorComponent.ErrorSession message={error} />)
 			case 2: // error del cliente
@@ -69,7 +69,7 @@ export function useAxios(){
 			case 4: // network error
 			case 5: // request aborted
 			case 6: // timeout
-				throw(<ErrorComponent.ErrorTimeout />)
+				throw(<ErrorComponent.ErrorTimeout handleRequest={retryRequest} count={count} />)
 			default: // error desconocido
 				throw(<ErrorComponent.ErrorSession message={error} />)
 			}

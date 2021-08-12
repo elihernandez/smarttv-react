@@ -1,11 +1,11 @@
 import React from 'react'
-import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { setMovie } from '../../redux/reducers/vodReducer'
-import {  isMovie, posterTypeSize, contentType } from '../../js/String'
-import { isKeyDown, isKeyEnter, isKeyUp } from '../../js/Keyboard'
-import { getProgressMovie } from '../../js/Time'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import { setMovie } from '../../redux/reducers/vodReducer'
+import { getProgressMovie } from '../../js/Time'
+import {  posterTypeSize, contentType } from '../../js/String'
+import { isKeyDown, isKeyEnter, isKeyUp } from '../../js/Keyboard'
 import { Img } from './Img'
 
 export function ItemCatalogue({ id, posterType, data, sliderVerticalRef }) {
@@ -23,10 +23,12 @@ export function ItemCatalogue({ id, posterType, data, sliderVerticalRef }) {
 	const dispatch = useDispatch()
 	const history = useHistory()
 	const match = useRouteMatch()
-	const className = posterTypeSize(posterType)
+	const posterSize = posterTypeSize(posterType)
 	const url = `${match.url}/${contentType(ContentType)}/${Registro}`
 
 	const handleMove = (e) => {
+		e.preventDefault()
+		
 		if(isKeyEnter(e)){
 			dispatch(setMovie(data))
 			
@@ -47,7 +49,7 @@ export function ItemCatalogue({ id, posterType, data, sliderVerticalRef }) {
 
 	return (
 		<div className="item-link">
-			<div id={id} className={`item-catalogue ${className}`} tabIndex="-1" onClick={handleMove} onKeyDown={handleMove}>
+			<div id={id} className={`item-catalogue ${posterSize}`} tabIndex="-1" onClick={handleMove} onKeyDown={handleMove}>
 				<div className="background-item">
 					<Img title={Title} posterType={posterType} imgPortrait={HDPosterUrlPortrait} imgLandscape={HDPosterUrlLandscape} />
 					{ResumePos &&

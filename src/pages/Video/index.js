@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useAxios } from '../../hooks/useAxios'
 import Player from './Player'
+import { useSelector } from 'react-redux'
 import ButtonPlay from './Buttons/ButtonPlay'
 import ProgressBar from './ProgressBar'
 // import { useAxios } from '../../hooks/useAxios'
@@ -8,11 +10,28 @@ import './styles.css'
 
 export default function VideoPage() {
 	console.log('Video Page')
+	const { fetchData } = useAxios()
+	const movie = useSelector(state => state.vod.movie)
+	const [response, setResponse] = useState(null)
+	const { Registro } = movie
+
+	useEffect(() => {
+		fetchData({ section: 'link-video', params: { registro: Registro }})
+			.then(response => {
+				console.log(response)
+				setResponse(response)
+			})
+			.catch(error => {
+				console.log(error)
+			})
+	}, [])
 
 	return (
 		<div className="video-page">
 			<div className="video-wrapper">
-				<Player />
+				{response && (
+					<Player movie={movie} data={response} />
+				)}
 				<div className="video-controllers">
 					<ButtonPlay />
 					<ProgressBar />
